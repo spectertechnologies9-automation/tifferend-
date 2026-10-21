@@ -41,7 +41,28 @@ _Last updated: 2026-10-21 (session 6: GitHub push + GitHub Pages deployment)_
 
 - **Pages source history:** the owner first enabled Pages as "Deploy from a branch". That served the raw, unbuilt source, so `/src/js/main.js` returned 404 and the page had no CSS or JS. The owner then switched Source to **GitHub Actions** (2026-10-21). From now on, only the Actions workflow deploys the built `dist/`.
 
-_Live results: filled in after the Actions deploy run._
+- **Live and verified (2026-10-21, about 10:55 UTC):** https://spectertechnologies9-automation.github.io/tifferend-/
+  - The "Deploy to GitHub Pages" workflow succeeded for `81377c0`, and later pushes deployed through it as well.
+  - For `ef7443c`, the live `index.html` switched to that build's bundle (`style-B0aoqJoB.css`, Last-Modified 10:54:37) and still served it after the live smoke run, so the branch publisher no longer overwrites it.
+- **Live smoke** (`node tests/smoke.mjs https://spectertechnologies9-automation.github.io/tifferend-/`): **33/33 pass.**
+  - Home, case and careers at 1440 and 390 return HTTP 200 with no failed requests.
+  - Every visible image decodes and all four fonts load.
+  - No console errors.
+  - Home → case → careers → home works through the real links and menu.
+- **Seen in the built-in browser:**
+  - The loader works.
+  - The case-study hero renders.
+  - The pane (577×549) showed the difference-blend headline over the model's face on phones. **Fixed in `ef7443c`:** on phones the lines now sit above and below the photo window. That was re-checked at 390×844, 360×740, 577×549 and 430×932, with layout 24/24 and interaction 29/29 still passing.
+- **Caveats:**
+  - The GitHub API's unauthenticated rate limit (60/h) ran out during monitoring, so the later runs were confirmed from the live HTML, not the Actions API.
+  - Live checks were Chromium only.
+
+### Next steps
+
+1. On real iPhone Safari and Android Chrome, open the live URL and check the hero lens, the pinned services (desktop) and `svh` sizing.
+2. Optional: add a custom domain (Settings → Pages). `base: './'` already supports it.
+3. The client confirmations from session 5 are still open: testimonials, stats, hero-photo rights.
+4. GitHub warns that `ubuntu-latest` moves to Ubuntu 26 from 2026-10-19. No action is needed unless a run breaks.
 
 ---
 
