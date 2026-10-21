@@ -67,6 +67,7 @@ function initCase() {
 
 function initCareers() {
   if (env.reduced) return;
-  gsap.from('.k-hero__title .c-line', { yPercent: 40, opacity: 0, stagger: 0.1, duration: 1.3, ease: 'expo.out', delay: 0.3 });
+  // the title is the LCP: like the decode, its entrance belongs to the in-site wipe; a direct load shows it at once
+  if (qs('.wipe.is-active')) gsap.from('.k-hero__title .c-line', { yPercent: 40, opacity: 0, stagger: 0.1, duration: 1.3, ease: 'expo.out', delay: 0.3 });
   gsap.from('.role', { y: 40, opacity: 0, stagger: 0.06, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.roles__list', start: 'top 85%', once: true } });
 }

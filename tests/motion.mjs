@@ -111,6 +111,34 @@ const b = await chromium.launch();
   await ctx.close();
 }
 
+// 6b) anchors through Lenis + pins (desktop): menu links and the numbers pill land on their chapter
+{
+  const ctx = await b.newContext({ viewport: { width: 1440, height: 900 } });
+  const p = await ctx.newPage(); const errs = []; p.on('pageerror', (e) => errs.push(e.message));
+  await p.addInitScript(() => sessionStorage.setItem('tf-intro', '1'));
+  await p.goto(BASE + 'index.html', { waitUntil: 'networkidle' }); await p.waitForTimeout(1500);
+  const land = [];
+  for (const id of ['#services', '#work', '#contact', '#studio']) {
+    await p.click('.menu-square'); await p.waitForTimeout(700);
+    await p.click(`.menu a[href="${id}"]`); await p.waitForTimeout(2600);
+    land.push([id, Math.round(await p.evaluate((s) => document.querySelector(s).getBoundingClientRect().top, id))]);
+  }
+  ok('menu anchors land on their chapter (Lenis + pins)', land.every(([, t]) => Math.abs(t) <= 4), JSON.stringify(land));
+  await p.evaluate(() => window.scrollTo(0, document.querySelector('.numbers').offsetTop)); await p.waitForTimeout(800);
+  await p.click('.pill-era'); await p.waitForTimeout(2600);
+  const wt = Math.round(await p.evaluate(() => document.querySelector('#work').getBoundingClientRect().top));
+  ok('"See our work" pill lands on the work chapter', Math.abs(wt) <= 4, String(wt));
+  // reload inside the services pin restores the same scroll and the same service (manual restoration)
+  const sy = await p.evaluate(() => Math.round(document.querySelector('.services').getBoundingClientRect().top + scrollY + 1.22 * innerHeight));
+  await p.evaluate((y) => window.scrollTo(0, y), sy); await p.waitForTimeout(1500);
+  const rb = await p.evaluate(() => document.querySelector('[data-svc-count]').textContent);
+  await p.reload({ waitUntil: 'networkidle' }); await p.waitForTimeout(2500);
+  const ra = await p.evaluate(() => ({ y: Math.round(scrollY), n: document.querySelector('[data-svc-count]').textContent }));
+  ok('reload inside a pin restores scroll + state', Math.abs(ra.y - sy) <= 2 && ra.n === rb && rb === '02', JSON.stringify({ sy, rb, ra }));
+  ok('no page errors (anchors)', errs.length === 0, errs.join(' | '));
+  await ctx.close();
+}
+
 // 7) keyboard, menu, form, careers (mobile)
 {
   const ctx = await b.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });

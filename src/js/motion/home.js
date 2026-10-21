@@ -179,8 +179,9 @@ export function initServices() {
     let current = 0;
     ScrollTrigger.create({
       trigger: pin, start: 'top top', end: () => '+=' + window.innerHeight * 3, pin: true, scrub: 0.8, animation: tl, anticipatePin: 1,
-      onUpdate: () => {
-        const idx = idxAt(tl.time());
+      // index from the scroll TARGET, not tl.time(): the scrubbed timeline lags behind a jump
+      onUpdate: (st) => {
+        const idx = idxAt(st.progress * tl.duration());
         if (idx !== current) {
           current = idx;
           counter.textContent = String(idx + 1).padStart(2, '0');

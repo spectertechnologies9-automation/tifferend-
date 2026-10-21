@@ -15,7 +15,7 @@ import '../styles/careers.css';
 
 import { ScrollTrigger } from './core/gsap.js';
 import { env } from './core/env.js';
-import { initSmooth, scrollToTarget } from './core/smooth.js';
+import { initSmooth, scrollToTarget, getLenis } from './core/smooth.js';
 import { initLineReveals, initCharReveals, initBlockReveals, initScrambleLabels } from './motion/text.js';
 import { initTransitions } from './motion/transition.js';
 import { initCursor, initMagnets } from './motion/cursor.js';
@@ -23,6 +23,12 @@ import { initStrips } from './motion/strip.js';
 import { initChrome } from './motion/chrome.js';
 import { initMenu, initAnchors, initVelocitySkew, initForm, initAccordions } from './ui/ui.js';
 import { FEATURES } from './config.js';
+
+// Scroll restoration is done by hand: the browser restores before pins add their spacers
+// (page still short), which lands a reload inside a pinned chapter far too early.
+const SCROLL_KEY = 'tf-scroll:' + location.pathname;
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.addEventListener('pagehide', () => { try { sessionStorage.setItem(SCROLL_KEY, String(Math.round(window.scrollY))); } catch (e) { /* blocked */ } });
 
 async function boot() {
   initSmooth();
@@ -64,7 +70,17 @@ async function boot() {
   initVelocitySkew();
 
   ScrollTrigger.refresh();
-  if (location.hash && document.querySelector(location.hash)) requestAnimationFrame(() => scrollToTarget(location.hash, { immediate: true }));
+  let saved = null;
+  try { saved = sessionStorage.getItem(SCROLL_KEY); sessionStorage.removeItem(SCROLL_KEY); } catch (e) { /* blocked */ }
+  const arrivedViaWipe = !!document.querySelector('.wipe.is-active');
+  const navType = performance.getEntriesByType('navigation')[0]?.type;
+  if (saved && !arrivedViaWipe && (navType === 'reload' || navType === 'back_forward')) {
+    // reload / back-forward return the reader to where they were (even if the URL has a hash, as browsers do)
+    const y = Number(saved);
+    const lenis = getLenis();
+    requestAnimationFrame(() => { if (lenis) lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y); ScrollTrigger.update(); });
+  }
+  else if (location.hash && document.querySelector(location.hash)) requestAnimationFrame(() => scrollToTarget(location.hash, { immediate: true }));
   window.addEventListener('load', () => ScrollTrigger.refresh());
   document.documentElement.classList.add('is-ready');
 }
