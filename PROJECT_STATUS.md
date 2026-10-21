@@ -39,7 +39,9 @@ _Last updated: 2026-10-21 (session 6: GitHub push + GitHub Pages deployment)_
 
 ### Live verification
 
-_Pending: filled in after the deploy run._
+- **Pages source history:** the owner first enabled Pages as "Deploy from a branch". That served the raw, unbuilt source, so `/src/js/main.js` returned 404 and the page had no CSS or JS. The owner then switched Source to **GitHub Actions** (2026-10-21). From now on, only the Actions workflow deploys the built `dist/`.
+
+_Live results: filled in after the Actions deploy run._
 
 ---
 
