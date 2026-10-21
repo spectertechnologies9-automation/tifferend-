@@ -1,6 +1,48 @@
 # PROJECT_STATUS — Tifferend website
 
-_Last updated: 2026-10-21 (session 5: complete rebuild, "funky studio" direction)_
+_Last updated: 2026-10-21 (session 6: GitHub push + GitHub Pages deployment)_
+
+## Session 6: deployment (read this first)
+
+### Repository and branch
+
+- **Repo:** https://github.com/spectertechnologies9-automation/tifferend- (public). It was empty before this session.
+- **Branch:** local `master` was renamed to `main` (the remote's default) and pushed with `-u origin main`. There was no force-push and no history rewrite; the session 1–4 commits are preserved.
+- **Release commit:** `cf3555d` "Rebuild Tifferend website and configure GitHub Pages deployment".
+- **Git identity:** set repo-locally to `spectertechnologies9-automation`, because the global `user.name` is a placeholder ("YOUR NEW GITHUB USERNAME"). The global config was not touched.
+
+### Deployment
+
+- **Workflow:** `.github/workflows/deploy.yml`, using the official actions at their latest majors as of 2026-10-21 (checkout@v7, setup-node@v7, configure-pages@v6, upload-pages-artifact@v5, deploy-pages@v5).
+  - Triggers: push to `main` and `workflow_dispatch`.
+  - Steps: Node 22 → `npm ci` (lockfile) → `npm run build` → upload `dist` → deploy.
+  - Permissions: `contents: read`, `pages: write`, `id-token: write`. Environment `github-pages`, concurrency group `pages`.
+- **Base path:** kept as `base: './'` (relative). It was verified by serving `dist/` under `/tifferend-/` locally: `tests/smoke.mjs` passed 33/33 (all pages at 1440 and 390, every image decoded, all 4 fonts loaded, no 4xx, no console errors, and home → case → careers → home through the real links). A hard-coded `/tifferend-/` base would have broken the local preview and any custom domain, so it wasn't used.
+- **First Actions run (39583550742):** checkout, Node setup, `npm ci` and build all succeeded on GitHub. **Configure Pages failed: "Get Pages site failed".** Pages wasn't enabled on the repo.
+  - The fix is the repo setting Settings → Pages → Source: **GitHub Actions**. It needs the owner's GitHub login. The built-in browser isn't signed in to GitHub, and the GITHUB_TOKEN can't enable Pages.
+
+### Tests run (session 6)
+
+- Clean-room `npm ci` + `npm run build` in a scratch copy: success. The lockfile is in sync.
+- Local `npm ci` failed with EPERM because the user's running vite preview (PID 16508) locks rolldown's native binary. This is a local Windows file lock, not a project problem. `node_modules` was repaired with `npm install`, and the lockfile is unchanged.
+- `npm test` (layout 24 + interaction 29): exit 0, all pass.
+- `tests/smoke.mjs` against the subpath build: 33/33.
+- Live-site checks: see "Live verification" below.
+
+### Repo hygiene
+
+- `.gitignore` covers `node_modules`, `dist`, `.claude`, editor files, `.env*`, `*.pem` and test output.
+- Previously tracked test screenshots (`tests/screens`, `tests/motion`, `tests/results.json`, about 61 MB) were untracked. They're still in old history, which is fine at about 6 MB max per file.
+- No secrets were found: every scan hit was a "design tokens" reference.
+- The PNG masters of the generated images are committed (`assets/generated`, 5 × 4–6 MB).
+- `tests/xbrowser.mjs` and its results were already deleted in the working tree before this session. They targeted the old structure and the deletion was committed.
+
+### Live verification
+
+_Pending: filled in after the deploy run._
+
+---
+
 
 ## Session 5: what happened (read this first)
 
