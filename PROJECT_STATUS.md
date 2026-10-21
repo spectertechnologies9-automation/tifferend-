@@ -1,90 +1,167 @@
 # PROJECT_STATUS — Tifferend website
 
-_Last updated: 2026-10-21 (session 4: redesign of the weakest chapters, motion fixes, first cross-browser QA)_
+_Last updated: 2026-10-21 (session 5: complete rebuild, "funky studio" direction)_
 
-## Session 4: what happened (read this first)
+## Session 5: what happened (read this first)
 
-**Baseline.** The project was not a git repo. I ran `git init` and committed the session-3 state as `b9bcc5a`, so everything below can be diffed or reverted. On the baseline (Chromium): build ✓, layout 24/24, motion 27/27. Playwright's browsers were missing on this machine. I installed Chromium, WebKit and Firefox.
+**The brief.** A complete rebuild: an experimental, colourful design-studio site using only verified content, with the user's ERA and Igloo recordings as the visual source. The session-2/4 site (AUGE/ERA/Igloo, ember on a light canvas) was replaced, not polished.
 
-**Critique (screenshots of every chapter at 1440 and 390), and what was done:**
+**References inspected** (with ffmpeg-static frames; details in `docs/REFERENCE_VIDEO_BREAKDOWN.md`):
+- ERA (47 s).
+- Igloo (0–48 s).
+- **The Lando Norris site at 53–89 s of the Igloo file.** Earlier sessions skipped it. It's now a governing reference (LN), because its lime, olive and off-white palette, highlight-bar reveals, collage and notched grid match the funky brief.
+- AUGE wasn't attached this time and no longer governs anything.
 
-| # | Weakness found | Change |
+**Concept.** "Create a difference, with a difference" (the client's own line):
+- a cursor lens reveals a recoloured "difference" world in the hero;
+- the headline is set in `mix-blend-mode: difference`;
+- chapters switch colour.
+
+Section-by-section mapping: `docs/ART_DIRECTION.md`.
+
+**Higgsfield.** Done with the user's approval at a quoted price:
+- 5 images on GPT Image 2.5 (2K, high) for 13.75 credits; 70 → about 56 credits left.
+- Video wasn't used: 80 credits for 5 s is over the balance.
+- Details in `docs/ASSET_MANIFEST.md`.
+
+### Pages and sections
+
+**Home:**
+1. LN loader.
+2. LN hero: lens reveal plus a pinned full-bleed opening.
+3. LN philosophy: stepped bars.
+4. LN work collage: colour interpolation olive → forest → bone, parallax.
+5. Igloo services: pinned one-subject stage, HUD decode, smear, ring.
+6. LN numbers: notched grid, count-up.
+7. LN clients: type-on, marquee.
+8. ERA process: disc with arc text, then the drawn map.
+9. ERA studio.
+10. ERA contact (orange) with the mailto form.
+11. LN footer: lime frame, notch tab, portrait window.
+
+**Case study** (My Mithila, client palette): band, bar intro, collage story, ERA quote, notched palette, kit grid, product, impact, LN card fan, team, curved-top "next".
+
+**Careers:** type-on hero, notched accordion roles (all 6, Apply link kept), ERA story + values, lime finale.
+
+**Kept functionality:**
+- mailto enquiry form with validation;
+- menu dialog (focus trap, Esc, focus return);
+- skip link;
+- anchors;
+- careers accordion;
+- in-site page transitions (now LN stepped lime bars);
+- first-visit loader (sessionStorage);
+- testimonials flag (still off).
+
+### Tests run (session 5)
+
+Everything ran on `vite build` + `vite preview` (:4173) in Playwright Chromium.
+
+- **`tests/run.mjs`: 24/24 clean.** That's 3 pages × 360/390/430/768/1440/1920, plus reduced motion at 390/1440. No element past the viewport edge, 0 hidden reveals, 0 console errors, 0 failed requests.
+- **`tests/motion.mjs`: 29/29 pass** (rewritten for the new structure):
+  - Intro and hero:
+    - Loader shows, completes, wipes out, and is skipped on repeat.
+    - Hero lens opens and follows the pointer with lag.
+    - Headline uses the difference blend.
+  - Home scroll chapters:
+    - Chrome flips over olive.
+    - Bars retract and remove themselves.
+    - Work background reaches forest, then bone.
+    - Services stay sticky and advance 01 → 02 → 03; the HUD decodes to the real label.
+    - Numbers count to 50/200/8/5.
+    - ERA disc rises; map draws with all stations.
+  - UI and navigation:
+    - Menu opens, Esc closes, focus returns.
+    - Form validates.
+    - Wipe navigates to the case and clears.
+  - Case and careers:
+    - Palette cells fill; cards fan (43°).
+    - Careers accordion opens with the correct form link.
+    - Skip link is the first tab stop.
+  - Phone and reduced motion:
+    - Phone: the lens drifts, services stack, menu opens, no errors.
+    - Reduced motion: no loader, no bars, nothing hidden, no pins, static marquees.
+- **`tests/perf.mjs`** (localhost, so network numbers are optimistic):
+
+| Page | Desktop 1440 transfer / LCP / CLS | Mobile 390 (4× CPU, ~1.6 Mbps, 150 ms) transfer / LCP / CLS |
 |---|---|---|
-| 1 | **Selected work was the weakest chapter:** a small image, a tiny label and a lot of dead space. It's the site's only case, yet it had no presence | **Rebuilt.** Closed state "MY ▢ MITHILA". Pinned and scrubbed: the frame opens into a stage and pushes the name apart off-screen, then the meta row arrives. One CSS variable `--p` drives clip, words and image scale (`home.css` §5, `home.js initWork`). Mobile: stacked name + scrubbed window-open. Static/reduced = closed composition |
-| 2 | **Services, desktop:** the pin had no holds, so almost every scroll position was mid-crossfade (blurred shard, HUD invisible). Service names were small | Timeline retimed as hold → transition → hold. Titles at ≈2.9vw/600. Progress hairline in the HUD. **Bug:** the counter read the lagging scrubbed time, so it showed the wrong service after jumps. It now uses the scroll target |
-| 3 | Services, mobile: the "01 / 03" counter overlapped the right-hand HUD text and was meaningless without a pin | Corner HUD lines hidden below 1024 |
-| 4 | Services → opener: a hard seam where the fog met the flat `--fog-1` | `::after` fade to `--fog-1` above the drifting fog (22% desktop, 8svh mobile, so it never covers text) |
-| 5 | Process: the first pinned screen was ≈60% empty ember (the line not yet drawn) | A dotted ghost route is visible from the start, and scrolling inks it in |
-| 6 | Case study ended on a sparse, small "Next" block | **Rebuilt** as a "YOUR / BRAND" poster: an image window opens between the words (scrubbed `--q`), with the serif CTA and email below |
-| 7 | Interaction feel | Press feedback via the independent `scale` property (menu square .92, ERA pill .96, form toggles .97, 160–180 ms ease-out). Magnet on the menu square and ERA pill (vanilla port of React Bits "Magnet", fine pointers only, off under reduced motion) |
-| 8 | **Bug: reload inside a pin landed ≈1,260 px early.** The browser restored scroll before the pin spacers existed | Manual scroll restoration (`main.js`). The position is saved on `pagehide` and re-applied after `ScrollTrigger.refresh()` on reload/back-forward. It wins over a URL hash, as browsers do. Fresh navigations still honour the hash |
-| 9 | Careers: desktop CLS 0.039; LCP held back by the title's opacity-0 entrance on every load | Preload the Inter Tight 900 woff2 (Vite rewrites it to the hashed asset). The title entrance now runs only on wipe arrival, the same rule as the decode |
-| 10 | Four orphaned session-1 stylesheets (`components/sections/pages/experimental.css`) not imported anywhere | Deleted (recoverable from `b9bcc5a`) |
+| Home | 741 KB / 388 ms / 0 | 409 KB / 1848 ms / 0.007 |
+| Case | 502 KB / 260 ms / 0 | 327 KB / 1324 ms / 0.001 |
+| Careers | 234 KB / 248 ms / 0 | 234 KB / 1348 ms / 0 |
 
-**Toolkit status (honest):**
-- **GSAP + ScrollTrigger + Lenis:** already integrated correctly. There's one `gsap.ticker` loop driving `lenis.raf`, `lenis.on('scroll', ScrollTrigger.update)` and `lagSmoothing(0)`. Lenis runs only on fine pointers without reduced motion; touch keeps native scroll. Verified with anchors through two pins and with reload-in-pin.
-- **React Bits:** not installed. The site is vanilla Vite multi-page (CLAUDE.md architecture), and adding React for a few effects isn't justified. The Magnet idea was ported to vanilla instead (`motion/cursor.js initMagnets`).
-- **Taste Skill:** not installed. Installing it would add a third-party skill to the user's global Claude config, so I read the repo README instead. Its frame checks were applied directly: a clear title on the first screen, no random blank stretches (which led to the Process ghost route and the Work rebuild), and screenshot-critique rounds at several widths.
-- **Figma MCP:** not configured, and no Figma file was supplied. Not used. The reference recordings and docs remain the authority.
-- **Emil Kowalski principles:** short ease-out press states, no bounce on press, interaction transforms on properties separate from the motion transforms, and holds so motion reads as hierarchy.
+- **Visual review.** Chapter screenshots at 1440 and 390 for every page, plus loader/wipe/menu/fan frames, all inspected by eye. A side-by-side sheet compares 8 reference frames with ours. One gap it showed (an empty LN footer) was fixed with the portrait window.
+- **Bugs found and fixed:**
+  - Difference blend had no backdrop inside the GSAP pin.
+  - GSAP folding CSS `translate` mispositioned the service objects and the fan.
+  - `overflow: hidden` broke the sticky fan.
+  - Overflows at 360 and 768.
+  - Lime CTA invisible on lime surfaces.
+  - Font-swap CLS of 0.14–0.16, fixed with font preloads.
+  - Layout-affecting margin tween.
+  - Map/script and hero lede collisions.
+  - Menu clipping.
+  - Case hero script collision on mobile.
 
-**Tests run on the final build** (`vite build` + `vite preview` :4173, this machine):
-- **Layout** (`tests/run.mjs`): **24/24 clean.** `.work__title` was added to the clipped-container exclusions, because its words leave the screen inside `overflow:hidden` by design.
-- **Motion** (`tests/motion.mjs`): **36/36 pass.** New checks:
-  - services holds are sharp with a readable HUD;
-  - the work frame opens while pinned and the title parts;
-  - the case next window opens;
-  - 4 menu anchors land within 1 px through Lenis + pins;
-  - the "See our work" pill lands on the work chapter;
-  - a reload inside the services pin restores scroll and the active service.
-- **Cross-browser** (`npm run xbrowser`, new): **18/18 ok.** WebKit, Firefox and Chromium × home/case/careers × 1440/390. Each checks errors, failed requests, element-edge overflow and hidden reveals, plus screenshots of the scroll chapters. These were compared by eye and render the same. This is the first WebKit/Firefox run ever. It's Playwright's WebKit, **not real Safari/iOS**.
-- **Perf** (`npm run perf`, localhost):
+**Not run:** Lighthouse, Firefox, Safari/WebKit, real devices, screen reader. Only Chromium has been tested.
 
-| Page | Desktop transfer / LCP / CLS | Mobile (throttled) transfer / LCP / CLS |
-|---|---|---|
-| Home | 676 KB / 152 ms / 0.005 | 349 KB / 1076–1384 ms / 0.004 |
-| Case | 444 KB / 124 ms / 0.022 | 496 KB / 1836 ms / 0.005 |
-| Careers | 241 KB / 148 ms / **0** | 241 KB / **2152 ms** / 0.006 |
+### Decisions
 
-  - This machine measures differently from session 3's. I built the untouched baseline and measured it here, and it gave the same home/case numbers (home mobile LCP ≈1.3 s, careers CLS 0.039). The differences from session 3's table are therefore environmental, not regressions. The careers improvements were measured against that local baseline.
+- **Stats** (50+/200+/8+/5+) are still shown. They are the client's own live-site claims (flagged in the content inventory), not invented.
+- **Fixed chrome CTA** is "Start a project" on home and case, and "Apply now" on careers.
+- **Services and map pin only at ≥1024 px.** At 768 portrait the pinned stage was cramped.
+- **The hero headline is the brand line**, not the old hero copy. "Your brand's creative partner" moved to the hero lede.
+- **Unused font packages removed:** Lora, Inter Tight, Pinyon Script.
 
-**Still not run:** real Safari/iOS and Android devices, Lighthouse, screen-reader pass.
+## Unresolved / remaining
 
-**Gotcha (Windows):** a running `vite preview` can lock `dist/`, and `vite build` then fails with ENOTEMPTY/EPERM. Stop the preview, build, restart.
+1. Client confirmations (carried over):
+   - testimonials;
+   - stats;
+   - hero-photo usage rights, which now also cover the generated recolour derivative;
+   - bamboo licence.
+2. Cross-browser QA: Safari for `mask-image` radial gradients, `color-mix()` and `svh`; Firefox; real phones.
+3. The My Mithila brand film is still not retrieved.
+4. Form backend, if `mailto:` isn't enough.
+5. Home desktop transfer is 741 KB. The hero ships two 1600 px images (base + diff). Lowering diff quality, or lazy-upgrading it after LCP, would cut about 200 KB.
+6. `public/img/illus-*` and `hero-field-640`/`-lqip` are unreferenced and can be deleted after client review.
+7. Pre-existing in the git working tree (not caused this session): `.gitignore` deleted, `dist/` present. Nothing has been committed.
 
-**Files changed in session 4:**
-- `index.html`: work section rewritten, services bar, magnet attributes
-- `work/my-mithila/index.html`: next block rewritten
-- `careers/index.html`: font preload, magnet attribute
-- `src/styles/home.css`: work §5 rewritten; services sizes, bar, fade; map ghost; press states
-- `src/styles/case.css`: next block
-- `src/styles/chrome.css`: menu-square press, `[data-magnet]`
-- `src/js/main.js`: scroll restoration, `initWork` / `initMagnets` wiring
-- `src/js/motion/home.js`: `initWork` (new), services retime, map ghost
-- `src/js/motion/pages.js`: next `--q`, careers title gating
-- `src/js/motion/cursor.js`: `initMagnets`
-- Tests:
-  - `tests/run.mjs`: exclusion
-  - `tests/motion.mjs`: +9 checks
-  - `tests/xbrowser.mjs`: new
-  - `package.json`: `xbrowser` script
-- Docs:
-  - `docs/ART_DIRECTION.md` §5–7 + case §9
-  - this file
-  - `CLAUDE.md`
-  - `.gitignore`: new
-- Deleted the 4 orphaned stylesheets. **No new runtime dependencies.**
+## Exact next steps
 
-**Exact next steps:**
-1. Test on a real iPhone (Safari) and an Android phone. Watch the work pin, `clip-path` with `calc(var(--p))`, `svh` units, and Lenis being off on touch.
-2. Client questions are unchanged from session 3: testimonials, stats, image rights, brand film.
-3. Optional: give the work chapter's closed-state crop a dedicated focal point (it currently shows the centre of the cards image).
-4. Optional: the case page desktop CLS of 0.022 is under target. It's the arrival band, if anyone wants to chase it.
-5. Deploy `dist/` (needs permission) and run Lighthouse on the real host.
+1. Open the site:
+   ```
+   npm install
+   npm run build
+   npm run preview
+   ```
+   Then visit http://localhost:4173.
+2. Review on a real iPhone (Safari) and Android, and fix any `mask-image`/`svh` issues.
+3. Get the client answers for item 1. Switch testimonials on if they're confirmed.
+4. Optional, if the user approves the credits: a short Higgsfield loop for the hero, once the balance allows (≥80 credits).
+
+## Files (session 5)
+
+- **Rewritten:**
+  - `index.html`, `work/my-mithila/index.html`, `careers/index.html`
+  - `src/styles/{tokens,base,chrome,home,case,careers}.css`
+  - `src/js/main.js`, `src/js/ui/ui.js`
+  - `tests/motion.mjs`, `tests/run.mjs` (exclusion list)
+  - `CLAUDE.md`, `docs/ART_DIRECTION.md`
+- **New:**
+  - `src/js/fx/{text,transition,chrome,marquee,cursor}.js`, `src/js/pages/{home,pages}.js`
+  - `docs/REFERENCE_VIDEO_BREAKDOWN.md`
+  - `tests/cls-probe.mjs`, `.claude/launch.json`
+  - `public/img/{hero-diff,svc-*,studio-flatlay}-*.webp`, `public/img/contours.svg`
+  - `assets/generated/*.png` (masters)
+- **Removed:**
+  - `src/js/motion/*`
+  - `src/styles/{components,sections,pages,experimental}.css`
+- **Updated:** `docs/ASSET_MANIFEST.md`, `package.json`.
 
 ---
 
-_Session 3 notes follow._
+_Earlier sessions below (historical; superseded by session 5)._
+
 
 ## Session 3: what happened (read this first)
 

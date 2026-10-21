@@ -1,358 +1,322 @@
 <!doctype html>
-<html lang="en" data-chrome="light">
+<html lang="en" data-chrome="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tifferend — Creative Branding Studio</title>
   <meta name="description" content="Tifferend builds brands through strategy, storytelling, and design. A full-service branding, marketing, and creative studio." />
   <meta name="author" content="Tifferend" />
-  <meta name="theme-color" content="#edf0e5" />
+  <meta name="theme-color" content="#d4ff09" />
   <meta property="og:title" content="Tifferend — Creative Branding Studio" />
   <meta property="og:description" content="Tifferend builds brands through strategy, storytelling, and design. A full-service branding, marketing, and creative studio." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="img/hero-field-1600.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:site" content="@tifferend" />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource/herr-von-muellerhoff/files/herr-von-muellerhoff-latin-400-normal.woff2" crossorigin />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-  <link rel="preload" as="image" href="img/hero-field-1080.webp" imagesrcset="img/hero-field-640.webp 640w, img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w, img/hero-field-1920.webp 1920w" imagesizes="(min-width: 768px) 60vw, 80vw" />
+  <link rel="preload" as="image" href="img/hero-field-1600.webp" imagesrcset="img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w, img/hero-field-1920.webp 1920w" imagesizes="(max-width: 760px) 120vh, 155vh" fetchpriority="high" />
   <script>
     (function () {
-      var d = document.documentElement; d.classList.add('js', 'chrome-hidden');
+      var d = document.documentElement; d.classList.add('js');
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduced');
-      try { if (!sessionStorage.getItem('tf-intro') && !d.classList.contains('reduced')) d.classList.add('has-loader'); } catch (e) {}
+      try { if (!d.classList.contains('reduced')) { if (sessionStorage.getItem('tf-wipe')) d.classList.add('is-wiping'); else if (!sessionStorage.getItem('tf-intro')) d.classList.add('is-loading'); } } catch (e) {}
+      // safety net: if the module never boots, show everything
+      setTimeout(function () { if (!d.classList.contains('is-ready')) d.classList.remove('js', 'is-loading', 'is-wiping'); }, 5000);
     })();
   </script>
   <script type="module" src="/src/js/main.js"></script>
 </head>
 <body data-page="home">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- ERA loader: ember curtain → arch → full bleed → flies into the first strip image -->
+  <!-- Loader (LN 53–58 s): lime field, morphing monogram, tiny label -->
   <div class="loader" id="loader" aria-hidden="true" hidden>
-    <div class="loader__media" data-loader-media><img src="img/hero-field-1600.webp" srcset="img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w, img/hero-field-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" /></div>
-    <div class="loader__words"><span>Brand</span><span>Design</span><span>Identity</span><span>Story</span><span>Strategy</span><span>Craft</span></div>
-    <span class="loader__count">00</span>
-    <button class="loader__skip" type="button" tabindex="-1">Skip intro</button>
+    <div class="loader__glyph"><span class="g-sans on">T</span><span class="g-serif">t.</span><span class="g-script">t</span><span class="g-mono">tf</span><span class="g-serif">tf.</span></div>
+    <p class="loader__label t-label">Loading tifferendly — <span data-loader-word>Brand</span></p>
+    <span class="loader__count t-mono" data-loader-count>00</span>
   </div>
 
-  <!-- Chrome -->
-  <a class="badge" href="index.html" aria-label="Tifferend — home">
-    <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="badge-c" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0" /></defs><text><textPath href="#badge-c" textLength="290">Tifferend · Creative branding studio ·</textPath></text></svg>
-    <span class="badge__mark" aria-hidden="true">t<span>.</span></span>
-  </a>
-  <nav class="cta-stack" aria-label="Primary">
-    <a class="cta-stack__main" href="#contact">Start<br />a project</a>
-    <div class="cta-stack__sub"><a href="#contact" data-book>Book a call</a><a href="#contact">Contact</a></div>
+  <header class="chrome" id="chrome">
+    <a class="logo" href="index.html" aria-label="Tifferend studio — home"><span class="logo__a">tifferend</span><span class="logo__b">Studio</span></a>
+    <div class="chrome__r">
+      <a class="btn" href="#contact" data-magnet><span class="btn__roll"><span>Start a project</span><span aria-hidden="true">Start a project</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <button class="sq menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="sq__lines" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    </div>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <ul class="menu__list">
+      <li><a href="#work">Work <span class="menu__s">My Mithila</span></a></li>
+      <li><a href="#services">Services <span class="menu__s">what we do</span></a></li>
+      <li><a href="#process">Process <span class="menu__s">know us better</span></a></li>
+      <li><a href="#studio">Studio <span class="menu__s">our story</span></a></li>
+      <li><a href="careers/index.html">Careers <span class="menu__s">join the team</span></a></li>
+      <li><a href="#contact">Contact <span class="menu__s">say hello</span></a></li>
+    </ul>
+    <div class="menu__meta">
+      <span class="t-script" aria-hidden="true">tifferendly</span>
+      <a class="t-lede link-u" href="mailto:hello@tifferend.com">hello@tifferend.com</a>
+      <a class="t-label" href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend ↗</a>
+      <span class="t-label muted">© 2026 Tifferend</span>
+    </div>
   </nav>
-  <div class="rail" aria-hidden="true"><span class="rail__line"><i class="rail__fill"></i></span><span class="rail__count">00</span><span class="rail__hint">Scroll</span></div>
-  <button class="menu-square" type="button" data-magnet="0.35" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
-
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
-    <nav aria-label="Menu">
-      <ul class="menu__list">
-        <li><a href="#work"><small>01</small>Work</a></li>
-        <li><a href="#services"><small>02</small>Services</a></li>
-        <li><a href="#studio"><small>03</small>Studio</a></li>
-        <li><a href="careers/index.html" data-transition="Careers"><small>04</small>Careers</a></li>
-        <li><a href="#contact"><small>05</small>Contact</a></li>
-      </ul>
-    </nav>
-    <div class="legal legal-txt"><ul><li>© 2026 Tifferend<i class="sep" aria-hidden="true"></i></li><li><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></li></ul><ul><li><a href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend</a></li></ul></div>
-  </div>
 
   <main id="main">
-    <!-- ================= 1. AUGE first viewport ================= -->
-    <section class="hero" id="top" data-theme="light" aria-labelledby="hero-title">
-      <div class="strip strip--hero" data-strip data-speed="58">
-        <ul class="strip__track" data-strip-track>
-          <li class="strip__item" style="--h:54;--ar:1.12;--fx:51%" data-lead>
-            <a href="#studio" data-cursor="The studio"><figure>
-              <img src="img/hero-field-1080.webp" srcset="img/hero-field-640.webp 640w, img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w" sizes="(min-width: 768px) 62vh, 80vw" width="1920" height="1080" fetchpriority="high" decoding="async" alt="A person in a tailored camel blazer stands in a wind-blurred golden grass field under a deep blue sky." />
-              <figcaption><b data-scramble-hover>Tifferend</b><span>Studio</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:40;--ar:1;--fx:60%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp"><figure>
-              <img src="img/mymithila-cards-640.webp" srcset="img/mymithila-cards-640.webp 640w, img/mymithila-cards-1260.webp 1260w" sizes="(min-width: 768px) 40vh, 80vw" width="1260" height="1162" loading="lazy" decoding="async" alt="My Mithila business cards in forest green and mustard on dark stone." />
-              <figcaption><b data-scramble-hover>My Mithila</b><span>Print</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:47;--ar:1.9;--fx:50%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-billboard-800.webp"><figure>
-              <img src="img/mymithila-billboard-800.webp" srcset="img/mymithila-billboard-800.webp 800w, img/mymithila-billboard-1560.webp 1560w" sizes="(min-width: 768px) 90vh, 85vw" width="1560" height="628" loading="lazy" decoding="async" alt="Green My Mithila billboard reading 'Small Changes, Big Impact' against a hedge." />
-              <figcaption><b data-scramble-hover>Small changes, big impact</b><span>Out-of-home</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:36;--ar:1;--fx:50%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mm-03-480.webp"><figure>
-              <img src="img/mm-03-480.webp" srcset="img/mm-03-480.webp 480w, img/mm-03-780.webp 780w" sizes="(min-width: 768px) 36vh, 70vw" width="780" height="780" loading="lazy" decoding="async" alt="Social post for the Snugglebug glass bottle with bamboo lid and jute cover." />
-              <figcaption><b data-scramble-hover>Snugglebug launch</b><span>Social</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:51;--ar:1.05;--fx:62%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-storefront-640.webp"><figure>
-              <img src="img/mymithila-storefront-640.webp" srcset="img/mymithila-storefront-640.webp 640w, img/mymithila-storefront-1260.webp 1260w" sizes="(min-width: 768px) 54vh, 80vw" width="1260" height="1163" loading="lazy" decoding="async" alt="My Mithila e-commerce storefront showing 'New Arrivals' on a laptop in a plant-filled room." />
-              <figcaption><b data-scramble-hover>Storefront</b><span>E-commerce</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:44;--ar:0.84;--fx:50%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-tote-560.webp"><figure>
-              <img src="img/mymithila-tote-560.webp" srcset="img/mymithila-tote-560.webp 560w, img/mymithila-tote-970.webp 970w" sizes="(min-width: 768px) 37vh, 65vw" width="970" height="1160" loading="lazy" decoding="async" alt="Canvas tote with a column of Mithila motifs and the line 'believe in the concept of sustainable living'." />
-              <figcaption><b data-scramble-hover>Canvas tote</b><span>Merchandise</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:38;--ar:1;--fx:40%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mm-04-480.webp"><figure>
-              <img src="img/mm-04-480.webp" srcset="img/mm-04-480.webp 480w, img/mm-04-780.webp 780w" sizes="(min-width: 768px) 38vh, 70vw" width="780" height="780" loading="lazy" decoding="async" alt="Social post: a hiker carrying the Nomad bamboo stainless steel flask." />
-              <figcaption><b data-scramble-hover>Nomad flask</b><span>Social</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:49;--ar:1.55;--fx:30%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-wordmark-800.webp"><figure>
-              <img src="img/mymithila-wordmark-800.webp" srcset="img/mymithila-wordmark-800.webp 800w, img/mymithila-wordmark-1560.webp 1560w" sizes="(min-width: 768px) 76vh, 85vw" width="1560" height="819" loading="lazy" decoding="async" alt="My Mithila wordmark constructed on a dashed grid, pale green on forest green." />
-              <figcaption><b data-scramble-hover>Wordmark system</b><span>Identity</span></figcaption>
-            </figure></a>
-          </li>
-          <li class="strip__item" style="--h:42;--ar:1;--fx:50%">
-            <a href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mm-06-480.webp"><figure>
-              <img src="img/mm-06-480.webp" srcset="img/mm-06-480.webp 480w, img/mm-06-780.webp 780w" sizes="(min-width: 768px) 42vh, 70vw" width="780" height="780" loading="lazy" decoding="async" alt="Social post: green Comfy Cups mug, 'Your coziest sip awaits'." />
-              <figcaption><b data-scramble-hover>Comfy Cups</b><span>Social</span></figcaption>
-            </figure></a>
-          </li>
-        </ul>
-      </div>
 
-      <h1 class="hero__mark" id="hero-title"><span class="sr-only">Tifferend — creative branding studio. </span><span class="hero__word" aria-hidden="true" data-velocity-skew data-hero-word>tifferend<i class="hero__dot"></i></span></h1>
-
-      <div class="hero__intro" data-velocity-skew>
-        <p class="hero__label">Tifferend©</p>
-        <p class="intro hero__text">Your brand's creative partner. A full-service branding, marketing, and creative studio — bridging the gap between business and creativity.</p>
-      </div>
-
-      <div class="legal legal-txt hero__legal">
-        <ul><li>© 2026 Tifferend<i class="sep" aria-hidden="true"></i></li><li><a href="careers/index.html" data-transition="Careers">Careers</a></li><li><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></li></ul>
-        <ul><li><a href="#contact">Book a free consultation</a></li><li><a href="https://x.com/tifferend" target="_blank" rel="noopener">X</a></li></ul>
+    <!-- 1 · HERO (LN 58–60.5 s): centred photo window, lagged lens reveals the "difference" version -->
+    <section class="hero" id="top" data-theme="paper" data-chrome="dark" data-hero>
+      <div class="hero__pin">
+        <div class="contours" aria-hidden="true"></div>
+        <figure class="hero__window" data-lens>
+          <img class="hero__base" src="img/hero-field-1600.webp" srcset="img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w, img/hero-field-1920.webp 1920w" sizes="(max-width: 760px) 120vh, 155vh" width="1920" height="1080" alt="A person in a tailored blazer standing in a wind-swept golden grass field under a deep blue sky." fetchpriority="high" />
+          <img class="hero__diff" src="img/hero-diff-1600.webp" srcset="img/hero-diff-1080.webp 1080w, img/hero-diff-1600.webp 1600w, img/hero-diff-1920.webp 1920w" sizes="(max-width: 760px) 120vh, 155vh" width="1920" height="1080" alt="Illustrative recolour of the same photograph: lime grass, cobalt and pink sky, orange suit. Created for this site, not client work." decoding="async" />
+          <figcaption class="hero__cap t-label"><span>Move to see the difference</span><span class="hero__cap-r">Illustrative recolour</span></figcaption>
+        </figure>
+        <h1 class="hero__title" aria-label="Create a difference, with a difference.">
+          <span class="hero__l1 t-mega" aria-hidden="true">Create a difference,</span>
+          <span class="hero__l2 t-serif" aria-hidden="true">with a difference.</span>
+        </h1>
+        <p class="hero__side hero__side--l t-label" aria-hidden="true">Branding · Identity · Strategy</p>
+        <p class="hero__side hero__side--r t-label" aria-hidden="true">Content · Photography · Film</p>
+        <a class="hero__card notch" href="#contact">
+          <span class="t-label">Now booking</span>
+          <span class="hero__card-t">Free consultation</span>
+          <span class="hero__card-a t-label">Book a call →</span>
+        </a>
+        <p class="hero__lede"><strong>Your brand's creative partner.</strong> A full-service branding, marketing, and creative studio — bridging the gap between business and creativity.</p>
       </div>
     </section>
 
-    <!-- ================= 2. Clients — AUGE heavy caps index ================= -->
-    <section class="clients" id="clients" data-theme="light" aria-labelledby="clients-title">
-      <div class="clients__head">
-        <h2 class="lbl" id="clients-title">Our clients</h2>
-        <p class="lbl clients__sub">Brands we've helped come alive</p>
+    <!-- 2 · PHILOSOPHY (LN 61–64.5 s): olive, grotesk caps + lime serif words, stepped lime bars -->
+    <section class="philo" id="philosophy" data-theme="olive" data-chrome="light">
+      <div class="contours" aria-hidden="true"></div>
+      <div class="philo__head">
+        <p class="t-label"><span class="dash"></span>The philosophy</p>
+        <h2 class="philo__h t-serif">Building a brand is <span class="philo__script t-script" data-sign>personal</span></h2>
       </div>
-      <ul class="clients__list" data-reveal="lines">
-        <li>My <span class="nb">Mithila<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">Ploco<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Mumbai Pav <span class="nb">Co.<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Bhagwan Mahaveer Jain <span class="nb">Hospital<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">FIAMM<i class="sep" aria-hidden="true"></i></span></li>
-        <li>JITO Youth <span class="nb">Wing<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">Autoverse<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Everow <span class="nb">Nutrition<i class="sep" aria-hidden="true"></i></span></li>
-        <li>EIMR Business <span class="nb">School<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Her <span class="nb">Amora<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Ishq by <span class="nb">Moh<i class="sep" aria-hidden="true"></i></span></li>
-        <li>Make-up <span class="nb">Biography<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">InMobi<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">Towands<i class="sep" aria-hidden="true"></i></span></li>
-        <li><span class="nb">IDH</span></li>
+      <p class="philo__state t-state" data-bars>It's not a deck. It's not a campaign. It's the thing you <span class="t-serif accent">stayed up for</span>, the thing you <span class="t-serif accent">believed in</span> before anyone else did.</p>
+      <div class="philo__foot">
+        <p class="t-lede philo__aside" data-lines>We don't take that lightly.</p>
+        <p class="t-body philo__body" data-lines>We come in without a blueprint because we actually believe every brand has something no one else does — that X-factor that makes it their own. Our job isn't to fit you into a mold, it's to find that thing, protect it, and build everything around it.</p>
+        <p class="philo__close t-serif" data-lines>That's not a process. <span class="accent">That's a philosophy.</span></p>
+      </div>
+    </section>
+
+    <!-- 3 · SELECTED WORK (LN 65–71 s): collage, captions, parallax, background interpolates olive → forest → bone -->
+    <section class="work" id="work" data-theme="olive" data-chrome="light" data-work>
+      <div class="contours" aria-hidden="true"></div>
+      <header class="work__head">
+        <p class="t-label"><span class="dash"></span>Selected work · Case 01</p>
+        <h2 class="work__title">
+          <span class="t-mega work__name" data-type>My Mithila</span>
+          <span class="t-script work__script" data-sign aria-hidden="true">Rebranding</span>
+        </h2>
+        <p class="t-label work__meta">Branding · 2024</p>
+      </header>
+      <div class="collage" data-collage>
+        <a class="cl cl--1" href="work/my-mithila/index.html" data-speed="0.12" data-cursor="View case"><span class="cl__cap t-label">Wordmark system — Identity</span><span class="cl__img"><img src="img/mymithila-wordmark-800.webp" srcset="img/mymithila-wordmark-800.webp 800w, img/mymithila-wordmark-1560.webp 1560w" sizes="(max-width: 760px) 92vw, 42vw" width="1560" height="819" loading="lazy" alt="My Mithila wordmark in green on a dark green construction grid." /></span></a>
+        <a class="cl cl--2" href="work/my-mithila/index.html" data-speed="-0.1" data-cursor="View case"><span class="cl__cap t-label">My Mithila — Print</span><span class="cl__img"><img src="img/mymithila-cards-640.webp" srcset="img/mymithila-cards-640.webp 640w, img/mymithila-cards-1260.webp 1260w" sizes="(max-width: 760px) 46vw, 20vw" width="1260" height="1162" loading="lazy" alt="My Mithila business cards in forest green and mustard yellow." /></span></a>
+        <a class="cl cl--3" href="work/my-mithila/index.html" data-speed="0.22" data-cursor="View case"><span class="cl__cap t-label">Small changes, big impact — Out-of-home</span><span class="cl__img"><img src="img/mymithila-billboard-800.webp" srcset="img/mymithila-billboard-800.webp 800w, img/mymithila-billboard-1560.webp 1560w" sizes="(max-width: 760px) 92vw, 34vw" width="1560" height="628" loading="lazy" alt="My Mithila billboard among trees." /></span></a>
+        <a class="cl cl--4" href="work/my-mithila/index.html" data-speed="-0.06" data-cursor="View case"><span class="cl__cap t-label">Storefront — E-commerce</span><span class="cl__img"><img src="img/mymithila-storefront-640.webp" srcset="img/mymithila-storefront-640.webp 640w, img/mymithila-storefront-1260.webp 1260w" sizes="(max-width: 760px) 46vw, 26vw" width="1260" height="1163" loading="lazy" alt="My Mithila e-commerce storefront on a laptop among plants." /></span></a>
+        <a class="cl cl--5" href="work/my-mithila/index.html" data-speed="0.16" data-cursor="View case"><span class="cl__cap t-label">Canvas tote — Merchandise</span><span class="cl__img"><img src="img/mymithila-tote-560.webp" srcset="img/mymithila-tote-560.webp 560w, img/mymithila-tote-970.webp 970w" sizes="(max-width: 760px) 46vw, 15vw" width="970" height="1160" loading="lazy" alt="My Mithila canvas tote bag with Mithila motifs." /></span></a>
+        <a class="cl cl--6" href="work/my-mithila/index.html" data-speed="-0.14" data-cursor="View case"><span class="cl__cap t-label">Snugglebug launch — Social</span><span class="cl__img"><img src="img/mm-03-480.webp" srcset="img/mm-03-480.webp 480w, img/mm-03-780.webp 780w" sizes="(max-width: 760px) 46vw, 13vw" width="780" height="780" loading="lazy" alt="My Mithila social post for the Snugglebug glass bottle." /></span></a>
+        <a class="cl cl--7" href="work/my-mithila/index.html" data-speed="0.08" data-cursor="View case"><span class="cl__cap t-label">Comfy Cups — Social</span><span class="cl__img"><img src="img/mm-06-480.webp" srcset="img/mm-06-480.webp 480w, img/mm-06-780.webp 780w" sizes="(max-width: 760px) 46vw, 11vw" width="780" height="780" loading="lazy" alt="My Mithila social post for Comfy Cups." /></span></a>
+        <div class="collage__text">
+          <p class="collage__lede t-serif" data-lines>A purpose-led identity for a sustainable living brand turning everyday switches into a quiet movement — verbal voice, visual system, packaging and storefront.</p>
+          <p class="t-mono collage__scope">Rebranding · Identity · Logo · Packaging · E-commerce · Print</p>
+          <a class="btn" href="work/my-mithila/index.html"><span class="btn__roll"><span>View the case study</span><span aria-hidden="true">View the case study</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · SERVICES (Igloo 19–39 s): pinned, one subject per screen, HUD + leader line + decode, smear, ring portal -->
+    <section class="svc" id="services" data-svc data-chrome="dark">
+      <div class="svc__stage">
+        <div class="svc__ring" aria-hidden="true"></div>
+        <header class="svc__head">
+          <p class="t-mono">////// What we do</p>
+          <h2 class="svc__h">Brands built with <span class="t-serif">intention</span></h2>
+        </header>
+        <article class="svc__item" style="--c: #f2e92e; --i: #101210" aria-labelledby="svc-1">
+          <figure class="svc__fig"><img src="img/svc-identity-960.webp" srcset="img/svc-identity-560.webp 560w, img/svc-identity-960.webp 960w" sizes="(max-width: 760px) 80vw, 32vw" width="960" height="1200" loading="lazy" alt="Illustrative still life: a stack of coloured geometric solids on yellow. Created for this site, not client work." /></figure>
+          <div class="svc__hud" aria-hidden="true"><svg class="svc__leader" viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M0 1 H120 L200 79" /></svg><span class="t-mono" data-decode>Service_01 // Brand strategy &amp; identity</span><span class="t-mono svc__coord">TF.01 — 3 deliverables</span></div>
+          <div class="svc__text">
+            <h3 class="svc__title" id="svc-1">Brand Strategy &amp; Identity</h3>
+            <p class="t-body">We dig deep into your audience, market, and vision to craft a brand identity that's unmistakably yours.</p>
+            <ul class="svc__list t-mono"><li>→ Brand positioning &amp; naming</li><li>→ Visual identity systems</li><li>→ Brand guidelines &amp; messaging</li></ul>
+          </div>
+        </article>
+        <article class="svc__item" style="--c: #ff3d8b; --i: #101210" aria-labelledby="svc-2">
+          <figure class="svc__fig"><img src="img/svc-content-960.webp" srcset="img/svc-content-560.webp 560w, img/svc-content-960.webp 960w" sizes="(max-width: 760px) 80vw, 32vw" width="960" height="1200" loading="lazy" alt="Illustrative still life: a vintage film camera on a tripod aimed at an orange, on pink. Created for this site, not client work." /></figure>
+          <div class="svc__hud" aria-hidden="true"><svg class="svc__leader" viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M0 1 H120 L200 79" /></svg><span class="t-mono" data-decode>Service_02 // Content &amp; media production</span><span class="t-mono svc__coord">TF.02 — 3 deliverables</span></div>
+          <div class="svc__text">
+            <h3 class="svc__title" id="svc-2">Content &amp; Media Production</h3>
+            <p class="t-body">Brand films, photography, and campaign visuals with cinematic quality and editorial precision.</p>
+            <ul class="svc__list t-mono"><li>→ Brand films &amp; commercials</li><li>→ Photography direction</li><li>→ Social-first content</li></ul>
+          </div>
+        </article>
+        <article class="svc__item" style="--c: #1f4bff; --i: #f4f2ec" aria-labelledby="svc-3">
+          <figure class="svc__fig"><img src="img/svc-growth-960.webp" srcset="img/svc-growth-560.webp 560w, img/svc-growth-960.webp 960w" sizes="(max-width: 760px) 80vw, 32vw" width="960" height="1200" loading="lazy" alt="Illustrative still life: coloured blocks rising like a staircase toward a chrome ball, on cobalt. Created for this site, not client work." /></figure>
+          <div class="svc__hud" aria-hidden="true"><svg class="svc__leader" viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M0 1 H120 L200 79" /></svg><span class="t-mono" data-decode>Service_03 // Digital &amp; growth marketing</span><span class="t-mono svc__coord">TF.03 — 3 deliverables</span></div>
+          <div class="svc__text">
+            <h3 class="svc__title" id="svc-3">Digital &amp; Growth Marketing</h3>
+            <p class="t-body">Social strategy, campaign execution, and websites that turn brand presence into measurable growth.</p>
+            <ul class="svc__list t-mono"><li>→ Social &amp; content strategy</li><li>→ Website design &amp; build</li><li>→ Performance campaigns</li></ul>
+          </div>
+        </article>
+        <p class="svc__count t-mono" aria-hidden="true"><span data-svc-n>01</span> / 03 — Branding · Content · Growth</p>
+        <p class="svc__note t-mono" aria-hidden="true">// Images: illustrative</p>
+      </div>
+    </section>
+
+    <!-- 5 · NUMBERS (LN 71.5–75 s): ink grid of notched cells -->
+    <section class="nums" data-theme="ink" data-chrome="light" aria-labelledby="nums-h">
+      <header class="nums__head">
+        <p class="t-label" id="nums-h"><span class="dash"></span>Tifferend in numbers</p>
+        <a class="t-label link-u" href="#work">See our work</a>
+      </header>
+      <ul class="nums__grid">
+        <li class="cell nums__cell"><span class="t-label">Brands built</span><span class="nums__n"><span data-count="50">50</span><span class="t-serif accent">+</span></span><span class="nums__d">From startups to heritage names across industries.</span></li>
+        <li class="cell nums__cell"><span class="t-label">Projects delivered</span><span class="nums__n"><span data-count="200">200</span><span class="t-serif accent">+</span></span><span class="nums__d">Identity, content, campaigns, and digital experiences.</span></li>
+        <li class="cell nums__cell"><span class="t-label">Industries served</span><span class="nums__n"><span data-count="8">8</span><span class="t-serif accent">+</span></span><span class="nums__d">Hospitality, fashion, tech, F&amp;B, real estate and more.</span></li>
+        <li class="cell nums__cell"><span class="t-label">Years of craft</span><span class="nums__n"><span data-count="5">5</span><span class="t-serif accent">+</span></span><span class="nums__d">Building brands with strategy and creative conviction.</span></li>
       </ul>
     </section>
 
-    <!-- ================= 3. Philosophy — ERA statement chapter ================= -->
-    <section class="philo" id="philosophy" data-theme="light" aria-labelledby="philo-title">
-      <p class="lbl philo__label">The philosophy</p>
-      <h2 class="era philo__statement" id="philo-title" data-reveal="chars"><span class="caps">Building</span><span class="script">a brand is</span><span class="caps">personal</span></h2>
-      <p class="small philo__body" data-reveal="lines">It's not a deck. It's not a campaign. It's the thing you stayed up for, the thing you believed in before anyone else did. We don't take that lightly.</p>
-      <span class="glyph" aria-hidden="true"><i></i></span>
-      <p class="small philo__body" data-reveal="lines">We come in without a blueprint because we actually believe every brand has something no one else does — that X-factor that makes it their own. Our job isn't to fit you into a mold, it's to find that thing, protect it, and build everything around it.</p>
-      <p class="era philo__sign" data-reveal="chars"><span class="caps">That's not a process.</span><span class="caps">That's a</span><span class="script">philosophy</span></p>
+    <!-- 6 · CLIENTS (LN 77–81 s): type-on with block cursor, giant lime script, name marquee -->
+    <section class="clients" data-theme="paper" data-chrome="dark" aria-labelledby="clients-h">
+      <span class="clients__paint t-script" aria-hidden="true" data-sign>alive</span>
+      <div class="clients__head">
+        <h2 class="clients__h" id="clients-h"><span class="t-mega" data-type>Brands we've helped</span> <span class="t-serif">come alive</span></h2>
+        <p class="t-body clients__p"><span class="t-label">Our clients</span><br />From local startups to established names.</p>
+      </div>
+      <div class="marquee clients__mq" data-marquee="40" aria-label="Clients">
+        <div class="marquee__track"><div class="marquee__group">
+          <span class="mq-sans">My Mithila</span><span class="mq-dot"></span><span class="mq-serif">Ploco</span><span class="mq-dot"></span><span class="mq-sans">Mumbai Pav Co.</span><span class="mq-dot"></span><span class="mq-serif">Bhagwan Mahaveer Jain Hospital</span><span class="mq-dot"></span><span class="mq-sans">FIAMM</span><span class="mq-dot"></span><span class="mq-serif">JITO Youth Wing</span><span class="mq-dot"></span><span class="mq-sans">Autoverse</span><span class="mq-dot"></span>
+        </div></div>
+      </div>
+      <div class="marquee clients__mq clients__mq--rev" data-marquee="-34" aria-hidden="false">
+        <div class="marquee__track"><div class="marquee__group">
+          <span class="mq-serif">Everow Nutrition</span><span class="mq-dot"></span><span class="mq-sans">EIMR Business School</span><span class="mq-dot"></span><span class="mq-serif">Her Amora</span><span class="mq-dot"></span><span class="mq-sans">Ishq by Moh</span><span class="mq-dot"></span><span class="mq-serif">Make-up Biography</span><span class="mq-dot"></span><span class="mq-sans">InMobi</span><span class="mq-dot"></span><span class="mq-serif">Towands</span><span class="mq-dot"></span><span class="mq-sans">IDH</span><span class="mq-dot"></span>
+        </div></div>
+      </div>
     </section>
 
-    <!-- ================= 4. Numbers — ERA data chapter ================= -->
-    <section class="numbers" data-theme="dark" aria-labelledby="numbers-title">
-      <h2 class="sr-only" id="numbers-title">Tifferend in numbers</h2>
-      <dl class="numbers__col">
-        <div class="num"><dt class="lbl">Brands built</dt><dd class="num__v"><span data-count="50">50</span>+</dd><dd class="small num__cap">From startups to heritage names across industries.</dd></div>
-        <div class="num"><dt class="lbl">Projects delivered</dt><dd class="num__v"><span data-count="200">200</span>+</dd><dd class="small num__cap">Identity, content, campaigns, and digital experiences.</dd></div>
-      </dl>
-      <figure class="numbers__img" data-skew-reveal>
-        <img src="img/hero-field-1080.webp" srcset="img/hero-field-640.webp 640w, img/hero-field-1080.webp 1080w, img/hero-field-1600.webp 1600w" sizes="(min-width: 900px) 24vw, 70vw" width="1920" height="1080" loading="lazy" decoding="async" alt="" />
-      </figure>
-      <dl class="numbers__col numbers__col--r">
-        <div class="num"><dt class="lbl">Industries served</dt><dd class="num__v"><span data-count="8">8</span>+</dd><dd class="small num__cap">Hospitality, fashion, tech, F&amp;B, real estate and more.</dd></div>
-        <div class="num"><dt class="lbl">Years of craft</dt><dd class="num__v"><span data-count="5">5</span>+</dd><dd class="small num__cap">Building brands with strategy and creative conviction.</dd></div>
-        <a class="pill-era" href="#work" data-magnet="0.25">See our work</a>
-      </dl>
-    </section>
-
-    <!-- ================= 5. Selected work — AUGE: the work parts its own name (pinned, scrubbed) ================= -->
-    <section class="work" id="work" data-theme="light" aria-labelledby="work-title">
-      <div class="work__pin" data-work>
-        <p class="legal-txt work__kicker"><span>Selected work</span><span>Case 01</span></p>
-        <h2 class="work__title" id="work-title"><span class="work__w work__w--l"><span>My</span></span> <span class="work__w work__w--r"><span>Mithila</span></span></h2>
-        <a class="work__card" href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp" aria-label="My Mithila — view the case study">
-          <figure class="work__img" data-work-frame><img src="img/mymithila-cards-1260.webp" srcset="img/mymithila-cards-640.webp 640w, img/mymithila-cards-1260.webp 1260w" sizes="(min-width: 1024px) min(86vw, 1260px), 100vw" width="1260" height="1162" loading="lazy" decoding="async" alt="My Mithila business cards in forest green and mustard." /></figure>
-        </a>
-        <div class="work__meta" data-work-meta>
-          <p class="legal-txt">Branding · 2024</p>
-          <p class="lbl work__scope">Rebranding · Identity · Logo · Packaging · E-commerce · Print</p>
-          <a class="cta-caps work__go" href="work/my-mithila/index.html" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp">View the case →</a>
+    <!-- 7 · PROCESS (ERA 21 s + 25–28 s): lavender circle opener with arc text, then the drawn map -->
+    <section class="opener" data-opener data-theme="paper" data-chrome="dark" aria-hidden="true">
+      <div class="opener__stage">
+        <div class="opener__disc">
+          <svg class="opener__arc" viewBox="0 0 1000 1000"><defs><path id="arc-p" d="M90 500 A410 410 0 0 1 910 500" /></defs><text><textPath href="#arc-p" startOffset="50%" text-anchor="middle">Understand · Create · Amplify</textPath></text></svg>
         </div>
       </div>
-      <p class="intro work__desc" data-reveal="rot-lines">A purpose-led identity for a sustainable living brand turning everyday switches into a quiet movement — verbal voice, visual system, packaging and storefront.</p>
     </section>
-
-    <!-- ================= 6. Services — Igloo fog / shard / HUD ================= -->
-    <section class="services" id="services" data-theme="fog" aria-labelledby="services-title">
-      <div class="services__pin" data-services>
-        <div class="fog" aria-hidden="true"><i></i><i></i></div>
-        <div class="services__tl"><p class="hud">////// What we do</p><h2 class="hud services__h" id="services-title">Brands built with intention</h2></div>
-        <ol class="services__list">
-          <li class="svc" data-svc>
-            <figure class="svc__shard" style="--clip: polygon(18% 2%, 64% 0%, 92% 18%, 100% 58%, 80% 96%, 34% 100%, 4% 78%, 0% 30%)"><img src="img/mymithila-wordmark-800.webp" width="1560" height="819" loading="lazy" decoding="async" alt="" style="object-position:22% 50%" /></figure>
-            <div class="svc__hud">
-              <svg class="svc__leader" viewBox="0 0 200 80" aria-hidden="true"><path d="M0 2 H120 L196 78" /></svg>
-              <p class="hud svc__code" data-hud-decode>Service_01 // Brand strategy &amp; identity</p>
-              <h3 class="svc__title">Brand Strategy &amp; Identity</h3>
-              <p class="svc__desc">We dig deep into your audience, market, and vision to craft a brand identity that's unmistakably yours.</p>
-              <ul class="hud svc__bullets"><li>→ Brand positioning &amp; naming<i class="sep" aria-hidden="true"></i></li><li>→ Visual identity systems<i class="sep" aria-hidden="true"></i></li><li>→ Brand guidelines &amp; messaging</li></ul>
-            </div>
-          </li>
-          <li class="svc" data-svc>
-            <figure class="svc__shard" style="--clip: polygon(8% 12%, 48% 0%, 86% 8%, 100% 46%, 90% 88%, 52% 100%, 12% 92%, 0% 52%)"><img src="img/illus-film-set-600.webp" srcset="img/illus-film-set-600.webp 600w, img/illus-film-set-1024.webp 1024w" sizes="40vw" width="1024" height="1024" loading="lazy" decoding="async" alt="A film crew around a cinema camera under a single studio light (illustrative image)." /></figure>
-            <div class="svc__hud">
-              <svg class="svc__leader" viewBox="0 0 200 80" aria-hidden="true"><path d="M0 2 H120 L196 78" /></svg>
-              <p class="hud svc__code" data-hud-decode>Service_02 // Content &amp; media production</p>
-              <h3 class="svc__title">Content &amp; Media Production</h3>
-              <p class="svc__desc">Brand films, photography, and campaign visuals with cinematic quality and editorial precision.</p>
-              <ul class="hud svc__bullets"><li>→ Brand films &amp; commercials<i class="sep" aria-hidden="true"></i></li><li>→ Photography direction<i class="sep" aria-hidden="true"></i></li><li>→ Social-first content</li></ul>
-            </div>
-          </li>
-          <li class="svc" data-svc>
-            <figure class="svc__shard" style="--clip: polygon(26% 0%, 78% 6%, 100% 34%, 94% 80%, 62% 100%, 16% 94%, 0% 62%, 6% 20%)"><img src="img/mymithila-storefront-640.webp" srcset="img/mymithila-storefront-640.webp 640w, img/mymithila-storefront-1260.webp 1260w" sizes="40vw" width="1260" height="1163" loading="lazy" decoding="async" alt="" style="object-position:62% 50%" /></figure>
-            <div class="svc__hud">
-              <svg class="svc__leader" viewBox="0 0 200 80" aria-hidden="true"><path d="M0 2 H120 L196 78" /></svg>
-              <p class="hud svc__code" data-hud-decode>Service_03 // Digital &amp; growth marketing</p>
-              <h3 class="svc__title">Digital &amp; Growth Marketing</h3>
-              <p class="svc__desc">Social strategy, campaign execution, and websites that turn brand presence into measurable growth.</p>
-              <ul class="hud svc__bullets"><li>→ Social &amp; content strategy<i class="sep" aria-hidden="true"></i></li><li>→ Website design &amp; build<i class="sep" aria-hidden="true"></i></li><li>→ Performance campaigns</li></ul>
-            </div>
-          </li>
-        </ol>
-        <p class="hud services__bl"><span data-svc-count>01</span> / 03 <i class="services__bar" aria-hidden="true"><b data-svc-bar></b></i> scroll</p>
-        <p class="hud services__br">Branding · Content · Growth</p>
-      </div>
-    </section>
-
-    <!-- ================= 7. ERA circle opener → process map ================= -->
-    <div class="opener" data-opener aria-hidden="true">
-      <div class="opener__sticky">
-        <div class="opener__circle" data-opener-circle>
-          <svg class="opener__arc" viewBox="0 0 1000 1000"><defs><path id="arcPath" d="M 140,520 A 360,360 0 0 1 860,520" /></defs><text><textPath href="#arcPath" startOffset="50%" text-anchor="middle">Understand · Create · Amplify</textPath></text></svg>
-        </div>
-      </div>
-    </div>
-
-    <section class="process" id="process" data-theme="ember" aria-labelledby="process-title">
-      <div class="process__pin" data-process>
-        <p class="lbl process__label">Our process</p>
-        <h2 class="era process__statement" id="process-title"><span class="caps">Know us</span><span class="script">better</span></h2>
-        <div class="map">
-          <svg class="map__line" viewBox="0 0 1600 200" preserveAspectRatio="none" aria-hidden="true"><path data-map-path d="M0 150 C 120 150, 200 70, 320 100 S 520 170, 640 120 S 860 40, 960 90 S 1180 170, 1280 120 S 1480 60, 1600 90" /></svg>
+    <section class="map" id="process" data-theme="lavender" data-chrome="dark" data-map aria-labelledby="map-h">
+      <div class="map__stage">
+        <header class="map__head">
+          <p class="t-wide">Our process</p>
+          <h2 class="map__h t-serif caps" id="map-h" data-chars>Know us <span class="t-script map__script">better</span></h2>
+        </header>
+        <div class="map__route">
+          <svg class="map__line" viewBox="0 0 1400 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0 150 C 120 150, 150 92, 260 104 S 420 182, 520 150 S 640 70, 720 96 S 860 176, 980 150 S 1160 64, 1260 110 S 1360 150, 1400 140" /></svg>
           <ol class="map__stations">
-            <li class="station" style="--x:20%">
-              <span class="station__dot" aria-hidden="true"></span>
-              <p class="lbl station__name"><span>Step 01</span> Understand</p>
-              <p class="small station__text">Research, audience insights, and strategic positioning form the foundation of every brand we build. We start by listening — to founders, customers, and the market — before we make a single design move.</p>
-            </li>
-            <li class="station" style="--x:50%">
-              <span class="station__dot" aria-hidden="true"></span>
-              <p class="lbl station__name"><span>Step 02</span> Create</p>
-              <p class="small station__text">Brand identity, storytelling, and design systems bring strategy to life with visual conviction. Every mark, word, and motion is engineered to belong unmistakably to you.</p>
-            </li>
-            <li class="station" style="--x:80%">
-              <span class="station__dot" aria-hidden="true"></span>
-              <p class="lbl station__name"><span>Step 03</span> Amplify</p>
-              <p class="small station__text">Marketing campaigns, social media, and digital growth turn brands into cultural forces. We ship work that earns attention and compounds value long after launch.</p>
-            </li>
+            <li class="map__st" style="--x: 18.6%"><span class="map__dot"></span><span class="t-wide">Step 01</span><h3 class="map__name t-serif caps">Understand</h3><p class="t-body">Research, audience insights, and strategic positioning form the foundation of every brand we build. We start by listening — to founders, customers, and the market — before we make a single design move.</p></li>
+            <li class="map__st" style="--x: 51.4%"><span class="map__dot"></span><span class="t-wide">Step 02</span><h3 class="map__name t-serif caps">Create</h3><p class="t-body">Brand identity, storytelling, and design systems bring strategy to life with visual conviction. Every mark, word, and motion is engineered to belong unmistakably to you.</p></li>
+            <li class="map__st" style="--x: 84%"><span class="map__dot"></span><span class="t-wide">Step 03</span><h3 class="map__name t-serif caps">Amplify</h3><p class="t-body">Marketing campaigns, social media, and digital growth turn brands into cultural forces. We ship work that earns attention and compounds value long after launch.</p></li>
           </ol>
         </div>
       </div>
     </section>
 
-    <!-- ================= 8. Studio — ERA statement ================= -->
-    <section class="studio" id="studio" data-theme="light" aria-labelledby="studio-title">
-      <p class="lbl">The studio — Our story</p>
-      <h2 class="era studio__statement" id="studio-title" data-reveal="chars"><span class="caps">Create a difference,</span><span class="script">with a</span><span class="caps">difference</span></h2>
-      <p class="small studio__body" data-reveal="lines">Tifferend began with a simple idea. Our founder Kunj honed his skills in commercial photography, brand design, and media production while freelancing. Recognizing the power of combining these disciplines, he expanded to include social media marketing — always focused on solving real business problems, not just creating pretty content.</p>
-      <p class="small studio__body" data-reveal="lines">From those early days working with small budgets, Tifferend has grown to partner with a diverse range of brands — from local startups to established names.</p>
-      <span class="glyph" aria-hidden="true"><i></i></span>
-      <p class="lbl studio__mission-l">Our mission</p>
-      <p class="studio__mission" data-reveal="lines">To create a difference in everything we deliver — empowering businesses of all sizes to reach their full potential through accessible, high-quality media and marketing.</p>
-      <ol class="values">
-        <li class="value"><span class="value__n">01</span><p class="lbl">Customer-centric</p><p class="small">Client success is our success. We put client needs first and strive to exceed expectations.</p></li>
-        <li class="value"><span class="value__n">02</span><p class="lbl">Staying updated</p><p class="small">The digital landscape constantly evolves. We stay ahead so clients can focus on their core business.</p></li>
-        <li class="value"><span class="value__n">03</span><p class="lbl">Utmost creativity</p><p class="small">We bring fresh ideas and a playful spirit to every project we take on.</p></li>
-        <li class="value"><span class="value__n">04</span><p class="lbl">Innovation</p><p class="small">We embrace new technologies and techniques to find the most effective solutions.</p></li>
-      </ol>
-      <a class="cta-serif" href="careers/index.html" data-transition="Careers">Let's do things tifferendly — join the team</a>
+    <!-- 8 · STUDIO (ERA 22–28 s): centred statement + one script word, story, values -->
+    <section class="studio" id="studio" data-theme="paper" data-chrome="dark" aria-labelledby="studio-h">
+      <p class="t-wide studio__label">The studio — Our story</p>
+      <h2 class="studio__h t-serif caps" id="studio-h" data-chars>Let's do things <span class="t-script studio__script">tifferendly</span></h2>
+      <figure class="studio__fig" data-rise>
+        <img src="img/studio-flatlay-1600.webp" srcset="img/studio-flatlay-800.webp 800w, img/studio-flatlay-1600.webp 1600w" sizes="(max-width: 760px) 100vw, 70vw" width="1600" height="905" loading="lazy" alt="Illustrative flat-lay of studio tools on cobalt: a camera, colour swatches, a sketchbook, scissors and a cactus. Created for this site." />
+        <figcaption class="t-label">Illustrative — the studio's tools</figcaption>
+      </figure>
+      <div class="studio__story">
+        <p class="t-lede" data-lines>Tifferend began with a simple idea. Our founder Kunj honed his skills in commercial photography, brand design, and media production while freelancing. Recognizing the power of combining these disciplines, he expanded to include social media marketing — always focused on solving real business problems, not just creating pretty content.</p>
+        <p class="t-body" data-lines>From those early days working with small budgets, Tifferend has grown to partner with a diverse range of brands — from local startups to established names.</p>
+      </div>
+      <div class="studio__mission">
+        <p class="t-wide">Our mission</p>
+        <p class="t-serif studio__mtext" data-lines>To create a difference in everything we deliver — empowering businesses of all sizes to reach their full potential through accessible, high-quality media and marketing.</p>
+      </div>
+      <ul class="values">
+        <li class="values__i" data-rise><span class="values__n t-serif">01</span><h3 class="values__t">Customer-centric</h3><p>Client success is our success. We put client needs first and strive to exceed expectations.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">02</span><h3 class="values__t">Staying updated</h3><p>The digital landscape constantly evolves. We stay ahead so clients can focus on their core business.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">03</span><h3 class="values__t">Utmost creativity</h3><p>We bring fresh ideas and a playful spirit to every project we take on.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">04</span><h3 class="values__t">Innovation</h3><p>We embrace new technologies and techniques to find the most effective solutions.</p></li>
+      </ul>
+      <a class="studio__join btn btn--ink" href="careers/index.html"><span class="btn__roll"><span>Let's do things tifferendly — join the team</span><span aria-hidden="true">Let's do things tifferendly — join the team</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
     </section>
 
-    <!-- Testimonials: built, switched off until the client confirms them (docs/CLIENT_CONTENT_INVENTORY.md) -->
+    <!-- Testimonials: unconfirmed, mounted only if FEATURES.testimonials (src/js/config.js) -->
     <template id="tpl-testimonials">
-      <section class="testimonials" data-theme="light" aria-labelledby="testi-title">
-        <p class="lbl" id="testi-title">What founders say</p>
-        <ul>
-          <li><blockquote><p class="era testi__q">"Tifferend didn't just design a logo — they unearthed who we actually were and gave it a voice."</p><footer class="lbl">Ananya Rao · Founder, My Mithila</footer></blockquote></li>
-          <li><blockquote><p class="era testi__q">"They moved like an in-house team from day one. The strategy work alone reshaped how we go to market."</p><footer class="lbl">Rohan Mehta · Co-founder &amp; CEO, Autoverse</footer></blockquote></li>
-          <li><blockquote><p class="era testi__q">"Every touchpoint feels considered. Our customers notice — and they tell us."</p><footer class="lbl">Priya Kapoor · Brand Director, Her Amora</footer></blockquote></li>
+      <section class="quotes" data-theme="lime" data-chrome="dark" aria-labelledby="quotes-h">
+        <p class="t-label" id="quotes-h">What founders say</p>
+        <ul class="quotes__list">
+          <li><blockquote class="t-serif">"Tifferend didn't just design a logo — they unearthed who we actually were and gave it a voice."</blockquote><p class="t-label">Ananya Rao · Founder, My Mithila</p></li>
+          <li><blockquote class="t-serif">"They moved like an in-house team from day one. The strategy work alone reshaped how we go to market."</blockquote><p class="t-label">Rohan Mehta · Co-founder &amp; CEO, Autoverse</p></li>
+          <li><blockquote class="t-serif">"Every touchpoint feels considered. Our customers notice — and they tell us."</blockquote><p class="t-label">Priya Kapoor · Brand Director, Her Amora</p></li>
         </ul>
       </section>
     </template>
-    <div data-testimonials-slot></div>
 
-    <!-- ================= 9. Contact — ERA finale ================= -->
-    <section class="contact" id="contact" data-theme="dark" aria-labelledby="contact-title">
-      <span class="glyph glyph--light" aria-hidden="true"><i></i></span>
-      <p class="lbl contact__label">Get in touch</p>
-      <h2 class="era contact__statement" id="contact-title"><span class="caps">Let's build something</span><span class="script">remarkable</span></h2>
-      <a class="contact__mail" href="mailto:hello@tifferend.com" data-cursor="Write to us" data-reveal="chars">hello@tifferend.com</a>
-      <p class="small contact__lede">Ready to elevate your brand? We'd love to hear about your project.</p>
+    <!-- 9 · CONTACT (ERA 44–47 s finale): full-colour chapter, giant condensed email, underline form -->
+    <section class="contact" id="contact" data-theme="orange" data-chrome="dark" aria-labelledby="contact-h">
+      <p class="t-wide contact__label">Get in touch</p>
+      <h2 class="contact__h t-serif caps" id="contact-h" data-chars>Let's build something <span class="t-script contact__script">remarkable</span></h2>
+      <a class="contact__mail t-serif" href="mailto:hello@tifferend.com" data-magnet>hello@tifferend.com</a>
+      <p class="contact__p t-body">Ready to elevate your brand? We'd love to hear about your project.</p>
       <div class="contact__ctas">
-        <a class="cta-caps" href="mailto:hello@tifferend.com?subject=Free%20consultation%20request">Book a free consultation</a>
-        <a class="cta-caps" href="#enquiry-title">Start a project</a>
+        <a class="btn btn--ink" href="mailto:hello@tifferend.com?subject=Free%20consultation"><span class="btn__roll"><span>Book a free consultation</span><span aria-hidden="true">Book a free consultation</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
       </div>
-
-      <form class="enquiry" id="enquiry" novalidate aria-labelledby="enquiry-title">
-        <p class="lbl enquiry__title" id="enquiry-title">Project enquiry</p>
-        <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required /></div>
-        <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
-        <div class="field field--wide"><label for="f-company">Brand / company</label><input id="f-company" name="company" type="text" autocomplete="organization" /></div>
-        <fieldset class="field field--wide field--toggles">
-          <legend>What do you need?</legend>
-          <label class="toggle"><input type="checkbox" name="services" value="Brand Strategy & Identity" /><span>Brand strategy &amp; identity</span></label>
-          <label class="toggle"><input type="checkbox" name="services" value="Content & Media Production" /><span>Content &amp; media production</span></label>
-          <label class="toggle"><input type="checkbox" name="services" value="Digital & Growth Marketing" /><span>Digital &amp; growth marketing</span></label>
-        </fieldset>
-        <div class="field field--wide"><label for="f-msg">Tell us about the project</label><textarea id="f-msg" name="message" rows="3" required></textarea></div>
-        <p class="form__status small" role="status" aria-live="polite"></p>
-        <div class="enquiry__foot field--wide">
-          <button class="cta-serif form__submit" type="submit">Send enquiry →</button>
-          <p class="lbl enquiry__note">Opens your email app, addressed to hello@tifferend.com</p>
+      <form class="form" id="enquiry" novalidate aria-labelledby="enq-h">
+        <h3 class="t-wide form__h" id="enq-h">Start a project — project enquiry</h3>
+        <div class="form__grid">
+          <label class="field"><span class="t-label">Your name</span><input name="name" type="text" autocomplete="name" required /></label>
+          <label class="field"><span class="t-label">Email</span><input name="email" type="email" autocomplete="email" required /></label>
+          <label class="field"><span class="t-label">Brand / company</span><input name="company" type="text" autocomplete="organization" /></label>
+          <fieldset class="field field--checks"><legend class="t-label">What do you need?</legend>
+            <label class="check"><input type="checkbox" name="services" value="Brand strategy & identity" /><span>Brand strategy &amp; identity</span></label>
+            <label class="check"><input type="checkbox" name="services" value="Content & media production" /><span>Content &amp; media production</span></label>
+            <label class="check"><input type="checkbox" name="services" value="Digital & growth marketing" /><span>Digital &amp; growth marketing</span></label>
+          </fieldset>
+          <label class="field field--wide"><span class="t-label">Tell us about the project</span><textarea name="message" rows="3" required></textarea></label>
+        </div>
+        <div class="form__foot">
+          <button class="btn btn--ink" type="submit"><span class="btn__roll"><span>Send enquiry →</span><span aria-hidden="true">Send enquiry →</span></span></button>
+          <p class="form__status t-label" role="status" aria-live="polite">Opens your email app, addressed to hello@tifferend.com</p>
         </div>
       </form>
-
-      <footer class="foot">
-        <div class="foot__l legal-txt"><p>Tifferend.</p><p>© 2026 All rights reserved</p></div>
-        <ul class="foot__nav lbl"><li><a href="#work">Work</a></li><li><a href="#services">Services</a></li><li><a href="#studio">Studio</a></li><li><a href="careers/index.html" data-transition="Careers">Careers</a></li></ul>
-        <div class="foot__r legal-txt"><a href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend</a><a href="#top">To top ↑</a></div>
-      </footer>
     </section>
   </main>
 
-  <div class="wipe" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 C 30 100 70 100 100 100 L 100 100 C 70 100 30 100 0 100 Z" /></svg><div class="wipe__inner"><img class="wipe__thumb" alt="" hidden /><p class="wipe__label"></p></div></div>
-  <div class="cursor" aria-hidden="true"><i class="cursor__dia"></i><span class="cursor__pill"></span></div>
+  <!-- FOOTER (LN 84–89 s) -->
+  <footer class="footer" data-chrome="light" data-footer>
+    <div class="footer__panel">
+      <div class="footer__sign">
+        <span class="t-script" aria-hidden="true" data-sign>tifferendly</span>
+        <p class="footer__title t-state" data-bars>Create a <span class="t-serif">difference</span>, with a <span class="t-serif">difference</span>.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col"><span class="t-label">Pages</span><a href="#work">Work</a><a href="#services">Services</a><a href="#studio">Studio</a><a href="careers/index.html">Careers</a><a href="#contact">Contact</a></div>
+        <div class="footer__mid"><figure class="footer__fig" aria-hidden="true"><img src="img/hero-diff-1080.webp" srcset="img/hero-diff-640.webp 640w, img/hero-diff-1080.webp 1080w" sizes="(max-width: 760px) 120vw, 60vw" width="1080" height="608" loading="lazy" alt="" /></figure><a class="btn" href="#contact"><span class="btn__roll"><span>Start a project</span><span aria-hidden="true">Start a project</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="t-label link-u" href="#top">To top ↑</a></div>
+        <div class="footer__col"><span class="t-label">Follow on</span><a href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend</a><a href="mailto:hello@tifferend.com">Email</a></div>
+      </div>
+      <div class="marquee footer__marquee" data-marquee="30" aria-hidden="true">
+        <div class="marquee__track"><div class="marquee__group"><span class="mq-sans">Branding · Identity · Strategy</span><span class="mq-dot"></span><span class="mq-serif">Book a free consultation</span><span class="mq-dot"></span><span class="mq-sans">hello@tifferend.com</span><span class="mq-dot"></span><span class="mq-serif">Content · Photography · Film</span><span class="mq-dot"></span><span class="mq-sans">Social media · Campaigns · Growth</span><span class="mq-dot"></span><span class="mq-serif">Packaging · Web design · Art direction</span><span class="mq-dot"></span></div></div>
+      </div>
+    </div>
+    <div class="footer__legal t-label"><span>© 2026 Tifferend. All rights reserved</span><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></div>
+  </footer>
+
+  <div class="wipe" id="wipe" aria-hidden="true" hidden></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
 </body>
 </html>

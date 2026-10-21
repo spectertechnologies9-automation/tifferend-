@@ -1,169 +1,119 @@
-# Art Direction — session 2 rebuild
+# Art Direction — session 5 rebuild ("tifferendly")
+
+Evidence and timestamps: `docs/REFERENCE_VIDEO_BREAKDOWN.md`. The session-2 direction (AUGE/ERA/Igloo, ember, light canvas) is superseded. Its analysis of AUGE remains in `REFERENCE_ANALYSIS.md` for reference only.
 
 ## Concept
 
-**"A studio that frames brands."** The site behaves like the references' best moments:
-- AUGE's confident, monumental studio voice for anything about **Tifferend itself** (identity, work, case study).
-- ERA's slow, architectural storytelling for anything about **belief and process** (philosophy, numbers, process, studio, contact).
-- Igloo's foggy one-subject-per-screen HUD world for **services**: the "lab" of what the studio makes.
+**Create a difference, with a difference.** The site keeps a hidden "difference" layer that the visitor uncovers:
+- a lens in the hero that reveals a recoloured world;
+- highlight bars that retract to reveal statements;
+- chapters that switch their whole colour.
 
-Tifferend keeps its name, lowercase serif wordmark, ember accent and its real copy. Ember takes over the job AUGE gives to lemon (signal colour) and ERA gives to its circle (chapter colour).
+The brand line (verbatim from the client's careers page) is the idea, and the headline uses `mix-blend-mode: difference`.
 
-## Typography system
+## Governing references (one per section)
 
-| Token | Family | Use | Reference match |
-|---|---|---|---|
-| `--f-grotesk` | **Inter Tight** 500/700/800/900 | Monumental words (home wordmark echo, case title, careers title, role rows), labels, legal row, body | Alternative to AUGE's Neue Haas / Helvetica Now Display Black (same category; exact font not identifiable) |
-| `--f-didone` | **Instrument Serif** 400 | ERA statements, numerals, CTA stack, giant email | Alternative to ERA's condensed Didone (less extreme; tracked tighter to compensate) |
-| `--f-script` | **Pinyon Script** 400 | Exactly one word inside an ERA statement | Alternative to ERA's formal script |
-| `--f-mono` | **Space Mono** 400/700 | Igloo HUD labels, metadata, counters | Igloo HUD is monospace. Also Tifferend's existing UI font |
-| `--f-mark` | **Lora** 700 | The "tifferend" wordmark only (giant on home, small in chrome) | Tifferend's identity font, kept |
-
-Scale rules:
-- AUGE monumental: 13–20vw, line-height 0.82, tracking −0.035em.
-- ERA statements: 5.2–7.4vw caps, line-height 0.95, tracking −0.01em, centred, max 3 lines.
-- Labels: 11–13 px caps, tracking +0.24em (ERA) or +0.02em bold (AUGE legal row).
-- Body: 16–19 px Inter Tight, line-height 1.4.
-
-## Colour system
-
-| Token | Value | Source |
+| Code | Reference | Where it governs |
 |---|---|---|
-| `--canvas` | `#EDF0E5` | AUGE canvas, sampled |
-| `--cream` | `#F2F4E9` | ERA cream, sampled |
-| `--ink` | `#0A0A0A` | AUGE ink |
-| `--navy` | `#182037` | ERA ink (ERA chapters only) |
-| `--ember` | `#FF7A4D` | Tifferend accent (replaces AUGE lemon / ERA powder blue) |
-| `--fog-1/2` | `#9296A2` / `#B6BAC5` | Igloo fog, sampled |
-| `--night` | `#140C0A` | ERA maroon role, warmed toward ember (contact finale) |
+| **LN** | Lando Norris site (Igloo recording 53–89 s) | Loader, page wipe, chrome, hero, philosophy, work collage, numbers, clients, footer, case study, careers roles and finale |
+| **ERA** | ERA Residence | Process opener (circle + arc text), process map, studio statement, contact finale, case quote, careers story |
+| **IG** | Igloo Inc. (0–48 s) | Services (pinned one-subject stage, HUD, leader line, decode, smear, ring portal) |
 
-## Layout rules
+New sections must name their reference here.
 
-- **No header bar.** Fixed chrome:
-  - Badge top-left.
-  - CTA stack top-right.
-  - Menu square bottom-right.
-  - Rail + counter on the left edge (≥ 1024).
-  - Chrome inverts automatically over dark chapters (`mix-blend-mode: difference` on the stack/badge).
-- Gutters: 2.1vw desktop (AUGE ≈ 40 px at 1920), 16 px mobile.
-- **No cards, shadows, gradients or rounded rectangles.** The two exceptions are both taken from the references: the AUGE hover pill and ERA's outlined pill CTA (one, in the numbers chapter).
+## Colour
 
-## Section specification and motion answers
+Each colour owns whole chapters. Colours are never sprinkled as decoration.
 
-Key: **T** = trigger, **Δ** = what changes, **D** = duration/ease, **N** = relation to the next interaction, **R** = fast-scroll/reverse behaviour, **M** = mobile, **RM** = reduced motion.
+| Token | Hex | Role |
+|---|---|---|
+| `--lime` | `#D4FF09` | LN signal: CTAs, bars, loader, wipe, footer frame. Sampled from LN |
+| `--olive` | `#272D1F` | LN statement and footer panel. Sampled |
+| `--paper` | `#F4F2EC` | Light canvas (LN off-white) |
+| `--ink` | `#101210` | Type, numbers grid |
+| `--cobalt` | `#1F4BFF` | Accent on paper, service 03 |
+| `--pink` | `#FF3D8B` | Service 02, careers script |
+| `--orange` | `#FF6A1F` | Contact finale (Tifferend's old ember, pushed brighter) |
+| `--lavender` | `#C7B8FF` | Process (ERA's powder blue role), careers story |
+| `--yellow` | `#F2E92E` | Service 01 |
+| `--forest` / `--mustard` / `--bone` | `#0E5A2E` / `#F5C518` / `#F4EFE6` | My Mithila's own palette: the work chapter and the case study only |
 
-### 0. Loader (ERA)
-- **T:** first load per session.
-- **Δ:**
-  - Ember curtain. Tracked caps loader words cycle.
-  - Arch grows from the bottom (0.8 s expo.out), then expands full screen (0.9 s expo.inOut).
-  - The full-bleed photo then **flies (GSAP Flip) into the first strip slot** (1.0 s expo.inOut) while the wordmark rises line-masked and the chrome fades in.
-- **D:** ≈ 3.2 s total. Skippable by click or any key.
-- **N:** ends exactly in the AUGE first viewport.
-- **R:** scroll is locked during the 3.2 s and released after.
-- **M:** same choreography. The arch is narrower.
-- **RM:** no loader.
+**Home chapter order:**
+1. paper (hero)
+2. olive (philosophy)
+3. olive → forest → bone (work)
+4. yellow / pink / cobalt (services)
+5. ink (numbers)
+6. paper (clients)
+7. lavender disc → lavender (process)
+8. paper (studio)
+9. orange (contact)
+10. lime frame + olive panel (footer)
 
-### 1. Home first viewport (AUGE)
-- **Δ:**
-  - The strip drifts left at 60 px/s. Scroll/drag velocity adds speed and skewX ±10° on images.
-  - The wordmark and paragraph skew with velocity.
-  - Hover: caption decodes (0.5 s) + ember pill "View case".
-- **N:** clicking an image runs the AUGE shrink → grey → ember wipe.
-- **R:** skew follows signed velocity and springs back (lerp 0.12).
-- **M:** the strip becomes a native swipe row with captions always visible, no drift, no skew. The wordmark is 24vw. The paragraph moves under the wordmark.
-- **RM:** static row.
+## Typography
 
-### 2. Clients (AUGE register)
-- **T:** enter viewport.
-- **Δ:** names reveal line by line (line mask, 0.9 s, stagger 0.06). Hover sets a name in italic skew (−10°).
-- **M/RM:** static.
+| Token | Family | Role | Reference match |
+|---|---|---|---|
+| `--f-sans` | **Archivo Variable** (wght 100–900, wdth 62–125) | Mega titles, statements, labels, body. Width axis used for hover stretch and ERA's wide tracked labels (`.t-wide`, wdth 125) | LN heavy grotesk (alternative); ERA wide sans (alternative) |
+| `--f-serif` | **Instrument Serif** 400 | LN accent words, ERA condensed caps statements, ledes, numerals | LN light serif / ERA condensed Didone (alternative) |
+| `--f-script` | **Herr Von Muellerhoff** 400 | One signature-script word per statement or block | LN signature / ERA script (alternative) |
+| `--f-mono` | **Space Mono** 400 | Igloo HUD only (services, scope lines) | Igloo HUD (category match) |
 
-### 3. Philosophy (ERA)
-- **T:** scroll, scrubbed.
-- **Δ:**
-  - Caps statement reveals **per character** (opacity 0 → 1 with blur 8 → 0 px) left→right.
-  - The script word "personal" fades/draws in after the caps.
-  - Body lines mask-rise.
-- **D:** scrubbed over ≈ 70% of viewport height.
-- **R:** reversible (scrub).
-- **M:** same, smaller.
-- **RM:** visible.
+**Type primitives** (`base.css`):
+- `.t-mega`: 900, caps, lh 0.84
+- `.t-state`: 800, caps, lh 0.93
+- `.t-serif`
+- `.t-script`
+- `.t-label`: 11 px, 750, caps
+- `.t-wide`: ERA
+- `.t-mono`: IG
+- `.t-body`
+- `.t-lede`
 
-### 4. Numbers (ERA data chapter)
-- **Δ:** the centre portrait enters with a **skewed/trapezoid clip** (polygon → rectangle, 1.4 s). Numerals count up (1.6 s expo.out).
-- **M:** 2×2 numerals, image above.
-- **RM:** static.
+**Rules:**
+- A statement mixes grotesk caps with serif accent words (LN).
+- ERA statements are serif caps with exactly one script word.
+- Script appears at most once per block.
 
-### 5. Selected work (AUGE: "the work parts its own name"), rebuilt in session 4
-- **Composition (closed):** "MY ▢ MITHILA". A small image window sits centred between the two halves of the name, set in Inter Tight 900 (≈6.6vw).
-- **T:** pinned for 1.4 × viewport height (desktop ≥ 1024), scrubbed 0.7.
-- **Δ:** one CSS variable `--p` (0 → 1) on `.work` drives everything in `home.css`:
-  - the frame's `clip-path` inset opens from 24vw × 40svh to min(86vw, 1260px) × 66svh;
-  - the words are pushed apart by the opening frame and leave the screen;
-  - the image settles from scale 1.16 → 1;
-  - the meta row (Branding · 2024 / scope / "View the case →") fades in over the last quarter.
-- Then a short hold, then the description paragraph in normal flow.
-- **N:** clicking the frame runs the AUGE shrink → grey → ember wipe → case.
-- **M:** no pin. Stacked name, full-width image that opens from an inset window (scrubbed), meta below.
-- **RM / no JS:** the closed composition, static, with the meta visible.
-- Image is never displayed wider than its 1260 px master.
+## Components
 
-### 6. Services (Igloo)
-- **T:** pinned for 3 × 100vh (desktop). **Session 4:** the timeline is hold (0.8) → transition (1) → hold → transition → hold, so most scroll positions show a sharp shard and a readable HUD. The index switches at the midpoint of each transition and is computed from the scroll *target* (`progress × duration`), not the lagging scrubbed time. Service titles are 600 at ≈2.9vw. A progress hairline sits in the bottom-left HUD. The bottom 22% fades to flat `--fog-1` above the drifting fog, so the hand-off to the circle opener has no seam.
-- **Δ:**
-  - Fog background (CSS radial gradients + slow drifting noise).
-  - Each service image is clipped to an irregular **shard polygon**, centred, monochrome.
-  - On scroll the active shard approaches (scale 0.6 → 1, blur 10 → 0, rotateY 12° → 0); the previous one recedes into the fog (scale ↑, blur ↑, opacity ↓).
-  - A HUD label (mono) with a leader line decodes beside it: "SERVICE_0X / NAME", followed by the verified bullet list as HUD lines.
-  - An RGB-split flash plays on change.
-- **D:** scrubbed.
-- **R:** fully reversible.
-- **M:** no pin. Each service is a fog screen with its shard and HUD, revealed on enter.
-- **RM:** static stacked list with images.
+- **Buttons:** lime rectangles (radius 4 px) with a rolling label. Ink and paper variants exist. No pills.
+- **Notched cell** (`.cell`, `.notch`): LN chamfered corners with a 1 px border. On hover, a lime border.
+- **Contour texture** (`.contours`): LN topographic lines, masked so they take the section's colour.
+- **Stepped bars** (`[data-bars]`): LN highlight bars. They retract per line and remove themselves.
 
-### 7. Circle opener → Process map (ERA)
-- **T:** scrub.
-- **Δ:**
-  - The ember semicircle with arc text rises and covers.
-  - The map chapter (ember background) pins for 150vh while a hand-drawn line draws left→right. Session 4: the route is visible from the start as a faint dotted trace, and scrolling inks it in, so the pinned screen never reads as empty.
-  - Three station dots pop as the line reaches them. Each station's label and paragraph mask-rise.
-- **R:** reversible.
-- **M:** vertical line drawn top→bottom with stations stacked (no pin).
-- **RM:** full drawn map, static.
+## Motion inventory (what each section does — no section repeats another's entrance)
 
-### 8. Studio (ERA statement)
-- Centred caps statement "CREATE A DIFFERENCE, *with a* DIFFERENCE" (script on "with a"), per-character reveal, founder story centred, mission small caps.
-- Values as four ERA "stations" in a row (label + condensed numeral + one line).
-- **M:** stacked.
+| Section | Motion |
+|---|---|
+| Loader | Glyph morph across 4 typefaces, 00→100 counter, stepped lime wipe out |
+| Hero | Lagged lens + trailing blob; scroll pin opens the window to full bleed and grows the lens until the difference takes over |
+| Philosophy | Stepped bars; script word wipes; body lines rise |
+| Work | Background interpolates; parallax collage; images clip up; script drifts |
+| Services | Pinned stage; object approaches from depth with blur; HUD decodes; RGB smear + ring portal between subjects; stage colour switches |
+| Numbers | Count-up; lime border on hover |
+| Clients | Type-on with block caret; giant script wipes; velocity-reactive marquees |
+| Process | Lavender disc rises with arc text and fills the screen; map route draws; stations appear as it passes |
+| Studio / contact | ERA per-character blur reveal, scrubbed |
+| Footer | Bars; signature wipe; marquee |
+| Case | Band opens; palette cells fill; kit drops in; card fan spreads; curved-top join into the lime "next" block |
+| Careers | Accordion rows with width-axis stretch |
 
-### 9. Contact finale (ERA B12)
-- Night colour, glyph (ember dot in a ring), **giant Instrument Serif email** that reveals per character.
-- Centred details: "Book a free consultation" + "Start a project" underlined CTAs.
-- The enquiry form is set as an ERA "sales office" block: underlined fields, no boxes. Legal row at the bottom.
+**Mobile is designed, not shrunk:**
+- The hero lens drifts on its own.
+- Services become full colour screens.
+- The map becomes a vertical route.
+- The fan becomes a native swipe strip.
+- Menu links size to the viewport.
 
-### Case study (AUGE)
-1. **Arrival:** ember wipe with thumbnail + decoding title (mixed serif-italic / grotesk glyph decode).
-2. **Hero band:** the image slides down with a curved bottom edge (SVG mask path morph). The giant centred "MY MITHILA" (Inter Tight 900) reveals, with the category "REBRANDING" small beneath.
-3. **Text chapter:**
-   - Left: ©2024 + scope list stagger.
-   - Right: about paragraph, **lines rise with −2° rotation** (AUGE A8).
-4. **Background / Strategy:** two-column AUGE text.
-5. **Verbal identity:** centred giant quote in Instrument Serif (it's a quote, so an ERA statement register).
-6. **Black chapter:** palette swatches as perspective panels that rotate in (rotateY ±14° → 0, scrubbed), with mono labels.
-7. **Curved-top white panel** returns to light: product images in an AUGE ragged row, OOH full bleed, tote.
-8. **Social diary:** AUGE drifting strip.
-9. **Next project (session 4):** a monumental "YOUR / BRAND" poster. A hero-field image window opens between the two lines while the words close in, all driven by one scrubbed `--q`. Below it: "Start a project" (ERA serif CTA) and the email. The whole poster links to the contact chapter through the wipe. Static state = open.
+**Reduced motion:**
+- no loader, wipe, bars, pins or drift;
+- static marquees wrap;
+- every text end state is plain.
 
-### Careers (AUGE)
-- Giant centred "JOIN THE TEAM" grotesk.
-- Left metadata column, roles as heavy rows (hover skew + pill "Read role"), accordion, then an ERA statement for the story.
+## Content integrity (unchanged rules)
 
-## Performance requirements
-
-- No WebGL. Igloo is interpreted with CSS 3D, clip-path and filters.
-- Transform/opacity/filter/clip-path only, with will-change applied briefly.
-- Fonts: latin subsets, ≤ 9 files.
-- LCP image preloaded.
-- CLS < 0.05.
-- Pins only in Services and Process (desktop).
+- Only My Mithila is presented as work.
+- Generated images are labelled illustrative in their alt text and captions.
+- Stats are the client's own live-site claims.
+- Testimonials stay behind `FEATURES.testimonials`.

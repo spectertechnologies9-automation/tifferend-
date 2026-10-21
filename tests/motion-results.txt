@@ -1,36 +1,29 @@
-PASS  loader completes, hides and releases the strip {"hidden":true,"hold":"0","word":"matrix(1, 0, 0, 1, 0, 0)"}
+PASS  loader shows on first visit {"shown":true,"loading":true}
+PASS  loader completes and wipes out {"hidden":true,"loading":false,"wipe":true,"flag":"1"}
 PASS  loader skipped on repeat visit 
-PASS  hero strip drifts (AUGE A1) -23.2 → -38.6
-PASS  cursor pill decodes over a strip image {"o":1,"t":"View case"}
-PASS  chrome hidden over the AUGE first viewport 
-PASS  chrome visible after the hero 
-PASS  ERA per-character statement resolves on scroll 16 chars
-PASS  chrome switches to dark over the numbers chapter 
-PASS  services pinned while shards change 
-PASS  shards advance 1 → 2 → 3 through the pin [0,1,2] first=[1,0,0]
-PASS  services hold: service 1 sharp + HUD readable {"o":1,"blur":"drop-shadow(rgba(40, 44, 56, 0.35) 0px 30px 60px)","hud":1}
-PASS  services hold: service 2 sharp + HUD readable {"o":1,"blur":"blur(0px)","hud":1}
-PASS  map line draws on scroll and stations appear 1617 → 47 [1,1,1]
-PASS  chrome follows the ember chapter 
-PASS  work frame opens with scroll while pinned [0,0.803908,1]
-PASS  work title parts as the frame opens {"l":[524,-9],"r":[916,1449]}
-PASS  case reached via wipe; overlay cleared 
-PASS  case title decoded back to plain text 
-PASS  palette panels settle into the picture plane matrix(1, 0, 0, 1, 0, 0)
-PASS  case next-block window opens on scroll 1
-PASS  no page errors (desktop flow) 
-PASS  menu anchors land on their chapter (Lenis + pins) [["#services",-1],["#work",-1],["#contact",-1],["#studio",-1]]
-PASS  "See our work" pill lands on the work chapter -1
-PASS  reload inside a pin restores scroll + state {"sy":8148,"rb":"02","ra":{"y":8148,"n":"02"}}
-PASS  no page errors (anchors) 
-PASS  first Tab focuses skip link 
-PASS  menu square opens the menu 
-PASS  focus moved into menu 
-PASS  focus trapped in menu + toggle 
-PASS  Escape closes menu, focus returns to the square 
-PASS  hero strip is natively scrollable on touch 
-PASS  form shows validation on empty submit 
-PASS  invalid field flagged 
-PASS  careers accordion opens 
-PASS  apply link points to the Google Form 
-PASS  visible focus ring on the first 10 tab stops A:solid A:solid A:solid A:solid A:solid BUTTON:solid A:solid A:solid A:solid A:solid
+PASS  hero lens opens to its rest radius {"x":50,"y":42,"r":180}
+PASS  hero lens follows the pointer (lagged) {"x":55.8,"y":23.57,"r":180} → {"x":68.76,"y":23.37,"r":180}
+PASS  hero headline blends with difference 
+PASS  chrome turns light over the olive chapter 
+PASS  LN highlight bars retract and are removed 
+PASS  work background interpolates to forest, then bone rgb(14, 90, 46) → rgb(244, 239, 230)
+PASS  services stage stays pinned (sticky) 
+PASS  services advance 01 → 02 → 03 01,02,03
+PASS  HUD label decodes to the real text Service_03 // Digital & growth marketing
+PASS  numbers count up to their values 
+PASS  ERA disc rises with the scroll y=-538
+PASS  map line draws and all stations appear {"off":0,"op":[1,1,1]}
+PASS  menu opens with focus inside {"open":true,"focus":true}
+PASS  Esc closes the menu and returns focus {"open":false,"focusBtn":true}
+PASS  form validates required fields 
+PASS  wipe navigates to the case and clears 
+PASS  palette cells fill 
+PASS  social cards fan out (LN) last card 43°
+PASS  careers accordion opens with a working apply link {"exp":"true","vis":true,"href":"https://forms.gle/hJoBoTJDMgsCnCJu9"}
+PASS  skip link is the first tab stop and becomes visible {"cls":"skip","top":12}
+PASS  no page errors (desktop) 
+PASS  phone: idle lens drifts on its own 50.00% → 58.82%
+PASS  phone: services are stacked screens (no pin) 
+PASS  phone: menu opens 
+PASS  no page errors (phone) 
+PASS  reduced motion: no loader, no bars, nothing hidden, no pins, static marquees {"loader":true,"bars":0,"hidden":0,"pinned":false,"marquee":true}

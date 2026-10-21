@@ -1,39 +1,49 @@
-/* Design tokens — sampled from the references (docs/REFERENCE_ANALYSIS.md) + Tifferend identity */
+/* Tifferend design tokens — session 5 ("funky studio") system.
+   Sampled values and their reference sources: docs/REFERENCE_VIDEO_BREAKDOWN.md */
 :root {
-  --canvas: #edf0e5;   /* AUGE canvas */
-  --cream: #f2f4e9;    /* ERA cream */
-  --ink: #0a0a0a;      /* AUGE ink */
-  --navy: #182037;     /* ERA ink */
-  --ember: #ff7a4d;    /* Tifferend accent — plays AUGE's lemon / ERA's chapter colour */
-  --ember-ink: #1a0a04;
-  --fog-1: #9296a2;    /* Igloo fog */
-  --fog-2: #b6bac5;
-  --fog-3: #d7d9de;
-  --night: #140c0a;    /* ERA maroon role, warmed to ember */
-  --muted: #6b6d66;
-  --muted-dark: #a8a49c;
-  --line: rgba(10, 10, 10, 0.18);
-  --line-dark: rgba(242, 244, 233, 0.22);
+  /* core (LN) */
+  --lime: #d4ff09;
+  --olive: #272d1f;
+  --paper: #f4f2ec;
+  --ink: #101210;
+  --sage: #a4a79c;
+  /* funky secondaries: each one owns whole chapters, never sprinkled */
+  --cobalt: #1f4bff;
+  --pink: #ff3d8b;
+  --orange: #ff6a1f;
+  --lavender: #c7b8ff;
+  --yellow: #f2e92e;
+  /* My Mithila (client palette, case study only) */
+  --forest: #0e5a2e;
+  --mustard: #f5c518;
+  --bone: #f4efe6;
 
-  --f-grotesk: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --f-didone: "Instrument Serif", "Bodoni 72", Didot, Georgia, serif;
-  --f-script: "Pinyon Script", "Snell Roundhand", cursive;
-  --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
-  --f-mark: "Lora", Georgia, serif;
+  --f-sans: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --f-serif: 'Instrument Serif', 'Times New Roman', serif;
+  --f-script: 'Herr Von Muellerhoff', cursive;
+  --f-mono: 'Space Mono', ui-monospace, monospace;
 
-  /* per-reference timing */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-inout: cubic-bezier(0.87, 0, 0.13, 1);
+  --g: clamp(16px, 2.2vw, 40px);           /* side gutter */
+  --chrome-h: 76px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);   /* expo.out */
+  --ease-io: cubic-bezier(0.87, 0, 0.13, 1);
 
-  --gx: max(16px, 2.1vw);      /* AUGE ≈ 40px at 1920 */
-  --chrome-top: max(16px, 2.6vw);
-  --pl: var(--gx);                 /* left padding that clears the ERA rail (≥1100px) */
-
-  --t-body: clamp(1rem, 0.94rem + 0.25vw, 1.1875rem);
-  --t-intro: clamp(1.15rem, 0.9rem + 0.75vw, 1.65rem);  /* AUGE paragraph ≈ 26px @1920 */
-  --t-label: 0.75rem;
-  --t-era: clamp(2.6rem, 1rem + 5.6vw, 8.6rem);         /* ERA statements */
-  --t-mega: clamp(5rem, 1rem + 17vw, 23rem);            /* AUGE monumental */
+  /* section-level colour (set by [data-theme]) */
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --accent: var(--cobalt);
+  --muted: color-mix(in srgb, var(--fg) 62%, var(--bg));
+  --line: color-mix(in srgb, var(--fg) 18%, transparent);
 }
 
-@media (min-width: 1100px) { :root { --pl: calc(var(--gx) + clamp(36px, 3.6vw, 66px) + 40px); } }
+[data-theme='paper'] { --bg: var(--paper); --fg: var(--ink); --accent: var(--cobalt); }
+[data-theme='olive'] { --bg: var(--olive); --fg: var(--paper); --accent: var(--lime); }
+[data-theme='ink'] { --bg: var(--ink); --fg: var(--paper); --accent: var(--lime); }
+[data-theme='lime'] { --bg: var(--lime); --fg: var(--ink); --accent: var(--ink); }
+[data-theme='lavender'] { --bg: var(--lavender); --fg: var(--ink); --accent: var(--cobalt); }
+[data-theme='orange'] { --bg: var(--orange); --fg: var(--ink); --accent: var(--paper); }
+[data-theme='cobalt'] { --bg: var(--cobalt); --fg: var(--paper); --accent: var(--lime); }
+[data-theme='forest'] { --bg: var(--forest); --fg: var(--bone); --accent: var(--mustard); }
+[data-theme='mustard'] { --bg: var(--mustard); --fg: var(--ink); --accent: var(--forest); }
+[data-theme='bone'] { --bg: var(--bone); --fg: var(--ink); --accent: var(--forest); }
+[data-theme] { --muted: color-mix(in srgb, var(--fg) 64%, var(--bg)); --line: color-mix(in srgb, var(--fg) 20%, transparent); }

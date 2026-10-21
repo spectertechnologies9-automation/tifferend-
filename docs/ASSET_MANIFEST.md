@@ -55,3 +55,30 @@ All OFL, self-hosted via `@fontsource`, latin subset only:
 - **Lora** 700: kept, the wordmark.
 
 The fonts section above describes session 1.
+
+## Session 5 additions (2026-10-21): generated with Higgsfield, with the user's approval
+
+Model: GPT Image 2.5 (`gpt_image_2_5`), 2K, quality high. Cost: 2.75 credits each, **13.75 credits total**. The account went from 70 to about 56 credits. One submission hit a 429 rate limit (not charged) and was resubmitted. No re-rolls.
+
+None of these images is client work. Each one's alt text or caption says "illustrative". Masters (PNG) are in `assets/generated/` (not shipped). Web versions (WebP q80) are in `public/img/`.
+
+| File (web) | Master | Prompt summary | Used in | Notes |
+|---|---|---|---|---|
+| hero-diff-640/1080/1600/1920 | hero-difference.png (2688×1520, resized to 1920×1080) | The client's hero photo (uploaded as reference) recoloured: lime grass, cobalt + pink/lavender sky, acid-yellow horizon, orange suit, same composition | Hero lens reveal; footer window | A derivative of the client's hero photo. Same usage-rights question as hero-field. Registered to the original by eye |
+| svc-identity-560/960 | svc-identity.png (1792×2240) | Stacked geometric solids on acid yellow | Service 01 | |
+| svc-content-560/960 | svc-content.png | Vintage film camera on a tripod aimed at an orange, hot pink sweep | Service 02 | Replaces the live-site placeholder `illus-film-set` |
+| svc-growth-560/960 | svc-growth.png | Coloured blocks rising like a chart toward a chrome ball, cobalt | Service 03 | |
+| studio-flatlay-800/1600 | studio-flatlay.png (2688×1520) | Overhead studio flat-lay on cobalt (camera, swatches, sketchbook, scissors, cactus) | Studio section; careers OG image | The camera dial carries tiny illegible marks; no readable text or brand |
+
+**Generated and checked:** every image was viewed at full size before use, with no readable lettering, logos or third-party marks.
+
+**Video:** none. Seedance 2.5 costs 80 credits for 5 s at 1080p, which is over the 70-credit balance.
+
+**Also new:**
+- `public/img/contours.svg`: procedurally generated topographic lines (matplotlib contour of a random Gaussian field), 31 KB raw.
+
+**No longer used:**
+- `illus-film-set`, `illus-portrait-noir`: kept in `public/img/` but unreferenced.
+- `hero-field-640`, `-lqip`: kept, unreferenced.
+
+**Fonts (session 5):** Archivo Variable (wdth file, latin ≈ 90 KB), Instrument Serif, Herr Von Muellerhoff, Space Mono. All OFL, self-hosted via `@fontsource`. Lora, Inter Tight and Pinyon Script were removed from package.json.

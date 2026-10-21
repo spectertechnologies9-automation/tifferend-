@@ -1,11 +1,11 @@
 import { gsap } from '../core/gsap.js';
-import { env, qs, qsa, clamp } from '../core/env.js';
-import { scrollToTarget, stopScroll, startScroll, onScrollVelocity } from '../core/smooth.js';
+import { env, qs, qsa } from '../core/env.js';
+import { scrollToTarget, stopScroll, startScroll } from '../core/smooth.js';
 
-/* AUGE menu square → full-screen menu (dialog semantics, focus trap, Esc, focus return) */
+/* Menu square → full-screen lime menu (dialog semantics, focus trap, Esc, focus return) */
 export function initMenu() {
   const menu = qs('#menu');
-  const btn = qs('.menu-square');
+  const btn = qs('.menu-btn');
   if (!menu || !btn) return;
   const links = qsa('.menu__list a', menu);
   let tl, open = false;
@@ -23,21 +23,22 @@ export function initMenu() {
     menu.classList.add('is-open'); document.body.classList.add('menu-open');
     btn.setAttribute('aria-expanded', 'true'); btn.querySelector('.sr-only').textContent = 'Close menu';
     stopScroll(); tl?.kill();
-    if (env.reduced) gsap.set(menu, { clipPath: 'inset(0% 0 0 0)' });
+    if (env.reduced) gsap.set(menu, { clipPath: 'inset(0 0 0% 0)' });
     else tl = gsap.timeline()
-      .to(menu, { clipPath: 'inset(0% 0 0 0)', duration: 0.8, ease: 'expo.inOut' })
-      .from(links, { yPercent: 110, skewX: -14, stagger: 0.05, duration: 0.9, ease: 'expo.out' }, '-=0.35');
+      .fromTo(menu, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.75, ease: 'expo.inOut' })
+      .from(links, { yPercent: 105, opacity: 0, stagger: 0.05, duration: 0.9, ease: 'expo.out' }, '-=0.3');
     document.addEventListener('keydown', onKey);
     setTimeout(() => links[0]?.focus(), 60);
   }
   function close(returnFocus = true) {
+    if (!open) return;
     open = false;
     document.removeEventListener('keydown', onKey);
     btn.setAttribute('aria-expanded', 'false'); btn.querySelector('.sr-only').textContent = 'Menu';
     document.body.classList.remove('menu-open'); startScroll(); tl?.kill();
     const done = () => { menu.classList.remove('is-open'); gsap.set(links, { clearProps: 'all' }); };
-    if (env.reduced) { gsap.set(menu, { clipPath: 'inset(100% 0 0 0)' }); done(); }
-    else gsap.to(menu, { clipPath: 'inset(0 0 100% 0)', duration: 0.7, ease: 'expo.inOut', onComplete: () => { gsap.set(menu, { clipPath: 'inset(100% 0 0 0)' }); done(); } });
+    if (env.reduced) { gsap.set(menu, { clipPath: 'inset(0 0 100% 0)' }); done(); }
+    else gsap.to(menu, { clipPath: 'inset(0 0 100% 0)', duration: 0.6, ease: 'expo.inOut', onComplete: done });
     if (returnFocus) btn.focus();
   }
   btn.addEventListener('click', () => (open ? close() : show()));
@@ -60,21 +61,7 @@ export function initAnchors() {
   });
 }
 
-/* AUGE A2: monumental type leans with scroll velocity and springs back */
-export function initVelocitySkew() {
-  const els = qsa('[data-velocity-skew]');
-  if (!els.length || env.reduced || !env.finePointer) return; // touch: no skew (native momentum would overshoot)
-  let skew = 0, target = 0;
-  onScrollVelocity((v) => { target = clamp(-v * 0.5, -12, 12); });
-  gsap.ticker.add(() => {
-    skew += (target - skew) * 0.12;
-    target *= 0.88;
-    if (Math.abs(skew) < 0.01) return;
-    els.forEach((el) => { el.style.transform = `skewX(${skew.toFixed(2)}deg)`; });
-  });
-}
-
-/* Enquiry form → composes an email (no backend available; documented in PROJECT_STATUS) */
+/* Enquiry form → composes an email (no backend; documented in PROJECT_STATUS) */
 export function initForm() {
   const form = qs('#enquiry');
   if (!form) return;
@@ -105,6 +92,7 @@ export function initAccordions() {
     btn.addEventListener('click', () => {
       const open = btn.getAttribute('aria-expanded') === 'true';
       btn.setAttribute('aria-expanded', String(!open));
+      btn.closest('[data-accordion]')?.classList.toggle('is-open', !open);
       if (env.reduced) { panel.hidden = open; return; }
       if (open) gsap.to(panel, { height: 0, duration: 0.5, ease: 'expo.inOut', onComplete: () => { panel.hidden = true; gsap.set(panel, { clearProps: 'height' }); } });
       else { panel.hidden = false; gsap.from(panel, { height: 0, duration: 0.7, ease: 'expo.inOut', clearProps: 'height' }); }

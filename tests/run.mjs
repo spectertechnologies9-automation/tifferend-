@@ -33,7 +33,7 @@ for (const reduced of [false, true]) {
       const overflow = await page.evaluate(() => {
         const vw = document.documentElement.clientWidth; const offenders = [];
         document.querySelectorAll('body *').forEach((el) => {
-          if (el.closest('.strip, .fog, .opener, .wipe, .menu, .loader, .kit, .c-full, .cursor, .work__title')) return; // deliberately clipped by an overflow:hidden parent
+          if (el.closest('.marquee, .opener, .wipe, .menu, .loader, .cursor, .contours, .clients__paint, .work__script, .ch__script, .c-fan__cards, .bar, .svc__ring')) return;
           const r = el.getBoundingClientRect();
           if (r.width && (r.right > vw + 1 || r.left < -1)) offenders.push(el.tagName.toLowerCase() + '.' + [...el.classList].join('.') + ' ' + Math.round(r.left) + '→' + Math.round(r.right));
         });

@@ -1,52 +1,99 @@
+/* Reset, type primitives and shared components. Pre-animation states are gated on .js:not(.reduced). */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; }
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-stopped { overflow: hidden; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; overflow-x: clip; background: var(--paper); }
 body {
-  margin: 0; background: var(--canvas); color: var(--ink);
-  font: 400 var(--t-body)/1.45 var(--f-grotesk); letter-spacing: -0.005em;
-  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip;
+  margin: 0; min-height: 100vh; background: var(--bg); color: var(--fg);
+  font-family: var(--f-sans); font-size: 17px; line-height: 1.45; font-variation-settings: 'wdth' 100;
+  -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
 }
-img, picture, video, svg { display: block; max-width: 100%; }
+img, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
-h1, h2, h3, h4, p, figure, blockquote, ul, ol, dl, dd { margin: 0; padding: 0; }
+h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
-input, textarea { font: inherit; color: inherit; }
-::selection { background: var(--ember); color: var(--ink); }
-:focus { outline: none; }
-:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+input, select, textarea { font: inherit; color: inherit; }
+::selection { background: var(--lime); color: var(--ink); }
 
-.skip-link { position: fixed; left: var(--gx); top: -100px; z-index: 1000; background: var(--ink); color: var(--canvas); padding: 12px 16px; font: 600 12px/1 var(--f-grotesk); letter-spacing: .2em; text-transform: uppercase; }
-.skip-link:focus { top: 12px; }
+[data-theme] { background: var(--bg); color: var(--fg); }
+
 .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: fixed; left: 12px; top: -80px; z-index: 300; background: var(--lime); color: var(--ink); padding: 12px 16px; font-weight: 800; border-radius: 4px; }
+.skip:focus { top: 12px; }
+:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 3px; }
+[data-theme='olive'] :focus-visible, [data-theme='ink'] :focus-visible, [data-theme='cobalt'] :focus-visible, [data-theme='forest'] :focus-visible { outline-color: var(--lime); }
 
-/* --- Typographic primitives (one per reference register) --- */
-.lbl { font: 600 var(--t-label)/1.35 var(--f-grotesk); letter-spacing: .24em; text-transform: uppercase; }      /* ERA tracked labels */
-.legal-txt { font: 600 14px/1.2 var(--f-grotesk); letter-spacing: -0.01em; text-transform: uppercase; }        /* AUGE legal row */
-.hud { font: 400 12px/1.5 var(--f-mono); letter-spacing: .04em; text-transform: uppercase; }                    /* Igloo HUD */
-.era { font: 400 var(--t-era)/0.94 var(--f-didone); letter-spacing: -0.012em; text-transform: uppercase; text-wrap: balance; }
-.era .script { display: block; font: 400 1.05em/0.7 var(--f-script); text-transform: none; letter-spacing: 0; margin: -0.12em 0 -0.02em 0.9em; position: relative; z-index: 1; }
-.mega { font: 900 var(--t-mega)/0.82 var(--f-grotesk); letter-spacing: -0.045em; text-transform: uppercase; }
-.intro { font: 400 var(--t-intro)/1.28 var(--f-grotesk); letter-spacing: -0.012em; }
-.small { font-size: 15px; line-height: 1.45; }
+/* ---------- type primitives ---------- */
+.t-mega { font-weight: 900; text-transform: uppercase; line-height: 0.84; letter-spacing: -0.035em; font-variation-settings: 'wdth' 100; }
+.t-state { font-weight: 800; text-transform: uppercase; line-height: 0.93; letter-spacing: -0.025em; }
+.t-serif { font-family: var(--f-serif); font-weight: 400; letter-spacing: -0.01em; text-transform: none; }
+.t-serif.caps, .t-state .t-serif, .t-mega .t-serif { text-transform: uppercase; letter-spacing: -0.02em; }
+.t-script { font-family: var(--f-script); font-weight: 400; text-transform: none; letter-spacing: 0; line-height: 1; }
+.t-label { font-size: 11px; font-weight: 750; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.25; }
+.t-wide { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.24em; font-variation-settings: 'wdth' 125; line-height: 1.4; }
+.t-mono { font-family: var(--f-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.35; }
+.t-body { font-size: clamp(16px, 1.15vw, 19px); line-height: 1.5; }
+.t-lede { font-size: clamp(19px, 1.6vw, 26px); line-height: 1.3; letter-spacing: -0.01em; }
+.accent { color: var(--accent); }
+.muted { color: var(--muted); }
+.dash { display: inline-block; width: 22px; height: 4px; background: var(--accent); vertical-align: middle; margin-right: 8px; }
 
-/* ERA underlined condensed-serif CTA */
-.cta-serif { display: inline-block; font: 400 clamp(1.5rem, 1rem + 1.4vw, 2.4rem)/1 var(--f-didone); text-transform: uppercase; letter-spacing: -0.005em; padding-bottom: 4px; background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size .6s var(--ease-out), color .3s; }
-.cta-serif:hover { background-size: 0 1px; background-position: 100% 100%; }
-.cta-caps { display: inline-block; font: 600 12px/1 var(--f-grotesk); letter-spacing: .24em; text-transform: uppercase; padding: 10px 0; background: linear-gradient(currentColor, currentColor) 0 calc(100% - 4px) / 0 1px no-repeat; transition: background-size .5s var(--ease-out); }
-.cta-caps:hover, .cta-caps:focus-visible { background-size: 100% 1px; }
+/* ---------- buttons (LN rectangle, not pills) ---------- */
+.btn {
+  --b-bg: var(--lime); --b-fg: var(--ink);
+  display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 18px; border-radius: 4px;
+  background: var(--b-bg); color: var(--b-fg); font-size: 12px; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase;
+  position: relative; overflow: hidden; isolation: isolate; white-space: nowrap;
+}
+.btn--ink { --b-bg: var(--ink); --b-fg: var(--paper); }
+.btn--paper { --b-bg: var(--paper); --b-fg: var(--ink); }
+.btn__roll { display: grid; overflow: hidden; height: 1.3em; line-height: 1.3em; }
+.btn__roll > span { grid-area: 1 / 1; transition: transform 0.55s var(--ease); }
+.btn__roll > span + span { transform: translateY(110%); }
+.btn:hover .btn__roll > span:first-child, .btn:focus-visible .btn__roll > span:first-child { transform: translateY(-110%); }
+.btn:hover .btn__roll > span + span, .btn:focus-visible .btn__roll > span + span { transform: translateY(0); }
+.btn svg { width: 12px; height: 12px; flex: none; transition: transform 0.55s var(--ease); }
+.btn:hover svg { transform: translate(2px, -2px); }
 
-/* JS-enhanced pre-states (content stays visible without JS or with reduced motion) */
-.js:not(.reduced) [data-reveal="lines"],
-.js:not(.reduced) [data-reveal="rot-lines"],
-.js:not(.reduced) [data-reveal="chars"] { visibility: hidden; }
-.js:not(.reduced) [data-decode]:not(.is-on) { visibility: hidden; }
-.js:not(.reduced) [data-reveal="fade"] { opacity: 0; transform: translateY(24px); }
-.split-line { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.link-u { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1.5px no-repeat; padding-bottom: 2px; transition: background-size 0.6s var(--ease); }
+.link-u:hover, .link-u:focus-visible { background-size: 0% 1.5px; background-position: 100% 100%; }
+
+/* ---------- LN notched cell (chamfered corners, 1px border) ---------- */
+.notch { --n: 14px; clip-path: polygon(0 0, calc(100% - var(--n)) 0, 100% var(--n), 100% 100%, var(--n) 100%, 0 calc(100% - var(--n))); }
+.cell { --n: 16px; position: relative; isolation: isolate; background: var(--line); transition: background-color 0.4s var(--ease); }
+.cell, .cell::before { clip-path: polygon(0 0, calc(100% - var(--n)) 0, 100% var(--n), 100% 100%, var(--n) 100%, 0 calc(100% - var(--n))); }
+.cell::before { content: ''; position: absolute; inset: 1px; z-index: -1; background: var(--bg); transition: background-color 0.4s var(--ease); }
+
+/* ---------- topographic contour texture (LN) ---------- */
+.contours { position: absolute; inset: 0; pointer-events: none; color: inherit; opacity: 0.09; background: currentColor;
+  -webkit-mask: url('/img/contours.svg') center / cover no-repeat; mask: url('/img/contours.svg') center / cover no-repeat; }
+
+/* ---------- LN stepped highlight bars (created by fx/text.js) ---------- */
+.bar-line { position: relative; }
+.bar { position: absolute; top: 2%; bottom: 0; background: var(--bar, var(--lime)); pointer-events: none; transform-origin: 100% 50%; z-index: 2; }
+
+/* type-on block cursor */
+.caret { display: inline-block; width: 0.55em; height: 0.82em; background: currentColor; vertical-align: -0.04em; margin-left: 0.04em; }
+
+/* decoding text (Igloo HUD / scramble) */
+.alt { font-family: var(--f-serif); font-style: italic; text-transform: none; }
+
+/* ---------- pre-animation states (end states are the defaults) ---------- */
+.js:not(.reduced) [data-bars]:not(.is-split),
+.js:not(.reduced) [data-type]:not(.is-typed),
+.js:not(.reduced) [data-chars]:not(.is-split),
+.js:not(.reduced) [data-lines]:not(.is-split) { visibility: hidden; }
+.js:not(.reduced) [data-rise] { opacity: 0; transform: translateY(40px); }
+.split-line { display: block; }
+
+/* ---------- marquee ---------- */
+.marquee { overflow: hidden; white-space: nowrap; contain: content; }
+.marquee__track { display: inline-flex; gap: 0; will-change: transform; }
+.marquee__group { display: inline-flex; align-items: center; flex: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
 }
+html:not(.js) .marquee, .marquee.is-static { white-space: normal; }
+html:not(.js) .marquee__track, .marquee.is-static .marquee__track { flex-wrap: wrap; justify-content: center; row-gap: 0.2em; }
+html:not(.js) .marquee__group, .marquee.is-static .marquee__group { flex-wrap: wrap; justify-content: center; }

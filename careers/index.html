@@ -1,98 +1,140 @@
 <!doctype html>
-<html lang="en" data-chrome="light">
+<html lang="en" data-chrome="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Careers — Tifferend</title>
-  <meta name="description" content="Join Tifferend — a team of creative minds and marketing strategists. Open roles in account management, content, film, design and social." />
-  <meta name="theme-color" content="#edf0e5" />
+  <meta name="description" content="Join the team at Tifferend: a passionate team of creative minds and marketing strategists. Six open positions." />
+  <meta name="theme-color" content="#f4f2ec" />
+  <meta property="og:title" content="Careers — Tifferend" />
+  <meta property="og:description" content="Let's do things tifferendly. Six open positions." />
+  <meta property="og:image" content="../img/studio-flatlay-1600.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@tifferend" />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource/instrument-serif/files/instrument-serif-latin-400-normal.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/node_modules/@fontsource/herr-von-muellerhoff/files/herr-von-muellerhoff-latin-400-normal.woff2" crossorigin />
   <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
-  <!-- the title (LCP) is set in Inter Tight 900: fetch it with the HTML, not after the CSS -->
-  <link rel="preload" href="/node_modules/@fontsource/inter-tight/files/inter-tight-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin />
-  <script>(function () { var d = document.documentElement; d.classList.add('js'); if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduced'); })();</script>
+  <script>
+    (function () {
+      var d = document.documentElement; d.classList.add('js');
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) d.classList.add('reduced');
+      try { if (!d.classList.contains('reduced') && sessionStorage.getItem('tf-wipe')) d.classList.add('is-wiping'); } catch (e) {}
+      setTimeout(function () { if (!d.classList.contains('is-ready')) d.classList.remove('js', 'is-wiping'); }, 5000);
+    })();
+  </script>
   <script type="module" src="/src/js/main.js"></script>
 </head>
 <body data-page="careers">
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip" href="#main">Skip to content</a>
 
-  <a class="badge" href="../index.html" aria-label="Tifferend — home" data-transition="Tifferend">
-    <svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="badge-c" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0" /></defs><text><textPath href="#badge-c" textLength="290">Tifferend · Creative branding studio ·</textPath></text></svg>
-    <span class="badge__mark" aria-hidden="true">t<span>.</span></span>
-  </a>
-  <nav class="cta-stack" aria-label="Primary">
-    <a class="cta-stack__main" href="#roles">Open<br />roles</a>
-    <div class="cta-stack__sub"><a href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now</a><a href="../index.html#contact" data-transition="Let's talk">Contact</a></div>
+  <header class="chrome" id="chrome">
+    <a class="logo" href="../index.html" aria-label="Tifferend studio — home"><span class="logo__a">tifferend</span><span class="logo__b">Studio</span></a>
+    <div class="chrome__r">
+      <a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener" data-magnet><span class="btn__roll"><span>Apply now</span><span aria-hidden="true">Apply now</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <button class="sq menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span class="sq__lines" aria-hidden="true"></span><span class="sr-only">Menu</span></button>
+    </div>
+  </header>
+
+  <nav class="menu" id="menu" aria-label="Main menu">
+    <ul class="menu__list">
+      <li><a href="../index.html">Home <span class="menu__s">the studio</span></a></li>
+      <li><a href="../index.html#work">Work <span class="menu__s">My Mithila</span></a></li>
+      <li><a href="../index.html#services">Services <span class="menu__s">what we do</span></a></li>
+      <li><a href="#roles">Open roles <span class="menu__s">six of them</span></a></li>
+      <li><a href="../index.html#contact">Contact <span class="menu__s">say hello</span></a></li>
+    </ul>
+    <div class="menu__meta">
+      <span class="t-script" aria-hidden="true">tifferendly</span>
+      <a class="t-lede link-u" href="mailto:hello@tifferend.com">hello@tifferend.com</a>
+      <a class="t-label" href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend ↗</a>
+      <span class="t-label muted">© 2026 Tifferend</span>
+    </div>
   </nav>
-  <div class="rail" aria-hidden="true"><span class="rail__line"><i class="rail__fill"></i></span><span class="rail__count">00</span><span class="rail__hint">Scroll</span></div>
-  <button class="menu-square" type="button" data-magnet="0.35" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
-  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
-    <nav aria-label="Menu">
-      <ul class="menu__list">
-        <li><a href="../index.html" data-transition="Tifferend"><small>00</small>Home</a></li>
-        <li><a href="../index.html#work" data-transition="Work"><small>01</small>Work</a></li>
-        <li><a href="../index.html#services" data-transition="Services"><small>02</small>Services</a></li>
-        <li><a href="#roles"><small>03</small>Open roles</a></li>
-        <li><a href="../index.html#contact" data-transition="Let's talk"><small>04</small>Contact</a></li>
+
+  <main id="main">
+    <!-- 1 · Hero (LN type-on + script) -->
+    <section class="cr-hero" data-theme="paper" data-chrome="dark">
+      <div class="contours" aria-hidden="true"></div>
+      <p class="t-label cr-hero__label"><span class="dash"></span>Careers</p>
+      <h1 class="cr-hero__h"><span class="t-mega cr-hero__a">Join the</span> <span class="t-serif cr-hero__b">team</span></h1>
+      <span class="t-script cr-hero__s" aria-hidden="true" data-sign>tifferendly</span>
+      <div class="cr-hero__foot">
+        <p class="t-lede">We're a passionate team of creative minds and marketing strategists on a mission to help businesses thrive. Born out of the freelancing hustle, we make high-quality, results-driven marketing accessible to everyone.</p>
+        <div class="cr-hero__ctas">
+          <p class="cr-hero__n"><span class="t-mega">6</span> <span class="t-label">open<br />positions</span></p>
+          <a class="btn btn--ink" href="#roles"><span class="btn__roll"><span>View open roles ↓</span><span aria-hidden="true">View open roles ↓</span></span></a>
+          <a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now</span><span aria-hidden="true">Apply now</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 · Roles (LN notched grid rows on ink) -->
+    <section class="roles" id="roles" data-theme="ink" data-chrome="light" aria-labelledby="roles-h">
+      <header class="roles__head">
+        <p class="t-label"><span class="dash"></span>Roles at Tifferend</p>
+        <h2 class="roles__h" id="roles-h"><span class="t-serif">Let's do things tifferendly.</span> Find your fit and apply below.</h2>
+      </header>
+      <ul class="roles__list">
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r1"><span class="t-mono role__n">01</span><span class="role__t">Account / Project Manager</span><span class="t-label role__type">Full-time</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r1" hidden><div class="role__in"><p class="t-body">An account manager is critical in balancing client satisfaction and agency success. They act as the primary liaison between the agency and its clients, ensuring smooth communication, managing expectations, and fostering strong relationships.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r2"><span class="t-mono role__n">02</span><span class="role__t">Content Strategist / Creator</span><span class="t-label role__type">Full-time</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r2" hidden><div class="role__in"><p class="t-body">Craft compelling narratives and content strategies that build brands and engage audiences. You'll brainstorm, create, and manage content across formats while collaborating with editors, videographers, and photographers.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r3"><span class="t-mono role__n">03</span><span class="role__t">Cinematographer &amp; Video Editor</span><span class="t-label role__type">Full-time</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r3" hidden><div class="role__in"><p class="t-body">Your role will primarily focus on shooting and editing engaging reels and videos. This is an excellent opportunity for a versatile individual passionate about both short-form content creation and cinematography. You live and breathe content.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r4"><span class="t-mono role__n">04</span><span class="role__t">Graphic Designer</span><span class="t-label role__type">Full-time</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r4" hidden><div class="role__in"><p class="t-body">Design brand identities, campaign visuals, and creative assets with editorial precision. You'll create everything from social media graphics and website banners to marketing collateral and presentations.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r5"><span class="t-mono role__n">05</span><span class="role__t">Video Editor</span><span class="t-label role__type">Full-time / Freelance</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r5" hidden><div class="role__in"><p class="t-body">A Video Editor plays a vital role in creating engaging visual content that drives social media success. They transform raw footage into compelling stories that capture audience attention across various platforms.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
+        <li class="cell role" data-accordion><button type="button" class="role__btn" aria-expanded="false" aria-controls="r6"><span class="t-mono role__n">06</span><span class="role__t">Social Media Marketing Intern</span><span class="t-label role__type">Internship</span><span class="role__x" aria-hidden="true"></span></button>
+          <div class="role__panel" id="r6" hidden><div class="role__in"><p class="t-body">We're looking for someone with a creative mindset who can turn limited resources into innovative solutions. This role is perfect for those who have basic skills in any area and want to expand their expertise across multiple domains.</p><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now ↗</span><span aria-hidden="true">Apply now ↗</span></span></a></div></div></li>
       </ul>
-    </nav>
-    <div class="legal legal-txt"><ul><li>© 2026 Tifferend</li><li><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></li></ul></div>
-  </div>
-
-  <main id="main" class="careers">
-    <section class="k-hero" data-theme="light" aria-labelledby="careers-title">
-      <p class="legal-txt k-hero__k" data-scramble>Careers</p>
-      <h1 class="mega k-hero__title" id="careers-title"><span class="c-line" data-decode>Join</span> <span class="c-line" data-decode>the team</span></h1>
-      <p class="intro k-hero__p" data-reveal="rot-lines">We're a passionate team of creative minds and marketing strategists on a mission to help businesses thrive. Born out of the freelancing hustle, we make high-quality, results-driven marketing accessible to everyone.</p>
-      <div class="legal legal-txt k-hero__legal"><ul><li>6 open positions</li><li><a href="#roles">View open roles ↓</a></li></ul><ul><li><a href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></li></ul></div>
     </section>
 
-    <section class="roles" id="roles" data-theme="light" aria-labelledby="roles-title">
-      <div class="roles__head"><h2 class="legal-txt" id="roles-title">Roles at Tifferend</h2><p class="lbl c-muted">Let's do things tifferendly. Find your fit and apply below.</p></div>
-      <ul class="roles__list" data-accordion>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r1" data-cursor="Read role"><span class="role__n hud">01</span><span class="role__title">Account / Project Manager</span><span class="role__type legal-txt">Full-time</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r1" hidden><p>An account manager is critical in balancing client satisfaction and agency success. They act as the primary liaison between the agency and its clients, ensuring smooth communication, managing expectations, and fostering strong relationships.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r2" data-cursor="Read role"><span class="role__n hud">02</span><span class="role__title">Content Strategist / Creator</span><span class="role__type legal-txt">Full-time</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r2" hidden><p>Craft compelling narratives and content strategies that build brands and engage audiences. You'll brainstorm, create, and manage content across formats while collaborating with editors, videographers, and photographers.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r3" data-cursor="Read role"><span class="role__n hud">03</span><span class="role__title">Cinematographer &amp; Video Editor</span><span class="role__type legal-txt">Full-time</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r3" hidden><p>Your role will primarily focus on shooting and editing engaging reels and videos. This is an excellent opportunity for a versatile individual passionate about both short-form content creation and cinematography. You live and breathe content.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r4" data-cursor="Read role"><span class="role__n hud">04</span><span class="role__title">Graphic Designer</span><span class="role__type legal-txt">Full-time</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r4" hidden><p>Design brand identities, campaign visuals, and creative assets with editorial precision. You'll create everything from social media graphics and website banners to marketing collateral and presentations.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r5" data-cursor="Read role"><span class="role__n hud">05</span><span class="role__title">Video Editor</span><span class="role__type legal-txt">Full-time / Freelance</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r5" hidden><p>A Video Editor plays a vital role in creating engaging visual content that drives social media success. They transform raw footage into compelling stories that capture audience attention across various platforms.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
-        <li class="role"><h3><button type="button" aria-expanded="false" aria-controls="r6" data-cursor="Read role"><span class="role__n hud">06</span><span class="role__title">Social Media Marketing Intern</span><span class="role__type legal-txt">Internship</span><span class="role__icon" aria-hidden="true"></span></button></h3>
-          <div class="role__panel" id="r6" hidden><p>We're looking for someone with a creative mindset who can turn limited resources into innovative solutions. This role is perfect for those who have basic skills in any area and want to expand their expertise across multiple domains.</p><a class="cta-caps" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener">Apply now ↗</a></div></li>
+    <!-- 3 · Story (ERA statement + one script word) -->
+    <section class="cr-story" data-theme="lavender" data-chrome="dark" aria-labelledby="story-h">
+      <p class="t-wide">Our story — Know us better</p>
+      <h2 class="cr-story__h t-serif caps" id="story-h" data-chars>Create a difference, with a <span class="t-script cr-story__s">difference</span></h2>
+      <div class="cr-story__body">
+        <p class="t-lede" data-lines>Tifferend began with a simple idea: create a difference, with a difference. Our founder Kunj honed his skills in commercial photography, brand design, and media production while freelancing. Recognizing the power of combining these disciplines, he expanded to include social media marketing — always focused on solving real business problems, not just creating pretty content.</p>
+        <p class="t-body" data-lines>From those early days working with small budgets, Tifferend has grown to partner with a diverse range of brands — from local startups to established names. We've earned our clients' trust by consistently delivering results and going the extra mile to find innovative solutions.</p>
+      </div>
+      <ul class="values">
+        <li class="values__i" data-rise><span class="values__n t-serif">01</span><h3 class="values__t">Customer-centric</h3><p>Client success is our success. We put client needs first and strive to exceed expectations.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">02</span><h3 class="values__t">Staying updated</h3><p>The digital landscape constantly evolves. We stay ahead so clients can focus on their core business.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">03</span><h3 class="values__t">Utmost creativity</h3><p>We bring fresh ideas and a playful spirit to every project we take on.</p></li>
+        <li class="values__i" data-rise><span class="values__n t-serif">04</span><h3 class="values__t">Innovation</h3><p>We embrace new technologies and techniques to find the most effective solutions.</p></li>
       </ul>
     </section>
 
-    <section class="studio" data-theme="light" aria-labelledby="story-title">
-      <p class="lbl">Our story — Know us better</p>
-      <h2 class="era studio__statement" id="story-title" data-reveal="chars"><span class="caps">Let's do things</span><span class="script">tifferendly</span></h2>
-      <p class="small studio__body" data-reveal="lines">Tifferend began with a simple idea: create a difference, with a difference. Our founder Kunj honed his skills in commercial photography, brand design, and media production while freelancing. Recognizing the power of combining these disciplines, he expanded to include social media marketing — always focused on solving real business problems, not just creating pretty content.</p>
-      <p class="small studio__body" data-reveal="lines">From those early days working with small budgets, Tifferend has grown to partner with a diverse range of brands — from local startups to established names. We've earned our clients' trust by consistently delivering results and going the extra mile to find innovative solutions.</p>
-      <span class="glyph" aria-hidden="true"><i></i></span>
-      <ol class="values">
-        <li class="value"><span class="value__n">01</span><p class="lbl">Customer-centric</p><p class="small">Client success is our success. We put client needs first and strive to exceed expectations.</p></li>
-        <li class="value"><span class="value__n">02</span><p class="lbl">Staying updated</p><p class="small">The digital landscape constantly evolves. We stay ahead so clients can focus on their core business.</p></li>
-        <li class="value"><span class="value__n">03</span><p class="lbl">Utmost creativity</p><p class="small">We bring fresh ideas and a playful spirit to every project we take on.</p></li>
-        <li class="value"><span class="value__n">04</span><p class="lbl">Innovation</p><p class="small">We embrace new technologies and techniques to find the most effective solutions.</p></li>
-      </ol>
-    </section>
-
-    <section class="contact k-apply" data-theme="dark" aria-labelledby="apply-title">
-      <span class="glyph glyph--light" aria-hidden="true"><i></i></span>
-      <p class="lbl contact__label">Think you'd be a great fit?</p>
-      <h2 class="era contact__statement" id="apply-title"><span class="caps">We'd love to</span><span class="script">hear from you</span></h2>
-      <a class="contact__mail" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener" data-cursor="Apply now" data-reveal="chars">Apply now</a>
-      <p class="small contact__lede">Our mission: to create a difference in everything we deliver — empowering businesses of all sizes to reach their full potential through accessible, high-quality media and marketing.</p>
-      <footer class="foot">
-        <div class="foot__l legal-txt"><p>Tifferend.</p><p>© 2026 All rights reserved</p></div>
-        <ul class="foot__nav lbl"><li><a href="../index.html" data-transition="Tifferend">Home</a></li><li><a href="../index.html#work" data-transition="Work">Work</a></li><li><a href="../index.html#contact" data-transition="Let's talk">Contact</a></li></ul>
-        <div class="foot__r legal-txt"><a href="mailto:hello@tifferend.com">hello@tifferend.com</a><a href="#main">To top ↑</a></div>
-      </footer>
+    <!-- 4 · Apply finale (LN lime) -->
+    <section class="cr-apply" data-theme="lime" data-chrome="dark">
+      <p class="t-label">Think you'd be a great fit?</p>
+      <h2 class="cr-apply__h"><span class="t-mega" data-type>We'd love to</span> <span class="t-serif">hear from you</span></h2>
+      <a class="btn btn--ink cr-apply__btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener" data-magnet><span class="btn__roll"><span>Apply now</span><span aria-hidden="true">Apply now</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
+      <p class="cr-apply__m t-body">Our mission: to create a difference in everything we deliver — empowering businesses of all sizes to reach their full potential through accessible, high-quality media and marketing.</p>
     </section>
   </main>
 
-  <div class="wipe" aria-hidden="true"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0 100 C 30 100 70 100 100 100 L 100 100 C 70 100 30 100 0 100 Z" /></svg><div class="wipe__inner"><img class="wipe__thumb" alt="" hidden /><p class="wipe__label"></p></div></div>
-  <div class="cursor" aria-hidden="true"><i class="cursor__dia"></i><span class="cursor__pill"></span></div>
+  <footer class="footer" data-chrome="light">
+    <div class="footer__panel">
+      <div class="footer__sign">
+        <span class="t-script" aria-hidden="true" data-sign>tifferendly</span>
+        <p class="footer__title t-state" data-bars>Create a <span class="t-serif">difference</span>, with a <span class="t-serif">difference</span>.</p>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col"><span class="t-label">Pages</span><a href="../index.html">Home</a><a href="../index.html#work">Work</a><a href="../index.html#services">Services</a><a href="#roles">Open roles</a><a href="../index.html#contact">Contact</a></div>
+        <div class="footer__mid"><figure class="footer__fig" aria-hidden="true"><img src="../img/hero-diff-1080.webp" srcset="../img/hero-diff-640.webp 640w, ../img/hero-diff-1080.webp 1080w" sizes="(max-width: 760px) 120vw, 60vw" width="1080" height="608" loading="lazy" alt="" /></figure><a class="btn" href="https://forms.gle/hJoBoTJDMgsCnCJu9" target="_blank" rel="noopener"><span class="btn__roll"><span>Apply now</span><span aria-hidden="true">Apply now</span></span><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 10 10 2M4 2h6v6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a><a class="t-label link-u" href="#main">To top ↑</a></div>
+        <div class="footer__col"><span class="t-label">Follow on</span><a href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend</a><a href="mailto:hello@tifferend.com">Email</a></div>
+      </div>
+      <div class="marquee footer__marquee" data-marquee="30" aria-hidden="true">
+        <div class="marquee__track"><div class="marquee__group"><span class="mq-sans">Let's do things tifferendly</span><span class="mq-dot"></span><span class="mq-serif">Six open positions</span><span class="mq-dot"></span><span class="mq-sans">hello@tifferend.com</span><span class="mq-dot"></span><span class="mq-serif">Content · Photography · Film</span><span class="mq-dot"></span><span class="mq-sans">Branding · Identity · Strategy</span><span class="mq-dot"></span></div></div>
+      </div>
+    </div>
+    <div class="footer__legal t-label"><span>© 2026 Tifferend. All rights reserved</span><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></div>
+  </footer>
+
+  <div class="wipe" id="wipe" aria-hidden="true" hidden></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
 </body>
 </html>
