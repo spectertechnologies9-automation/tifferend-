@@ -22,7 +22,7 @@ PASS  social cards fan out (LN) last card 43°
 PASS  careers accordion opens with a working apply link {"exp":"true","vis":true,"href":"https://forms.gle/hJoBoTJDMgsCnCJu9"}
 PASS  skip link is the first tab stop and becomes visible {"cls":"skip","top":12}
 PASS  no page errors (desktop) 
-PASS  phone: idle lens drifts on its own 50.00% → 58.82%
+PASS  phone: idle lens drifts on its own 50.00% → 58.61%
 PASS  phone: services are stacked screens (no pin) 
 PASS  phone: menu opens 
 PASS  no page errors (phone) 
