@@ -48,6 +48,12 @@ Durable rules for anyone (human or agent) working on this repo.
 - `html{overflow-x:clip}` hides overflow from `scrollWidth`, so `tests/run.mjs` checks element edges and any offender fails the run. Decorative bleeds must be added to its exclusion list.
 - **Fonts:** Archivo Variable (one wdth file for all weights and widths), Instrument Serif 400, Herr Von Muellerhoff 400, Space Mono 400. Don't add families without updating ART_DIRECTION.
 
+## Deployment
+- GitHub Pages at https://spectertechnologies9-automation.github.io/tifferend-/, repo `spectertechnologies9-automation/tifferend-`, branch `main`.
+- `.github/workflows/deploy.yml` builds and deploys on every push to `main` (official Pages actions, `npm ci`, Node 22). Don't commit `dist/`.
+- The repo's Settings → Pages → Source must be **GitHub Actions**. In "Deploy from a branch" mode GitHub republishes the raw source over the build: `/src/js/main.js` 404s and the site loads with no CSS or JS.
+- Keep `base: './'`. Check the live site with `node tests/smoke.mjs https://spectertechnologies9-automation.github.io/tifferend-/`.
+
 ## QA before declaring done
 - Run `npm run build`, then serve `dist` (`npm run preview`).
 - Then `npm test` (layout 24 + interaction 29) and `npm run perf`.
