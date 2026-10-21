@@ -45,7 +45,7 @@
     <div class="cta-stack__sub"><a href="#contact" data-book>Book a call</a><a href="#contact">Contact</a></div>
   </nav>
   <div class="rail" aria-hidden="true"><span class="rail__line"><i class="rail__fill"></i></span><span class="rail__count">00</span><span class="rail__hint">Scroll</span></div>
-  <button class="menu-square" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
+  <button class="menu-square" type="button" data-magnet="0.35" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
 
   <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
     <nav aria-label="Menu">
@@ -183,19 +183,25 @@
       <dl class="numbers__col numbers__col--r">
         <div class="num"><dt class="lbl">Industries served</dt><dd class="num__v"><span data-count="8">8</span>+</dd><dd class="small num__cap">Hospitality, fashion, tech, F&amp;B, real estate and more.</dd></div>
         <div class="num"><dt class="lbl">Years of craft</dt><dd class="num__v"><span data-count="5">5</span>+</dd><dd class="small num__cap">Building brands with strategy and creative conviction.</dd></div>
-        <a class="pill-era" href="#work">See our work</a>
+        <a class="pill-era" href="#work" data-magnet="0.25">See our work</a>
       </dl>
     </section>
 
-    <!-- ================= 5. Selected work — AUGE "next project" block ================= -->
+    <!-- ================= 5. Selected work — AUGE: the work parts its own name (pinned, scrubbed) ================= -->
     <section class="work" id="work" data-theme="light" aria-labelledby="work-title">
-      <p class="legal-txt work__kicker">Selected work</p>
-      <a class="work__card" href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp">
-        <figure class="work__img"><img src="img/mymithila-cards-1260.webp" srcset="img/mymithila-cards-640.webp 640w, img/mymithila-cards-1260.webp 1260w" sizes="(min-width: 900px) 30vw, 80vw" width="1260" height="1162" loading="lazy" decoding="async" alt="My Mithila business cards in forest green and mustard." /></figure>
-        <span class="work__name"><b class="legal-txt" id="work-title" data-scramble-hover>My Mithila</b><span class="legal-txt">Branding · 2024</span></span>
-      </a>
+      <div class="work__pin" data-work>
+        <p class="legal-txt work__kicker"><span>Selected work</span><span>Case 01</span></p>
+        <h2 class="work__title" id="work-title"><span class="work__w work__w--l"><span>My</span></span> <span class="work__w work__w--r"><span>Mithila</span></span></h2>
+        <a class="work__card" href="work/my-mithila/index.html" data-cursor="View case" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp" aria-label="My Mithila — view the case study">
+          <figure class="work__img" data-work-frame><img src="img/mymithila-cards-1260.webp" srcset="img/mymithila-cards-640.webp 640w, img/mymithila-cards-1260.webp 1260w" sizes="(min-width: 1024px) min(86vw, 1260px), 100vw" width="1260" height="1162" loading="lazy" decoding="async" alt="My Mithila business cards in forest green and mustard." /></figure>
+        </a>
+        <div class="work__meta" data-work-meta>
+          <p class="legal-txt">Branding · 2024</p>
+          <p class="lbl work__scope">Rebranding · Identity · Logo · Packaging · E-commerce · Print</p>
+          <a class="cta-caps work__go" href="work/my-mithila/index.html" data-transition="My Mithila" data-thumb="img/mymithila-cards-640.webp">View the case →</a>
+        </div>
+      </div>
       <p class="intro work__desc" data-reveal="rot-lines">A purpose-led identity for a sustainable living brand turning everyday switches into a quiet movement — verbal voice, visual system, packaging and storefront.</p>
-      <p class="lbl work__scope">Rebranding · Identity · Logo · Packaging · E-commerce · Print</p>
     </section>
 
     <!-- ================= 6. Services — Igloo fog / shard / HUD ================= -->
@@ -235,7 +241,7 @@
             </div>
           </li>
         </ol>
-        <p class="hud services__bl"><span data-svc-count>01</span> / 03 — scroll</p>
+        <p class="hud services__bl"><span data-svc-count>01</span> / 03 <i class="services__bar" aria-hidden="true"><b data-svc-bar></b></i> scroll</p>
         <p class="hud services__br">Branding · Content · Growth</p>
       </div>
     </section>

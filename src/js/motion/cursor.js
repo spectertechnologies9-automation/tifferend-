@@ -34,3 +34,26 @@ export function initCursor() {
     raf = requestAnimationFrame(() => { raf = 0; update(document.elementFromPoint(px, py)); });
   }, { passive: true });
 }
+
+// Magnet (vanilla port of the React Bits "Magnet" idea): [data-magnet="strength"] elements lean
+// toward the pointer when it comes within reach, and settle back when it leaves. Fine pointers only.
+export function initMagnets() {
+  if (!env.finePointer || env.reduced) return;
+  const els = [...document.querySelectorAll('[data-magnet]')];
+  if (!els.length) return;
+  const reach = 70;
+  const state = new Map(els.map((el) => [el, false]));
+  let raf = 0, px = 0, py = 0;
+  const tick = () => {
+    raf = 0;
+    els.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const inside = Math.abs(px - cx) < r.width / 2 + reach && Math.abs(py - cy) < r.height / 2 + reach;
+      const k = Number(el.dataset.magnet) || 0.3;
+      if (inside) { state.set(el, true); gsap.to(el, { '--mx': `${(px - cx) * k}px`, '--my': `${(py - cy) * k}px`, duration: 0.5, ease: 'power3.out', overwrite: 'auto' }); }
+      else if (state.get(el)) { state.set(el, false); gsap.to(el, { '--mx': '0px', '--my': '0px', duration: 0.8, ease: 'expo.out', overwrite: 'auto' }); }
+    });
+  };
+  window.addEventListener('pointermove', (e) => { if (e.pointerType !== 'mouse') return; px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
+}

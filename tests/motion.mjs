@@ -61,6 +61,13 @@ const b = await chromium.launch();
   }
   ok('services pinned while shards change', pinnedSeen);
   ok('shards advance 1 → 2 → 3 through the pin', JSON.stringify(seq) === '[0,1,2]', JSON.stringify(seq) + ' first=' + JSON.stringify(s0));
+  // 4b) services HOLD: inside each hold the active shard is sharp and its HUD readable (session 4)
+  const holdState = () => p.evaluate(() => [...document.querySelectorAll('[data-svc]')].map((li) => ({ o: +(+getComputedStyle(li.querySelector('.svc__shard')).opacity).toFixed(2), blur: getComputedStyle(li.querySelector('.svc__shard')).filter, hud: +(+getComputedStyle(li.querySelector('.svc__hud')).opacity).toFixed(2) })));
+  await wheelTo(sv + 0.22 * 900); const h0 = await holdState();
+  await wheelTo(sv + 1.22 * 900); const h1 = await holdState();
+  const sharp = (h) => h.o > 0.97 && h.hud > 0.97 && !/blur\((?!0px)/.test(h.blur);
+  ok('services hold: service 1 sharp + HUD readable', sharp(h0[0]), JSON.stringify(h0[0]));
+  ok('services hold: service 2 sharp + HUD readable', sharp(h1[1]), JSON.stringify(h1[1]));
   // 5) ERA circle + map
   await wheelTo(await yOf('.opener', 0.25)); await p.screenshot({ path: `${OUT}/opener.png` });
   const pr = await yOf('.process');
@@ -70,6 +77,15 @@ const b = await chromium.launch();
   const d1 = await p.evaluate(() => ({ off: +getComputedStyle(document.querySelector('[data-map-path]')).strokeDashoffset.replace('px', ''), on: [...document.querySelectorAll('.station')].map((s) => +getComputedStyle(s).opacity) }));
   ok('map line draws on scroll and stations appear', d1.off < d0 && d1.on.filter((o) => o > 0.9).length >= 2, `${d0.toFixed(0)} → ${d1.off.toFixed(0)} ${JSON.stringify(d1.on)}`);
   ok('chrome follows the ember chapter', await p.evaluate(() => document.documentElement.dataset.chrome === 'ember'));
+
+  // 5b) AUGE work: the frame opens and parts the name (scrubbed --p, pinned)
+  const wk = await yOf('.work');
+  const workState = () => p.evaluate(() => { const sec = document.querySelector('.work'); const r = (s) => document.querySelector(s).getBoundingClientRect(); return { p: +getComputedStyle(sec).getPropertyValue('--p'), frame: Math.round(r('.work__img').width), pinned: Math.abs(r('[data-work]').top) < 2, l: Math.round(r('.work__w--l').right), rr: Math.round(r('.work__w--r').left) }; });
+  await wheelTo(wk + 5); const w0 = await workState();
+  await wheelTo(wk + 0.7 * 900); const w1 = await workState();
+  await wheelTo(wk + 1.3 * 900); const w2 = await workState(); await p.screenshot({ path: `${OUT}/work-open.png` });
+  ok('work frame opens with scroll while pinned', w0.p < 0.1 && w1.p > w0.p && w2.p > 0.95 && w1.pinned, JSON.stringify([w0.p, w1.p, w2.p]));
+  ok('work title parts as the frame opens', w2.l < w0.l && w2.rr > w0.rr, JSON.stringify({ l: [w0.l, w2.l], r: [w0.rr, w2.rr] }));
 
   // 6) work block → AUGE shrink/grey → ember wipe → case
   await wheelTo(await yOf('.work', 0.1));
@@ -87,6 +103,10 @@ const b = await chromium.launch();
   await wheelTo(dark); await p.screenshot({ path: `${OUT}/case-dark.png` });
   const rot = await p.evaluate(() => getComputedStyle(document.querySelector('.panel')).transform);
   ok('palette panels settle into the picture plane', rot === 'none' || /matrix\(1, 0, 0, 1, 0, 0\)|matrix3d\(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1\)/.test(rot), rot.slice(0, 60));
+  // case A11: the next block's window opens as it reaches the centre
+  await wheelTo(await yOf('.c-next', 0.2)); await p.screenshot({ path: `${OUT}/case-next.png` });
+  const q = await p.evaluate(() => +getComputedStyle(document.querySelector('[data-next]')).getPropertyValue('--q'));
+  ok('case next-block window opens on scroll', q > 0.9, String(q));
   ok('no page errors (desktop flow)', errs.length === 0, errs.join(' | '));
   await ctx.close();
 }

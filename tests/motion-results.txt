@@ -1,18 +1,23 @@
 PASS  loader completes, hides and releases the strip {"hidden":true,"hold":"0","word":"matrix(1, 0, 0, 1, 0, 0)"}
 PASS  loader skipped on repeat visit 
-PASS  hero strip drifts (AUGE A1) -21.5 → -79.2
+PASS  hero strip drifts (AUGE A1) -23.4 → -38.9
 PASS  cursor pill decodes over a strip image {"o":1,"t":"View case"}
 PASS  chrome hidden over the AUGE first viewport 
 PASS  chrome visible after the hero 
 PASS  ERA per-character statement resolves on scroll 16 chars
 PASS  chrome switches to dark over the numbers chapter 
 PASS  services pinned while shards change 
-PASS  shards advance 1 → 2 → 3 through the pin [0,1,2] first=[0.9998,0.0002,0]
-PASS  map line draws on scroll and stations appear 1614 → 47 [1,1,1]
+PASS  shards advance 1 → 2 → 3 through the pin [0,1,2] first=[1,0,0]
+PASS  services hold: service 1 sharp + HUD readable {"o":1,"blur":"drop-shadow(rgba(40, 44, 56, 0.35) 0px 30px 60px)","hud":1}
+PASS  services hold: service 2 sharp + HUD readable {"o":1,"blur":"blur(0px)","hud":1}
+PASS  map line draws on scroll and stations appear 1620 → 48 [1,1,1]
 PASS  chrome follows the ember chapter 
+PASS  work frame opens with scroll while pinned [0,0.80409,1]
+PASS  work title parts as the frame opens {"l":[524,-9],"r":[916,1449]}
 PASS  case reached via wipe; overlay cleared 
 PASS  case title decoded back to plain text 
 PASS  palette panels settle into the picture plane matrix(1, 0, 0, 1, 0, 0)
+PASS  case next-block window opens on scroll 1
 PASS  no page errors (desktop flow) 
 PASS  first Tab focuses skip link 
 PASS  menu square opens the menu 

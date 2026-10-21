@@ -55,6 +55,10 @@ function initCase() {
     });
   }
 
+  // A11 next block: one variable (--q) opens the window and closes the gap between the words
+  const next = qs('[data-next]');
+  if (next) gsap.fromTo(next, { '--q': 0 }, { '--q': 1, ease: 'none', scrollTrigger: { trigger: next, start: 'top 85%', end: 'center 50%', scrub: 0.6 } });
+
   // clip reveals for case imagery (bottom→top, AUGE/ERA image reveal)
   qsa('[data-clip]').forEach((img) => {
     gsap.fromTo(img, { clipPath: 'inset(100% 0% 0% 0%)', scale: 1.12 }, { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.5, ease: 'expo.inOut', scrollTrigger: { trigger: img, start: 'top 88%', once: true } });

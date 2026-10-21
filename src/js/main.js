@@ -18,7 +18,7 @@ import { env } from './core/env.js';
 import { initSmooth, scrollToTarget } from './core/smooth.js';
 import { initLineReveals, initCharReveals, initBlockReveals, initScrambleLabels } from './motion/text.js';
 import { initTransitions } from './motion/transition.js';
-import { initCursor } from './motion/cursor.js';
+import { initCursor, initMagnets } from './motion/cursor.js';
 import { initStrips } from './motion/strip.js';
 import { initChrome } from './motion/chrome.js';
 import { initMenu, initAnchors, initVelocitySkew, initForm, initAccordions } from './ui/ui.js';
@@ -32,6 +32,7 @@ async function boot() {
   initForm();
   initAccordions();
   initCursor();
+  initMagnets();
 
   // split only after fonts are ready so line/char measurements are correct
   try { await Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 1500))]); } catch (e) { /* ignore */ }
@@ -44,6 +45,7 @@ async function boot() {
     initCharReveals();
     home.initIntro();
     home.initNumbers();
+    home.initWork();
     home.initServices();
     home.initOpener();
     home.initMap();

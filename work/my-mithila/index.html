@@ -25,7 +25,7 @@
     <div class="cta-stack__sub"><a href="../../index.html#contact" data-transition="Let's talk">Book a call</a><a href="../../index.html#work" data-transition="Work">All work</a></div>
   </nav>
   <div class="rail" aria-hidden="true"><span class="rail__line"><i class="rail__fill"></i></span><span class="rail__count">00</span><span class="rail__hint">Scroll</span></div>
-  <button class="menu-square" type="button" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
+  <button class="menu-square" type="button" data-magnet="0.35" aria-expanded="false" aria-controls="menu"><span class="sr-only">Menu</span><i aria-hidden="true"></i><i aria-hidden="true"></i></button>
   <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu">
     <nav aria-label="Menu">
       <ul class="menu__list">
@@ -168,13 +168,16 @@
       </dl>
     </section>
 
-    <!-- A11: AUGE next block -->
-    <section class="c-next" data-theme="light" aria-labelledby="next-h">
-      <p class="legal-txt c-next__k">Next</p>
-      <a class="c-next__card" href="../../index.html#contact" data-cursor="Start a project" data-transition="Let's talk" data-thumb="../../img/hero-field-640.webp">
-        <figure><img src="../../img/hero-field-1080.webp" srcset="../../img/hero-field-640.webp 640w, ../../img/hero-field-1080.webp 1080w" sizes="(min-width: 900px) 26vw, 80vw" width="1920" height="1080" loading="lazy" decoding="async" alt="" /></figure>
-        <span><b class="legal-txt" id="next-h">Your brand</b><span class="legal-txt">Start a project</span></span>
+    <!-- A11: AUGE next block — the next case is yours. The window opens between the words (scrubbed) -->
+    <section class="c-next" data-theme="light" aria-labelledby="next-h" data-next>
+      <h2 class="sr-only" id="next-h">Next: your brand. Start a project.</h2>
+      <p class="legal-txt c-next__k"><span>Next</span><span>Case 02 — yours</span></p>
+      <a class="c-next__card" href="../../index.html#contact" data-cursor="Start a project" data-transition="Let's talk" data-thumb="../../img/hero-field-640.webp" aria-label="Your brand — start a project">
+        <span class="c-next__line c-next__line--a" aria-hidden="true">Your</span>
+        <figure class="c-next__img"><img src="../../img/hero-field-1080.webp" srcset="../../img/hero-field-640.webp 640w, ../../img/hero-field-1080.webp 1080w, ../../img/hero-field-1600.webp 1600w" sizes="(min-width: 900px) 44vw, 80vw" width="1920" height="1080" loading="lazy" decoding="async" alt="" /></figure>
+        <span class="c-next__line c-next__line--b" aria-hidden="true">Brand</span>
       </a>
+      <p class="c-next__cta"><a class="cta-serif" href="../../index.html#contact" data-transition="Let's talk" data-thumb="../../img/hero-field-640.webp">Start a project</a><a class="cta-caps" href="mailto:hello@tifferend.com">hello@tifferend.com</a></p>
     </section>
 
     <footer class="c-foot legal legal-txt" data-theme="light"><ul><li>© 2026 Tifferend</li><li><a href="mailto:hello@tifferend.com">hello@tifferend.com</a></li><li><a href="../../careers/index.html" data-transition="Careers">Careers</a></li></ul><ul><li><a href="https://x.com/tifferend" target="_blank" rel="noopener">X / @tifferend</a></li></ul></footer>

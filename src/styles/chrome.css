@@ -23,7 +23,7 @@ html[data-chrome="fog"] { --chrome-c: var(--ink); }
 .cta-stack__sub a:hover { color: var(--ember); }
 
 /* AUGE menu square (bottom-right) */
-.menu-square { position: fixed; z-index: 85; right: var(--gx); bottom: calc(var(--gx) + 44px); width: clamp(56px, 4.7vw, 90px); aspect-ratio: 1; background: var(--ink); display: grid; place-content: center; gap: 7px; transition: transform .5s var(--ease-out), background-color .4s; }
+.menu-square { position: fixed; z-index: 85; right: var(--gx); bottom: calc(var(--gx) + 44px); width: clamp(56px, 4.7vw, 90px); aspect-ratio: 1; background: var(--ink); display: grid; place-content: center; gap: 7px; transition: transform .5s var(--ease-out), background-color .4s, scale .18s var(--ease-out); }
 .menu-square i { display: block; width: clamp(24px, 2.3vw, 44px); height: 2px; background: var(--ember); transition: transform .5s var(--ease-out); }
 .menu-square:hover i:first-child { transform: translateX(-4px); }
 .menu-square:hover i:last-child { transform: translateX(4px); }
@@ -96,3 +96,8 @@ html[data-chrome="ember"] .menu-square { background: var(--ink); }
   .cta-stack__sub { display: none; }
   .menu-square { bottom: var(--gx); width: 52px; }
 }
+
+/* Interaction feedback. Uses the independent `translate` / `scale` properties so it composes with
+   GSAP/CSS transforms instead of fighting them. Press = quick 160–180ms ease-out, never bouncy. */
+[data-magnet] { translate: var(--mx, 0px) var(--my, 0px); }
+.menu-square:active { scale: .92; }

@@ -114,6 +114,34 @@ export function initNumbers() {
 }
 
 /* ======================================================================
+   5. AUGE selected work: the frame opens and parts the project's name.
+   Everything is driven by one CSS variable (--p) — see home.css.
+   ====================================================================== */
+export function initWork() {
+  const sec = qs('.work');
+  const pin = qs('[data-work]', sec || document);
+  if (!pin || env.reduced) return;
+  const words = qsa('.work__w', pin);
+  const mm = gsap.matchMedia();
+  mm.add('(min-width: 1024px)', () => {
+    pin.classList.add('is-scrub');
+    // entrance: the two words rise into their slots as the chapter arrives
+    gsap.from(words.map((w) => w.firstElementChild), { yPercent: 105, duration: 1.2, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: pin, start: 'top 70%', once: true } });
+    const tl = gsap.timeline()
+      .fromTo(sec, { '--p': 0 }, { '--p': 1, duration: 1, ease: 'power2.inOut' })
+      .to({}, { duration: 0.22 }); // hold on the open stage before releasing the pin
+    ScrollTrigger.create({ trigger: pin, start: 'top top', end: () => '+=' + window.innerHeight * 1.4, pin: true, scrub: 0.7, anticipatePin: 1, animation: tl, invalidateOnRefresh: true });
+    return () => { pin.classList.remove('is-scrub'); gsap.set(sec, { '--p': 0 }); };
+  });
+  mm.add('(max-width: 1023px)', () => {
+    gsap.from(words, { yPercent: 100, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.07, scrollTrigger: { trigger: pin, start: 'top 80%', once: true } });
+    // the frame opens from a window as it crosses the screen
+    gsap.fromTo(qs('[data-work-frame]', pin), { clipPath: 'inset(14% 12% 14% 12%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { trigger: '[data-work-frame]', start: 'top 95%', end: 'center 55%', scrub: 0.5 } });
+    gsap.fromTo(sec, { '--p': 0 }, { '--p': 1, ease: 'none', scrollTrigger: { trigger: '[data-work-frame]', start: 'top 95%', end: 'bottom 30%', scrub: 0.5 } });
+  });
+}
+
+/* ======================================================================
    6. Igloo services: fog, shards approaching from depth, HUD decode, RGB split
    ====================================================================== */
 export function initServices() {
@@ -132,19 +160,27 @@ export function initServices() {
     gsap.set(shards.slice(1), { scale: 0.5, opacity: 0, filter: 'blur(16px)', rotateY: 16, xPercent: -50, yPercent: -50 });
     gsap.set(shards[0], { xPercent: -50, yPercent: -50 });
     gsap.set(huds.slice(1), { opacity: 0, x: -24 });
+    // Each service HOLDS in focus (H) before the next one comes out of the fog (T):
+    // most scroll positions land on a sharp, readable service, never on a mid-crossfade blur.
+    const H = 0.8, T = 1;
+    const bar = qs('[data-svc-bar]', pin);
     const tl = gsap.timeline({ defaults: { ease: 'power2.inOut' } });
+    tl.to({}, { duration: H });
     for (let i = 1; i < svcs.length; i++) {
-      const at = i - 1;
-      tl.to(shards[i - 1], { scale: 1.9, opacity: 0, filter: 'blur(18px)', rotateY: -10, duration: 1 }, at)
-        .to(huds[i - 1], { opacity: 0, x: 24, duration: 0.4 }, at)
-        .to(shards[i], { scale: 1, opacity: 1, filter: 'blur(0px)', rotateY: 0, duration: 1 }, at)
-        .to(huds[i], { opacity: 1, x: 0, duration: 0.45 }, at + 0.55);
+      const at = H + (i - 1) * (T + H);
+      tl.to(shards[i - 1], { scale: 1.9, opacity: 0, filter: 'blur(18px)', rotateY: -10, duration: T }, at)
+        .to(huds[i - 1], { opacity: 0, x: 24, duration: 0.35, ease: 'power2.in' }, at)
+        .to(shards[i], { scale: 1, opacity: 1, filter: 'blur(0px)', rotateY: 0, duration: T }, at)
+        .to(huds[i], { opacity: 1, x: 0, duration: 0.5, ease: 'expo.out' }, at + 0.5)
+        .to({}, { duration: H }, at + T);
     }
+    if (bar) tl.fromTo(bar, { scaleX: 1 / svcs.length }, { scaleX: 1, ease: 'none', duration: tl.duration() }, 0);
+    const idxAt = (t) => clamp(Math.floor((t - H + T / 2) / (T + H)) + 1, 0, svcs.length - 1);
     let current = 0;
     ScrollTrigger.create({
-      trigger: pin, start: 'top top', end: () => '+=' + window.innerHeight * 2.2, pin: true, scrub: 0.8, animation: tl, anticipatePin: 1,
-      onUpdate: (s) => {
-        const idx = clamp(Math.round(s.progress * (svcs.length - 1)), 0, svcs.length - 1);
+      trigger: pin, start: 'top top', end: () => '+=' + window.innerHeight * 3, pin: true, scrub: 0.8, animation: tl, anticipatePin: 1,
+      onUpdate: () => {
+        const idx = idxAt(tl.time());
         if (idx !== current) {
           current = idx;
           counter.textContent = String(idx + 1).padStart(2, '0');
@@ -203,6 +239,9 @@ export function initMap() {
     place();
     window.addEventListener('resize', place);
     if (env.reduced) { stations.forEach((s) => s.classList.add('is-on')); return; }
+    // the route is already there as a faint dotted trace; scrolling inks it in
+    const ghost = path.cloneNode();
+    ghost.removeAttribute('data-map-path'); ghost.classList.add('map__ghost'); path.before(ghost);
     gsap.set(path, { strokeDasharray: total, strokeDashoffset: total });
     gsap.set(stations, { opacity: 0, y: 24 });
     const shown = new Set();
@@ -218,7 +257,7 @@ export function initMap() {
         });
       },
     });
-    return () => window.removeEventListener('resize', place);
+    return () => { window.removeEventListener('resize', place); ghost.remove(); };
   });
   mm.add('(max-width: 1023px)', () => {
     if (env.reduced) return;
