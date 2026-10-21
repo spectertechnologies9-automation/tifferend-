@@ -1,0 +1,164 @@
+
+/* ================= EXPERIMENTAL ART DIRECTION PASS =================
+   A deliberate "controlled rupture" layer: keep the client's black/ember
+   identity, but make the composition feel authored, kinetic and unexpected. */
+.hero { isolation:isolate; }
+.hero__content { z-index:4; }
+.hero__title {
+  max-width: 11ch;
+  font-size: clamp(4.2rem, 10.8vw, 14.8rem);
+  line-height: .79;
+  letter-spacing: -.075em;
+  text-wrap: balance;
+  position: relative;
+  mix-blend-mode: normal;
+}
+.hero__title em {
+  display:inline-block;
+  color:var(--ember);
+  font-weight:400;
+  transform:rotate(-8deg) translateY(.025em);
+  transform-origin:20% 70%;
+  text-shadow: .025em .025em 0 rgba(255,255,255,.16);
+}
+.hero__title::after {
+  content:"MAKE / A / DIFFERENCE";
+  position:absolute;
+  right:-1.5vw;
+  bottom:-.8em;
+  font:400 clamp(8px,.75vw,12px)/1.4 var(--font-mono);
+  letter-spacing:.18em;
+  writing-mode:vertical-rl;
+  color:var(--ember);
+  opacity:.9;
+}
+.hero__media { overflow:hidden; }
+.hero__media img { transform-origin:50% 50%; will-change:transform,filter; }
+.hero__shade {
+  background:linear-gradient(90deg,rgba(0,0,0,.48),transparent 72%),linear-gradient(0deg,rgba(0,0,0,.65),transparent 55%);
+}
+.hero::before {
+  content:"T / 01";
+  position:absolute; z-index:4; top:28%; right:var(--gutter);
+  font:10px var(--font-mono); letter-spacing:.2em; color:var(--paper);
+  writing-mode:vertical-rl; mix-blend-mode:difference;
+}
+.hero__content::before {
+  content:"";
+  position:absolute; width:clamp(90px,13vw,210px); aspect-ratio:1;
+  border:1px solid rgba(255,122,77,.8); border-radius:50%;
+  right:7%; top:3%; pointer-events:none;
+  box-shadow:0 0 0 18px rgba(255,122,77,.05),0 0 0 38px rgba(255,122,77,.035);
+  animation:tf-orbit 16s linear infinite;
+}
+.hero__content::after {
+  content:"✳";
+  position:absolute; right:calc(7% + clamp(35px,6.5vw,105px)); top:calc(3% + clamp(35px,6.5vw,105px));
+  color:var(--ember); font-size:clamp(24px,4vw,64px); line-height:1;
+  pointer-events:none; animation:tf-counterspin 16s linear infinite;
+}
+.hero__sub { max-width:25ch; }
+.hero__ctas .btn { transition:transform .45s var(--ease-out),background .35s,color .35s; }
+.hero__ctas .btn:hover { transform:translateY(-5px) rotate(-1.5deg); }
+.ticker { overflow:hidden; }
+.ticker__track { will-change:transform; }
+.ticker__item i { display:inline-block; transition:transform .45s var(--ease-out); }
+.ticker:hover .ticker__item i { transform:rotate(180deg) scale(1.35); }
+
+/* Work should feel like an exhibition, not a row of portfolio thumbnails. */
+.work { position:relative; }
+.work::before {
+  content:"SELECT / COLLECT / CONNECT";
+  position:absolute; right:var(--gutter); top:clamp(35px,5vh,70px);
+  font:9px var(--font-mono); letter-spacing:.18em; color:var(--muted);
+  writing-mode:vertical-rl;
+}
+.work__title { max-width:9ch; }
+.strip__track { align-items:center; padding-block:2.5vh 5vh; perspective:1200px; }
+.strip__item { transform-style:preserve-3d; }
+.strip__item:nth-child(3n + 1) { --tilt:-2deg; }
+.strip__item:nth-child(3n + 2) { --tilt:2.5deg; }
+.strip__item:nth-child(3n) { --tilt:-.7deg; }
+.strip__item figure { position:relative; transform:rotate(var(--tilt,0deg)); transition:transform .7s var(--ease-out); }
+.strip__item a:hover figure,.strip__item a:focus-visible figure { transform:rotate(0) translateY(-12px) scale(1.015); }
+.strip__item img { filter:saturate(.82); transition:transform 1s var(--ease-out),filter .7s,clip-path .8s var(--ease-out); clip-path:polygon(0 0,100% 0,100% 94%,94% 100%,0 100%); }
+.strip__item a:hover img { filter:saturate(1.12) contrast(1.04); clip-path:polygon(0 0,100% 0,100% 100%,0 100%); }
+.strip__item figcaption { align-items:baseline; }
+.strip__item .strip__id { color:var(--ember); }
+
+/* Big typographic moments break the expected grid. */
+.philosophy { position:relative; overflow:hidden; }
+.philosophy__title { position:relative; z-index:1; max-width:9ch; }
+.philosophy__title em { position:relative; color:var(--ember); }
+.philosophy__title em::after {
+  content:""; position:absolute; left:-.05em; right:-.08em; bottom:.02em; height:.055em;
+  background:var(--ember); transform:scaleX(0); transform-origin:left;
+}
+.philosophy.is-in-view .philosophy__title em::after { animation:tf-draw .9s .2s var(--ease-out) forwards; }
+.philosophy__grid { position:relative; }
+.philosophy__grid::after {
+  content:"✳"; position:absolute; right:2%; top:10%; color:var(--ember);
+  font-size:clamp(70px,14vw,220px); line-height:1; opacity:.8;
+  transform:rotate(-15deg); pointer-events:none;
+}
+.philosophy__body { position:relative; z-index:2; }
+
+/* Service list acts like a kinetic index. */
+.services__list li { position:relative; transition:padding .5s var(--ease-out),border-color .4s; }
+.services__list li::before {
+  content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--ember);
+  transform:scaleY(0); transform-origin:bottom; transition:transform .45s var(--ease-out);
+}
+.services__list li:hover { padding-left:22px; border-color:var(--ember); }
+.services__list li:hover::before,.services__list li.is-active::before { transform:scaleY(1); }
+.services__list a,.services__list button { transition:transform .45s var(--ease-out); }
+.services__list li:hover a,.services__list li:hover button { transform:translateX(4px); }
+
+/* Chapter change: an editorial colour field with a moving target. */
+.opener { isolation:isolate; }
+.opener__circle { will-change:transform; }
+.opener__arc { overflow:visible; }
+.opener__arc text { letter-spacing:.16em; }
+.process { position:relative; }
+.process::before {
+  content:"NO / FORMULA";
+  position:absolute; top:18px; right:var(--gutter); z-index:3;
+  font:10px var(--font-mono); letter-spacing:.18em; color:rgba(0,0,0,.6);
+  writing-mode:vertical-rl;
+}
+.step { transition:transform .6s var(--ease-out); }
+.step:hover { transform:translateY(-8px) rotate(-.4deg); }
+.step__num { transition:color .4s; }
+.step:hover .step__num { color:#fff; }
+
+/* Contact: typographic overprint and a pulse that feels physical. */
+.contact { position:relative; isolation:isolate; }
+.contact::before {
+  content:"LET'S MAKE A DIFFERENCE";
+  position:absolute; left:-.04em; bottom:3%; z-index:-1;
+  font:700 clamp(3.8rem,13vw,18rem)/.75 var(--font-serif);
+  letter-spacing:-.09em; white-space:nowrap;
+  color:rgba(255,255,255,.035); pointer-events:none;
+}
+.contact a:hover { text-shadow:5px 0 rgba(255,122,77,.6),-5px 0 rgba(255,255,255,.18); }
+.wordmark { transition:letter-spacing .6s var(--ease-out); }
+.wordmark:hover { letter-spacing:.035em; }
+
+@keyframes tf-orbit { to { transform:rotate(360deg); } }
+@keyframes tf-counterspin { to { transform:rotate(-360deg); } }
+@keyframes tf-draw { to { transform:scaleX(1); } }
+
+@media (max-width:899px) {
+  .hero__title { font-size:clamp(3.8rem,13vw,8rem); }
+  .hero__content::before { right:4%; top:-12%; width:90px; }
+  .hero__content::after { right:calc(4% + 32px); top:calc(-12% + 32px); font-size:24px; }
+  .hero::before { top:38%; right:12px; }
+  .work::before { display:none; }
+  .philosophy__grid::after { top:-4%; right:0; font-size:74px; }
+  .process::before { display:none; }
+  .contact::before { white-space:normal; max-width:100%; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .hero__content::before,.hero__content::after { animation:none; }
+  .strip__item figure,.strip__item img { transition:none; }
+}

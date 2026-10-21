@@ -1,0 +1,27 @@
+PASS  loader completes, hides and releases the strip {"hidden":true,"hold":"0","word":"matrix(1, 0, 0, 1, 0, 0)"}
+PASS  loader skipped on repeat visit 
+PASS  hero strip drifts (AUGE A1) -21.5 → -79.2
+PASS  cursor pill decodes over a strip image {"o":1,"t":"View case"}
+PASS  chrome hidden over the AUGE first viewport 
+PASS  chrome visible after the hero 
+PASS  ERA per-character statement resolves on scroll 16 chars
+PASS  chrome switches to dark over the numbers chapter 
+PASS  services pinned while shards change 
+PASS  shards advance 1 → 2 → 3 through the pin [0,1,2] first=[0.9998,0.0002,0]
+PASS  map line draws on scroll and stations appear 1614 → 47 [1,1,1]
+PASS  chrome follows the ember chapter 
+PASS  case reached via wipe; overlay cleared 
+PASS  case title decoded back to plain text 
+PASS  palette panels settle into the picture plane matrix(1, 0, 0, 1, 0, 0)
+PASS  no page errors (desktop flow) 
+PASS  first Tab focuses skip link 
+PASS  menu square opens the menu 
+PASS  focus moved into menu 
+PASS  focus trapped in menu + toggle 
+PASS  Escape closes menu, focus returns to the square 
+PASS  hero strip is natively scrollable on touch 
+PASS  form shows validation on empty submit 
+PASS  invalid field flagged 
+PASS  careers accordion opens 
+PASS  apply link points to the Google Form 
+PASS  visible focus ring on the first 10 tab stops A:solid A:solid A:solid A:solid A:solid BUTTON:solid A:solid A:solid A:solid A:solid

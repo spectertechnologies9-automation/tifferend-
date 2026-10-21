@@ -1,0 +1,104 @@
+/* =====================  CASE STUDY — AUGE A7–A12  ===================== */
+.case { padding-bottom: 0; }
+
+/* A8 hero: image band with a convex curved bottom edge, giant centred title */
+.c-hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto auto; justify-items: center; padding-bottom: calc(var(--gx) + 6px); }
+.c-hero__band { width: 100%; height: 38svh; overflow: hidden; border-radius: 0 0 50% 50% / 0 0 14% 14%; will-change: transform; }
+.c-hero__band img { width: 100%; height: 118%; object-fit: cover; object-position: 50% 45%; }
+.c-hero__title { align-self: center; position: relative; display: grid; justify-items: center; margin: 6vh 0 0; font: 900 clamp(4rem, 1rem + 15.5vw, 22rem)/0.8 var(--f-grotesk); letter-spacing: -0.05em; text-transform: uppercase; text-align: center; }
+.c-line { display: block; white-space: nowrap; }
+.c-hero__dia { position: absolute; left: -0.36em; top: 0.3em; width: 0.13em; height: 0.13em; background: var(--ember); transform: rotate(45deg); border-radius: 0.012em; }
+.c-hero__cat { margin: 3vh 0 4vh; }
+.c-hero__legal { width: 100%; padding: 0 calc(var(--gx) + clamp(56px, 4.7vw, 90px) + 24px) 0 var(--pl); }
+.wipe__label .alt { font-family: var(--f-didone); font-style: italic; font-weight: 400; }
+
+/* A8 text chapter */
+.c-text { display: grid; gap: 32px; padding: clamp(110px, 20vh, 240px) var(--gx) clamp(110px, 20vh, 240px) var(--pl); }
+.c-text__c { color: var(--muted); }
+.c-disc { display: grid; gap: 0.35em; margin-top: 12px; }
+.c-text__p { font: 400 clamp(1.6rem, 0.9rem + 2.3vw, 3.4rem)/1.12 var(--f-grotesk); letter-spacing: -0.025em; }
+@media (min-width: 1024px) { .c-text { grid-template-columns: 1fr 1.2fr 3fr; column-gap: 3vw; align-items: start; padding-left: calc(var(--pl) + 2vw); } }
+
+.c-split { display: grid; gap: 72px; padding: 0 var(--gx) clamp(110px, 20vh, 240px) var(--pl); }
+.c-split article { display: grid; gap: 20px; align-content: start; border-top: 1px solid var(--line); padding-top: 24px; }
+.c-split article p:not(.legal-txt) { max-width: 42ch; font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem); line-height: 1.42; }
+.c-h { font: 600 clamp(2rem, 1rem + 2.8vw, 4.4rem)/0.98 var(--f-grotesk); letter-spacing: -0.035em; }
+.c-h--xl { font-weight: 900; font-size: clamp(2.6rem, 1rem + 5vw, 7.6rem); line-height: 0.86; text-transform: uppercase; letter-spacing: -0.045em; }
+.c-muted { color: var(--muted); }
+@media (min-width: 900px) { .c-split { grid-template-columns: 1fr 1fr; gap: 4vw; padding-left: calc(var(--pl) + 2vw); } }
+
+.c-quote { display: grid; gap: 40px; justify-items: center; text-align: center; padding: 0 var(--gx) clamp(110px, 20vh, 240px); }
+.c-quote blockquote { display: grid; gap: 24px; justify-items: center; }
+.c-quote__q { font: 400 clamp(1.9rem, 0.8rem + 3.9vw, 5.6rem)/1.04 var(--f-grotesk); letter-spacing: -0.035em; max-width: 22ch; }
+.c-quote__img { width: min(90vw, 560px); margin-top: 6vh; }
+.c-quote__img img, .c-full img, .ragged img { width: 100%; }
+
+/* A9 black chapter: palette panels in perspective */
+.c-dark { background: #000; color: var(--cream); padding: clamp(110px, 20vh, 240px) var(--gx); overflow: hidden; }
+.c-dark__head { display: grid; gap: 22px; justify-items: center; text-align: center; margin-bottom: 10vh; }
+.c-dark__title { font: 900 clamp(2.6rem, 1rem + 5.6vw, 8.2rem)/0.86 var(--f-grotesk); letter-spacing: -0.045em; text-transform: uppercase; max-width: 12ch; }
+.c-dark__p { max-width: 50ch; color: var(--muted-dark); font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem); line-height: 1.45; }
+.panels { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; perspective: 1400px; }
+.panel { min-height: 46svh; background: var(--c); color: var(--t); padding: 18px; display: grid; grid-template-rows: auto 1fr auto auto; gap: 8px; transform-style: preserve-3d; will-change: transform; }
+.panel__dots { color: var(--ember); letter-spacing: .2em; font-size: 14px; }
+.panel__name { font: 900 clamp(1.6rem, 1rem + 2.2vw, 3.6rem)/0.9 var(--f-grotesk); letter-spacing: -0.04em; text-transform: uppercase; align-self: end; }
+.panel .small { opacity: .85; max-width: 22ch; }
+@media (min-width: 900px) { .panels { grid-template-columns: repeat(4, 1fr); gap: 1.4vw; } .panel { min-height: 62svh; padding: 24px; } }
+
+/* A10 curved-top return to light */
+.c-return { position: relative; z-index: 1; margin-top: -9vw; background: var(--canvas); border-radius: 50% 50% 0 0 / 9vw 9vw 0 0; padding: calc(9vw + clamp(60px, 10vh, 140px)) var(--gx) clamp(110px, 18vh, 220px); }
+.c-return__head { display: grid; gap: 22px; max-width: 980px; margin: 0 auto 10vh; text-align: center; justify-items: center; }
+.c-return__head p:not(.legal-txt) { max-width: 52ch; font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem); line-height: 1.45; }
+.c-full { margin: 0 calc(-1 * var(--gx)); display: grid; gap: 12px; }
+.c-full figcaption { padding: 0 var(--gx); }
+.c-product { margin-top: clamp(110px, 18vh, 220px); display: grid; gap: 56px; }
+.c-product__text { display: grid; gap: 20px; max-width: 760px; }
+.c-product__text p:not(.legal-txt) { max-width: 46ch; font-size: clamp(1.05rem, 0.95rem + 0.35vw, 1.3rem); line-height: 1.45; }
+.ragged { display: grid; gap: 28px; }
+.ragged figure { display: grid; gap: 10px; }
+@media (min-width: 900px) {
+  .ragged { display: flex; align-items: flex-start; gap: 0; margin: 0 calc(-1 * var(--gx)); }
+  .ragged li { width: calc(var(--w) * 1vw); }
+  .ragged li:nth-child(2) { margin-top: 16vh; }
+  .ragged li:nth-child(3) { margin-top: 6vh; }
+  .ragged figcaption { padding: 0 12px; }
+  .c-product__text { padding-left: calc(var(--pl) - var(--gx)); }
+}
+
+.c-impact { background: var(--ember); color: var(--ink); padding: clamp(110px, 20vh, 240px) var(--gx); display: grid; gap: 32px; justify-items: center; text-align: center; }
+.c-impact__title { font-size: clamp(3.4rem, 1rem + 10vw, 15rem); max-width: 10ch; }
+.c-impact__p { max-width: 34ch; }
+.c-impact__s { max-width: 48ch; }
+
+.c-diary { padding: clamp(110px, 18vh, 220px) 0 clamp(60px, 10vh, 120px); overflow: hidden; }
+.c-diary__head { display: grid; gap: 12px; padding: 0 var(--gx) 0 var(--pl); margin-bottom: 6vh; }
+.strip--diary .strip__item figcaption { opacity: 1; transform: none; }
+
+.c-credits { display: grid; gap: 20px; padding: 6vh var(--gx) 10vh var(--pl); }
+.c-credits dl div { display: flex; justify-content: space-between; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); font: 600 clamp(1rem, 0.9rem + 0.4vw, 1.35rem)/1.2 var(--f-grotesk); text-transform: uppercase; letter-spacing: -0.01em; }
+.c-credits dt { color: var(--muted); font-weight: 400; }
+@media (min-width: 1024px) { .c-credits { grid-template-columns: 1fr 2fr; } }
+
+.c-next { display: grid; gap: 24px; justify-items: center; padding: clamp(110px, 20vh, 240px) var(--gx) clamp(110px, 20vh, 240px) var(--pl); }
+.c-next__k { justify-self: start; }
+.c-next__card { display: grid; gap: 16px; justify-items: center; text-align: center; }
+.c-next__card figure { width: min(80vw, 480px); aspect-ratio: 16 / 10; overflow: hidden; }
+.c-next__card img { width: 100%; height: 100%; object-fit: cover; object-position: 51% 40%; transition: transform 1.2s var(--ease-out); }
+.c-next__card:hover img { transform: scale(1.05); }
+.c-next__card > span { display: grid; gap: 4px; }
+@media (min-width: 900px) {
+  .c-next { grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .c-next__k { grid-column: 1; grid-row: 1; }
+  .c-next__card { grid-column: 2 / 4; grid-row: 1; grid-template-columns: min(26vw, 480px) auto; align-items: center; justify-items: start; text-align: left; column-gap: 24px; }
+  .c-next__card figure { width: 100%; }
+}
+.c-foot { padding: 24px calc(var(--gx) + clamp(56px, 4.7vw, 90px) + 24px) calc(var(--gx) + 6px) var(--pl); border-top: 1px solid var(--line); }
+@media (max-width: 767px) { .c-foot { padding-right: calc(52px + 32px); } .c-hero__legal { display: none; } .c-hero__band { height: 30svh; } }
+
+/* Motif kit-of-parts (traced from the client's motif files) — assembles on scroll */
+.kit { position: relative; margin: 0 calc(-1 * var(--gx)) 10vh; background: #0e5a2e; padding: 12vh var(--gx) 8vh; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3vw; align-items: center; overflow: hidden; }
+.kit__m { width: 100%; max-width: 280px; justify-self: center; fill: #f5c518; will-change: transform; }
+.kit__cap { grid-column: 1 / -1; color: #f4efe6; text-align: center; margin-top: 6vh; }
+
+/* credits: right column clears the fixed CTA stack */
+@media (min-width: 1100px) { .c-credits { padding-right: calc(var(--gx) + clamp(120px, 10vw, 190px)); } }

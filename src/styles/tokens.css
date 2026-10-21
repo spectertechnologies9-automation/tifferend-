@@ -1,0 +1,39 @@
+/* Design tokens — sampled from the references (docs/REFERENCE_ANALYSIS.md) + Tifferend identity */
+:root {
+  --canvas: #edf0e5;   /* AUGE canvas */
+  --cream: #f2f4e9;    /* ERA cream */
+  --ink: #0a0a0a;      /* AUGE ink */
+  --navy: #182037;     /* ERA ink */
+  --ember: #ff7a4d;    /* Tifferend accent — plays AUGE's lemon / ERA's chapter colour */
+  --ember-ink: #1a0a04;
+  --fog-1: #9296a2;    /* Igloo fog */
+  --fog-2: #b6bac5;
+  --fog-3: #d7d9de;
+  --night: #140c0a;    /* ERA maroon role, warmed to ember */
+  --muted: #6b6d66;
+  --muted-dark: #a8a49c;
+  --line: rgba(10, 10, 10, 0.18);
+  --line-dark: rgba(242, 244, 233, 0.22);
+
+  --f-grotesk: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --f-didone: "Instrument Serif", "Bodoni 72", Didot, Georgia, serif;
+  --f-script: "Pinyon Script", "Snell Roundhand", cursive;
+  --f-mono: "Space Mono", ui-monospace, Menlo, monospace;
+  --f-mark: "Lora", Georgia, serif;
+
+  /* per-reference timing */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.87, 0, 0.13, 1);
+
+  --gx: max(16px, 2.1vw);      /* AUGE ≈ 40px at 1920 */
+  --chrome-top: max(16px, 2.6vw);
+  --pl: var(--gx);                 /* left padding that clears the ERA rail (≥1100px) */
+
+  --t-body: clamp(1rem, 0.94rem + 0.25vw, 1.1875rem);
+  --t-intro: clamp(1.15rem, 0.9rem + 0.75vw, 1.65rem);  /* AUGE paragraph ≈ 26px @1920 */
+  --t-label: 0.75rem;
+  --t-era: clamp(2.6rem, 1rem + 5.6vw, 8.6rem);         /* ERA statements */
+  --t-mega: clamp(5rem, 1rem + 17vw, 23rem);            /* AUGE monumental */
+}
+
+@media (min-width: 1100px) { :root { --pl: calc(var(--gx) + clamp(36px, 3.6vw, 66px) + 40px); } }
