@@ -126,6 +126,8 @@
 /* ---------- 6. SERVICES (Igloo fog + shard + HUD) ---------- */
 .services { position: relative; color: var(--ink); }
 .services__pin { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 50% 45%, var(--fog-3) 0%, var(--fog-2) 45%, var(--fog-1) 100%); }
+/* bottom edge settles to flat --fog-1 above the drifting fog, so the hand-off to the circle opener has no seam */
+.services__pin::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8svh; z-index: 1; pointer-events: none; background: linear-gradient(to bottom, rgba(146,150,162,0), var(--fog-1) 92%); }
 .fog { position: absolute; inset: -20%; pointer-events: none; }
 .fog i { position: absolute; width: 70%; height: 70%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.55), rgba(255,255,255,0)); filter: blur(30px); animation: fogdrift 26s ease-in-out infinite alternate; }
 .fog i:nth-child(1) { left: 0; top: 10%; }
@@ -150,6 +152,7 @@
 .svc__bullets { display: grid; gap: 4px; }
 @media (min-width: 1024px) {
   .services__pin { height: 100svh; }
+  .services__pin::after { height: 22%; }
   .services__list { position: absolute; inset: 0; }
   .svc { position: absolute; inset: 0; padding: 0; display: block; }
   .svc__shard { position: absolute; left: 50%; top: 52%; width: min(30vw, 58svh); margin: 0; transform: translate(-50%, -50%); will-change: transform, filter, opacity; }

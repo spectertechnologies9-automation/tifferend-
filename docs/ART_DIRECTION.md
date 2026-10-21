@@ -95,12 +95,22 @@ Key: **T** = trigger, **Δ** = what changes, **D** = duration/ease, **N** = rela
 - **M:** 2×2 numerals, image above.
 - **RM:** static.
 
-### 5. Selected work (AUGE A11)
-- **Δ:** hover shows the pill and scales the image 1.04. Click shrinks the image → grey page → ember wipe → case.
-- **M:** tap goes straight to the wipe.
+### 5. Selected work (AUGE: "the work parts its own name"), rebuilt in session 4
+- **Composition (closed):** "MY ▢ MITHILA". A small image window sits centred between the two halves of the name, set in Inter Tight 900 (≈6.6vw).
+- **T:** pinned for 1.4 × viewport height (desktop ≥ 1024), scrubbed 0.7.
+- **Δ:** one CSS variable `--p` (0 → 1) on `.work` drives everything in `home.css`:
+  - the frame's `clip-path` inset opens from 24vw × 40svh to min(86vw, 1260px) × 66svh;
+  - the words are pushed apart by the opening frame and leave the screen;
+  - the image settles from scale 1.16 → 1;
+  - the meta row (Branding · 2024 / scope / "View the case →") fades in over the last quarter.
+- Then a short hold, then the description paragraph in normal flow.
+- **N:** clicking the frame runs the AUGE shrink → grey → ember wipe → case.
+- **M:** no pin. Stacked name, full-width image that opens from an inset window (scrubbed), meta below.
+- **RM / no JS:** the closed composition, static, with the meta visible.
+- Image is never displayed wider than its 1260 px master.
 
 ### 6. Services (Igloo)
-- **T:** pinned for 3 × 100vh (desktop).
+- **T:** pinned for 3 × 100vh (desktop). **Session 4:** the timeline is hold (0.8) → transition (1) → hold → transition → hold, so most scroll positions show a sharp shard and a readable HUD. The index switches at the midpoint of each transition and is computed from the scroll *target* (`progress × duration`), not the lagging scrubbed time. Service titles are 600 at ≈2.9vw. A progress hairline sits in the bottom-left HUD. The bottom 22% fades to flat `--fog-1` above the drifting fog, so the hand-off to the circle opener has no seam.
 - **Δ:**
   - Fog background (CSS radial gradients + slow drifting noise).
   - Each service image is clipped to an irregular **shard polygon**, centred, monochrome.
@@ -116,7 +126,7 @@ Key: **T** = trigger, **Δ** = what changes, **D** = duration/ease, **N** = rela
 - **T:** scrub.
 - **Δ:**
   - The ember semicircle with arc text rises and covers.
-  - The map chapter (ember background) pins for 150vh while a hand-drawn line draws left→right.
+  - The map chapter (ember background) pins for 150vh while a hand-drawn line draws left→right. Session 4: the route is visible from the start as a faint dotted trace, and scrolling inks it in, so the pinned screen never reads as empty.
   - Three station dots pop as the line reaches them. Each station's label and paragraph mask-rise.
 - **R:** reversible.
 - **M:** vertical line drawn top→bottom with stations stacked (no pin).
@@ -143,7 +153,7 @@ Key: **T** = trigger, **Δ** = what changes, **D** = duration/ease, **N** = rela
 6. **Black chapter:** palette swatches as perspective panels that rotate in (rotateY ±14° → 0, scrubbed), with mono labels.
 7. **Curved-top white panel** returns to light: product images in an AUGE ragged row, OOH full bleed, tote.
 8. **Social diary:** AUGE drifting strip.
-9. **Next project:** small centred image + "START A PROJECT" → wipe to contact.
+9. **Next project (session 4):** a monumental "YOUR / BRAND" poster. A hero-field image window opens between the two lines while the words close in, all driven by one scrubbed `--q`. Below it: "Start a project" (ERA serif CTA) and the email. The whole poster links to the contact chapter through the wipe. Static state = open.
 
 ### Careers (AUGE)
 - Giant centred "JOIN THE TEAM" grotesk.

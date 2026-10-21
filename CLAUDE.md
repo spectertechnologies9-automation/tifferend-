@@ -24,6 +24,11 @@ Durable rules for anyone (human or agent) working on this repo.
 - Page-title decode runs only on arrival through the in-site wipe. Direct loads show the title at once (LCP).
 - `html{overflow-x:clip}` hides overflow from `scrollWidth`. `tests/run.mjs` therefore checks element edges, and any offender fails the run.
 - Only Inter Tight 400/600/900 are loaded. Don't use 500/700 (they'd map to 400/900).
+- No React. The site is vanilla. Port component ideas (e.g. React Bits) to plain JS in `motion/`.
+- Scrubbed compositions use one CSS variable tweened by GSAP (`--p` on `.work`, `--q` on `.c-next`), with all geometry in CSS `calc()`. The static/reduced state must be a finished composition by itself.
+- Interaction feedback (press, magnet) uses the independent `scale` / `translate` properties, never `transform`, so it can't fight GSAP transforms.
+- Pinned timelines need settled holds between transitions. Derive state shown in the UI (counters, labels) from `self.progress`, never from a scrubbed timeline's lagging `time()`.
+- Scroll restoration is manual (`main.js`, re-applied after `ScrollTrigger.refresh()`). Don't switch it back to `auto`, or a reload inside a pin lands in the wrong place.
 
 ## QA before declaring done
-`npm run build && npm run preview`, then `npm test` and `npm run perf`. Record real results in `PROJECT_STATUS.md`. Never claim unmeasured scores or untested browsers.
+`npm run build && npm run preview`, then `npm test`, `npm run xbrowser` (WebKit + Firefox + Chromium) and `npm run perf`. On Windows, stop the preview before building: it locks `dist/`. Record real results in `PROJECT_STATUS.md`. Never claim unmeasured scores or untested browsers.

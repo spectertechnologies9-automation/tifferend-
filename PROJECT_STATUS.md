@@ -1,6 +1,90 @@
 # PROJECT_STATUS — Tifferend website
 
-_Last updated: 2026-10-21 (session 3: resume, critique and fixes after the session-2 rebuild)_
+_Last updated: 2026-10-21 (session 4: redesign of the weakest chapters, motion fixes, first cross-browser QA)_
+
+## Session 4: what happened (read this first)
+
+**Baseline.** The project was not a git repo. I ran `git init` and committed the session-3 state as `b9bcc5a`, so everything below can be diffed or reverted. On the baseline (Chromium): build ✓, layout 24/24, motion 27/27. Playwright's browsers were missing on this machine. I installed Chromium, WebKit and Firefox.
+
+**Critique (screenshots of every chapter at 1440 and 390), and what was done:**
+
+| # | Weakness found | Change |
+|---|---|---|
+| 1 | **Selected work was the weakest chapter:** a small image, a tiny label and a lot of dead space. It's the site's only case, yet it had no presence | **Rebuilt.** Closed state "MY ▢ MITHILA". Pinned and scrubbed: the frame opens into a stage and pushes the name apart off-screen, then the meta row arrives. One CSS variable `--p` drives clip, words and image scale (`home.css` §5, `home.js initWork`). Mobile: stacked name + scrubbed window-open. Static/reduced = closed composition |
+| 2 | **Services, desktop:** the pin had no holds, so almost every scroll position was mid-crossfade (blurred shard, HUD invisible). Service names were small | Timeline retimed as hold → transition → hold. Titles at ≈2.9vw/600. Progress hairline in the HUD. **Bug:** the counter read the lagging scrubbed time, so it showed the wrong service after jumps. It now uses the scroll target |
+| 3 | Services, mobile: the "01 / 03" counter overlapped the right-hand HUD text and was meaningless without a pin | Corner HUD lines hidden below 1024 |
+| 4 | Services → opener: a hard seam where the fog met the flat `--fog-1` | `::after` fade to `--fog-1` above the drifting fog (22% desktop, 8svh mobile, so it never covers text) |
+| 5 | Process: the first pinned screen was ≈60% empty ember (the line not yet drawn) | A dotted ghost route is visible from the start, and scrolling inks it in |
+| 6 | Case study ended on a sparse, small "Next" block | **Rebuilt** as a "YOUR / BRAND" poster: an image window opens between the words (scrubbed `--q`), with the serif CTA and email below |
+| 7 | Interaction feel | Press feedback via the independent `scale` property (menu square .92, ERA pill .96, form toggles .97, 160–180 ms ease-out). Magnet on the menu square and ERA pill (vanilla port of React Bits "Magnet", fine pointers only, off under reduced motion) |
+| 8 | **Bug: reload inside a pin landed ≈1,260 px early.** The browser restored scroll before the pin spacers existed | Manual scroll restoration (`main.js`). The position is saved on `pagehide` and re-applied after `ScrollTrigger.refresh()` on reload/back-forward. It wins over a URL hash, as browsers do. Fresh navigations still honour the hash |
+| 9 | Careers: desktop CLS 0.039; LCP held back by the title's opacity-0 entrance on every load | Preload the Inter Tight 900 woff2 (Vite rewrites it to the hashed asset). The title entrance now runs only on wipe arrival, the same rule as the decode |
+| 10 | Four orphaned session-1 stylesheets (`components/sections/pages/experimental.css`) not imported anywhere | Deleted (recoverable from `b9bcc5a`) |
+
+**Toolkit status (honest):**
+- **GSAP + ScrollTrigger + Lenis:** already integrated correctly. There's one `gsap.ticker` loop driving `lenis.raf`, `lenis.on('scroll', ScrollTrigger.update)` and `lagSmoothing(0)`. Lenis runs only on fine pointers without reduced motion; touch keeps native scroll. Verified with anchors through two pins and with reload-in-pin.
+- **React Bits:** not installed. The site is vanilla Vite multi-page (CLAUDE.md architecture), and adding React for a few effects isn't justified. The Magnet idea was ported to vanilla instead (`motion/cursor.js initMagnets`).
+- **Taste Skill:** not installed. Installing it would add a third-party skill to the user's global Claude config, so I read the repo README instead. Its frame checks were applied directly: a clear title on the first screen, no random blank stretches (which led to the Process ghost route and the Work rebuild), and screenshot-critique rounds at several widths.
+- **Figma MCP:** not configured, and no Figma file was supplied. Not used. The reference recordings and docs remain the authority.
+- **Emil Kowalski principles:** short ease-out press states, no bounce on press, interaction transforms on properties separate from the motion transforms, and holds so motion reads as hierarchy.
+
+**Tests run on the final build** (`vite build` + `vite preview` :4173, this machine):
+- **Layout** (`tests/run.mjs`): **24/24 clean.** `.work__title` was added to the clipped-container exclusions, because its words leave the screen inside `overflow:hidden` by design.
+- **Motion** (`tests/motion.mjs`): **36/36 pass.** New checks:
+  - services holds are sharp with a readable HUD;
+  - the work frame opens while pinned and the title parts;
+  - the case next window opens;
+  - 4 menu anchors land within 1 px through Lenis + pins;
+  - the "See our work" pill lands on the work chapter;
+  - a reload inside the services pin restores scroll and the active service.
+- **Cross-browser** (`npm run xbrowser`, new): **18/18 ok.** WebKit, Firefox and Chromium × home/case/careers × 1440/390. Each checks errors, failed requests, element-edge overflow and hidden reveals, plus screenshots of the scroll chapters. These were compared by eye and render the same. This is the first WebKit/Firefox run ever. It's Playwright's WebKit, **not real Safari/iOS**.
+- **Perf** (`npm run perf`, localhost):
+
+| Page | Desktop transfer / LCP / CLS | Mobile (throttled) transfer / LCP / CLS |
+|---|---|---|
+| Home | 676 KB / 152 ms / 0.005 | 349 KB / 1076–1384 ms / 0.004 |
+| Case | 444 KB / 124 ms / 0.022 | 496 KB / 1836 ms / 0.005 |
+| Careers | 241 KB / 148 ms / **0** | 241 KB / **2152 ms** / 0.006 |
+
+  - This machine measures differently from session 3's. I built the untouched baseline and measured it here, and it gave the same home/case numbers (home mobile LCP ≈1.3 s, careers CLS 0.039). The differences from session 3's table are therefore environmental, not regressions. The careers improvements were measured against that local baseline.
+
+**Still not run:** real Safari/iOS and Android devices, Lighthouse, screen-reader pass.
+
+**Gotcha (Windows):** a running `vite preview` can lock `dist/`, and `vite build` then fails with ENOTEMPTY/EPERM. Stop the preview, build, restart.
+
+**Files changed in session 4:**
+- `index.html`: work section rewritten, services bar, magnet attributes
+- `work/my-mithila/index.html`: next block rewritten
+- `careers/index.html`: font preload, magnet attribute
+- `src/styles/home.css`: work §5 rewritten; services sizes, bar, fade; map ghost; press states
+- `src/styles/case.css`: next block
+- `src/styles/chrome.css`: menu-square press, `[data-magnet]`
+- `src/js/main.js`: scroll restoration, `initWork` / `initMagnets` wiring
+- `src/js/motion/home.js`: `initWork` (new), services retime, map ghost
+- `src/js/motion/pages.js`: next `--q`, careers title gating
+- `src/js/motion/cursor.js`: `initMagnets`
+- Tests:
+  - `tests/run.mjs`: exclusion
+  - `tests/motion.mjs`: +9 checks
+  - `tests/xbrowser.mjs`: new
+  - `package.json`: `xbrowser` script
+- Docs:
+  - `docs/ART_DIRECTION.md` §5–7 + case §9
+  - this file
+  - `CLAUDE.md`
+  - `.gitignore`: new
+- Deleted the 4 orphaned stylesheets. **No new runtime dependencies.**
+
+**Exact next steps:**
+1. Test on a real iPhone (Safari) and an Android phone. Watch the work pin, `clip-path` with `calc(var(--p))`, `svh` units, and Lenis being off on touch.
+2. Client questions are unchanged from session 3: testimonials, stats, image rights, brand film.
+3. Optional: give the work chapter's closed-state crop a dedicated focal point (it currently shows the centre of the cards image).
+4. Optional: the case page desktop CLS of 0.022 is under target. It's the arrival band, if anyone wants to chase it.
+5. Deploy `dist/` (needs permission) and run Lighthouse on the real host.
+
+---
+
+_Session 3 notes follow._
 
 ## Session 3: what happened (read this first)
 
